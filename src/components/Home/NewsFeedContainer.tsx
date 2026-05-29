@@ -42,9 +42,9 @@ export default function NewsFeedContainer({ sourcesData, children }: NewsFeedCon
           onClick={() => setIsExpanded(true)}
           className="hidden md:flex fixed left-0 top-1/2 -translate-y-1/2 z-[60] group items-center"
         >
-          <div className="h-32 w-2 bg-gray-200 rounded-r-full group-hover:bg-aleti-red transition-all duration-300" />
+          <div className="h-32 w-2 bg-gray-200 rounded-r-full group-hover:bg-primary transition-all duration-300" />
           <div className="flex items-center justify-center w-10 h-16 bg-white dark:bg-[#111318] border-2 border-l-0 border-gray-100 dark:border-white/[0.04] rounded-r-2xl shadow-2xl -ml-0.5 transition-all duration-300 group-hover:pl-2">
-            <ChevronRight size={24} className="text-gray-400 group-hover:text-aleti-red" strokeWidth={3} />
+            <ChevronRight size={24} className="text-gray-400 group-hover:text-primary" strokeWidth={3} />
           </div>
         </button>
       )}
@@ -61,7 +61,7 @@ export default function NewsFeedContainer({ sourcesData, children }: NewsFeedCon
           className="hidden md:flex fixed left-[320px] lg:left-[calc(320px+4rem)] top-1/2 -translate-y-1/2 z-[60] group items-center opacity-0 hover:opacity-100 transition-opacity duration-300"
           title="필터 접기"
         >
-           <div className="h-16 w-1 bg-gray-100 rounded-full group-hover:bg-aleti-red/30 transition-colors" />
+           <div className="h-16 w-1 bg-gray-100 rounded-full group-hover:bg-primary/30 transition-colors" />
         </button>
       )}
     </div>

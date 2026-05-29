@@ -32,7 +32,7 @@ export default function TributeBadge({ image, name, subText, number, stats }: Tr
     >
       <div className={`relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : ''} md:group-hover:[transform:rotateY(180deg)] md:group-hover:!rotate-y-180`}>
         {/* Front: Image + Text */}
-        <div className="absolute inset-0 [backface-visibility:hidden] flex items-center gap-3 bg-white dark:bg-[#0a0b10] px-3 rounded-2xl border border-gray-100 dark:border-volt/10 shadow-sm transition-all md:group-hover:border-aleti-red/20 dark:md:group-hover:border-volt/15">
+        <div className="absolute inset-0 [backface-visibility:hidden] flex items-center gap-3 bg-white dark:bg-[#0a0b10] px-3 rounded-2xl border border-gray-100 dark:border-volt/10 shadow-sm transition-all md:group-hover:border-primary/20 dark:md:group-hover:border-volt/15">
           <div className="relative h-11 w-11 transition-all duration-500 shrink-0">
             <Image
               src={image}
@@ -43,7 +43,7 @@ export default function TributeBadge({ image, name, subText, number, stats }: Tr
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-[13px] font-black text-gray-400 uppercase tracking-[0.2em] leading-none md:group-hover:text-aleti-red dark:md:group-hover:text-volt transition-colors">
+            <span className="text-[13px] font-black text-gray-400 uppercase tracking-[0.2em] leading-none md:group-hover:text-primary dark:md:group-hover:text-volt transition-colors">
               {subText}
             </span>
             <span className="text-base font-black text-gray-900 dark:text-white uppercase tracking-tighter leading-none mt-1 whitespace-nowrap">
@@ -53,7 +53,7 @@ export default function TributeBadge({ image, name, subText, number, stats }: Tr
         </div>
 
         {/* Back: Stats */}
-        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-aleti-red dark:bg-[#0a0b10] dark:border dark:border-volt/20 rounded-2xl flex items-center justify-around px-2 text-white dark:text-volt shadow-lg">
+        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-primary dark:bg-[#0a0b10] dark:border dark:border-volt/20 rounded-2xl flex items-center justify-around px-2 text-white dark:text-volt shadow-lg">
           {stats.map((stat, idx) => (
             <div key={stat.label} className="flex items-center gap-2">
               <div className="flex flex-col items-center">

@@ -2,14 +2,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ExternalLink, User, ImageIcon, Sparkles, Clock } from 'lucide-react';
 import { NewsListResponse } from '@/client/types.gen';
+import { ClubConfig } from '@/config/clubs';
 
 interface NewsCardProps {
   news: NewsListResponse;
   showImage?: boolean;
   fromPage?: number;
+  club: ClubConfig;
 }
 
-export default function NewsCard({ news, showImage = false, fromPage }: NewsCardProps) {
+export default function NewsCard({ news, showImage = false, fromPage, club }: NewsCardProps) {
   const getArticleTypeText = (type: string) => {
     switch (type) {
       case 'WEB_ARTICLE': return '웹 기사';
@@ -23,26 +25,30 @@ export default function NewsCard({ news, showImage = false, fromPage }: NewsCard
 
   return (
     <Link
-      href={`/news/${news.id}${fromPage ? `?fromPage=${fromPage}` : ''}`}
+      href={`/${club.id}/news/${news.id}${fromPage ? `?fromPage=${fromPage}` : ''}`}
       id={`news-${news.id}`}
-      className="group relative flex flex-col bg-white dark:bg-[#111318] rounded-3xl border border-gray-100 dark:border-white/[0.04] shadow-sm dark:shadow-none hover:shadow-xl dark:hover:shadow-black/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden mb-6 sm:mb-8 dark-card-pattern volt-hover-glow"
+      className="group relative flex flex-col bg-white dark:bg-[#111318] rounded-[2rem] border border-gray-100 dark:border-white/10 shadow-sm hover:shadow-2xl dark:hover:shadow-black/40 hover:-translate-y-1 transition-all duration-500 overflow-hidden mb-8 sm:mb-10"
     >
       {/* 상단 액센트 라인 */}
-      <div className="h-1.5 w-full bg-gradient-to-r from-aleti-red via-aleti-red/50 to-transparent dark:from-volt/60 dark:via-volt/20 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div 
+        className="h-2 w-full opacity-0 group-hover:opacity-100 transition-opacity"
+        style={{ background: `linear-gradient(90deg, ${club.colors.primary}, ${club.colors.accent}, transparent)` }}
+      />
 
-      <div className="relative z-10 p-5 sm:p-6 lg:p-7 flex flex-col sm:flex-row gap-5 sm:gap-6">
+
+      <div className="relative z-10 p-6 sm:p-8 lg:p-10 flex flex-col sm:flex-row gap-6 sm:gap-8">
         {/* 이미지 영역 - 웹 기사만 표시 */}
         {showImage && news.articleType === 'WEB_ARTICLE' && (
-          <div className="relative h-48 w-full sm:h-40 sm:w-48 lg:h-48 lg:w-64 shrink-0 overflow-hidden rounded-xl bg-gray-50 dark:bg-[#16181f] border border-gray-100 dark:border-white/[0.04] shadow-inner group/img">
+          <div className="relative h-56 w-full sm:h-48 sm:w-56 lg:h-56 lg:w-72 shrink-0 overflow-hidden rounded-2xl bg-gray-100 dark:bg-[#16181f] border border-gray-100 dark:border-white/[0.04] shadow-inner group/img">
             {imageUrl ? (
               <img
                 src={imageUrl}
                 alt={news.titleKo || ''}
-                className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-1000"
               />
             ) : (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-50 dark:bg-[#16181f]">
-                <ImageIcon size={32} className="text-gray-200" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-100 dark:bg-[#16181f]">
+                <ImageIcon size={40} className="text-gray-300" />
               </div>
             )}
           </div>
@@ -50,22 +56,25 @@ export default function NewsCard({ news, showImage = false, fromPage }: NewsCard
 
         {/* 콘텐츠 영역 */}
         <div className="flex flex-col flex-grow min-w-0 justify-center">
-          <div className="mb-3 flex flex-wrap items-center gap-2 sm:gap-3">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2">
-              <span className="text-[11px] sm:text-[12px] lg:text-[13px] font-bebas text-white dark:text-volt bg-aleti-red dark:bg-black dark:border dark:border-volt/25 px-2.5 py-1 rounded-sm uppercase tracking-wider shadow-sm">
+              <span 
+                className="text-[11px] sm:text-[12px] lg:text-[13px] font-bebas text-white px-3 py-1.5 rounded-md uppercase tracking-widest shadow-md"
+                style={{ backgroundColor: club.colors.primary }}
+              >
                 {news.sourceName}
               </span>
             </div>
 
-            <div className="flex items-center gap-1.5 text-[11px] sm:text-[12px] lg:text-[13px] font-extrabold text-aleti-navy dark:text-volt/60 uppercase tracking-tighter">
-              <User size={14} className="text-aleti-red dark:text-volt/70" />
-              <span className="truncate max-w-[80px] sm:max-w-none font-kanit">{news.authorName || '알레띠 뉴스'}</span>
+            <div className="flex items-center gap-1.5 text-[11px] sm:text-[12px] lg:text-[13px] font-extrabold uppercase tracking-tighter text-gray-500 dark:text-gray-400">
+              <User size={16} style={{ color: club.colors.primary }} />
+              <span className="truncate max-w-[100px] sm:max-w-none font-kanit">{news.authorName || 'NEWS'}</span>
             </div>
 
-            <div className="w-1 h-1 rounded-full bg-gray-200 hidden xs:block" />
+            <div className="w-1 h-1 rounded-full bg-gray-300 hidden xs:block" />
 
-            <div className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-[12px] lg:text-[13px] font-bold text-gray-500 font-kanit">
-              <Clock size={14} className="text-gray-400" />
+            <div className="flex items-center gap-1.5 text-[11px] sm:text-[12px] lg:text-[13px] font-bold text-gray-400 font-kanit">
+              <Clock size={16} />
               <span className="whitespace-nowrap">
                 {news.publishedAt
                   ? new Date(news.publishedAt).toLocaleString('ko-KR', {
@@ -80,28 +89,36 @@ export default function NewsCard({ news, showImage = false, fromPage }: NewsCard
             </div>
           </div>
 
-          <h3 className="mb-4 text-xl sm:text-2xl lg:text-[1.65rem] font-bold text-gray-950 dark:text-gray-100 group-hover:text-aleti-red dark:group-hover:text-volt transition-colors line-clamp-2 leading-[1.4] tracking-tight">
+          <h3 className="mb-5 text-2xl sm:text-3xl lg:text-[2rem] font-black text-gray-900 dark:text-white transition-colors line-clamp-2 leading-[1.2] tracking-tight group-hover:text-primary">
             {news.titleKo}
           </h3>
 
           {news.summaryKo && (
-            <div className="relative p-4 sm:p-5 rounded-xl bg-gray-50 dark:bg-white/[0.03] border-l-4 border-aleti-red/30 dark:border-volt/20 group-hover:border-aleti-red/60 dark:group-hover:border-volt/40 transition-all hidden xs:block shadow-sm">
-              <div className="flex items-center gap-2 mb-2 text-aleti-red dark:text-volt">
-                <Sparkles size={14} className="fill-current" />
-                <span className="text-[10px] lg:text-[11px] font-bebas tracking-widest uppercase">AI Summary</span>
+            <div 
+              className="relative p-5 sm:p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border-l-4 transition-all hidden xs:block shadow-inner"
+              style={{ borderLeftColor: club.colors.primary }}
+            >
+              <div className="flex items-center gap-2 mb-3" style={{ color: club.colors.primary }}>
+                <Sparkles size={18} className="fill-current" />
+                <span className="text-[11px] lg:text-[12px] font-bebas tracking-[0.2em] uppercase">AI Insight</span>
               </div>
-              <p className="text-sm lg:text-[1.05rem] text-gray-700 dark:text-gray-300 line-clamp-2 font-semibold leading-relaxed font-kanit">
+              <p className="text-base lg:text-[1.1rem] text-gray-600 dark:text-gray-300 line-clamp-2 font-bold leading-relaxed font-kanit">
                 {news.summaryKo}
               </p>
             </div>
           )}
 
-          <div className="mt-5 lg:mt-7 flex items-center gap-2 text-[11px] lg:text-[12px] font-bebas text-aleti-red dark:text-volt/70 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-all sm:translate-y-2 group-hover:translate-y-0 uppercase tracking-widest">
-            <span>Read Full Story</span>
-            <ExternalLink size={14} />
+          <div 
+            className="mt-6 lg:mt-8 flex items-center gap-2 text-[12px] lg:text-[13px] font-bebas opacity-100 sm:opacity-0 group-hover:opacity-100 transition-all sm:translate-y-2 group-hover:translate-y-0 uppercase tracking-[0.2em]"
+            style={{ color: club.colors.primary }}
+          >
+            <span className="border-b-2 border-current pb-0.5">Read Full Story</span>
+            <ExternalLink size={16} />
           </div>
         </div>
       </div>
     </Link>
+
   );
 }
+

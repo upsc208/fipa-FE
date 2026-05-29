@@ -3,26 +3,24 @@
 @variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --aleti-red: #E2322A;
-  --aleti-navy: #004595;
-  --aleti-white: #FFFFFF;
-  --gemini-indigo: #4F46E5;
-  --gemini-purple: #9333EA;
-  --gemini-blue: #3B82F6;
+  --background: var(--primary);
+  --foreground: #ffffff;
+  --primary: #E2322A;
+  --secondary: #004595;
+  --accent: #E2322A;
+  --white: #FFFFFF;
   --volt: #CCFF00;
 
-  /* Surface colors for dark mode support */
+  /* Surface colors for light/team mode */
   --surface: #ffffff;
-  --surface-secondary: #f9fafb;
-  --surface-tertiary: #f3f4f6;
-  --border-color: #e5e7eb;
-  --border-light: #f3f4f6;
-  --text-primary: #0f172a;
-  --text-secondary: #4b5563;
-  --text-tertiary: #9ca3af;
-  --text-muted: #d1d5db;
+  --surface-secondary: rgba(255, 255, 255, 0.1);
+  --surface-tertiary: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --border-light: rgba(255, 255, 255, 0.1);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-tertiary: rgba(255, 255, 255, 0.5);
+  --text-muted: rgba(255, 255, 255, 0.3);
 }
 
 .dark {
@@ -31,23 +29,22 @@
   --surface: #111318;
   --surface-secondary: #16181f;
   --surface-tertiary: #1c1e27;
-  --border-color: rgba(204, 255, 0, 0.08);
-  --border-light: rgba(204, 255, 0, 0.04);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.04);
   --text-primary: #e2e8f0;
   --text-secondary: #94a3b8;
   --text-tertiary: #64748b;
   --text-muted: #475569;
 }
 
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-aleti-red: var(--aleti-red);
-  --color-aleti-navy: var(--aleti-navy);
-  --color-aleti-white: var(--aleti-white);
-  --color-gemini-indigo: var(--gemini-indigo);
-  --color-gemini-purple: var(--gemini-purple);
-  --color-gemini-blue: var(--gemini-blue);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-white: var(--white);
   --color-volt: var(--volt);
   --font-bebas: var(--font-bebas-neue);
   --font-kanit: var(--font-kanit);
@@ -62,6 +59,7 @@
   --color-text-tertiary: var(--text-tertiary);
   --color-text-muted: var(--text-muted);
 }
+
 
 html, body {
   background-color: var(--background);
@@ -117,11 +115,11 @@ h1, h2, h3 {
 }
 
 /* 세련된 포인트 라인 */
-.aleti-gradient-line {
-  background: linear-gradient(90deg, var(--aleti-red) 0%, #ff6b6b 100%);
+.primary-gradient-line {
+  background: linear-gradient(90deg, var(--primary) 0%, #ff6b6b 100%);
 }
 
-.dark .aleti-gradient-line {
+.dark .primary-gradient-line {
   background: linear-gradient(90deg, var(--volt) 0%, rgba(204, 255, 0, 0.2) 100%) !important;
 }
 
@@ -153,41 +151,60 @@ html {
 }
 
 /* ===================================================
-   Jersey-inspired Geometric Triangle Pattern (Dark Mode)
-   Inspired by Atlético 25/26 Away Kit
+   Kit-inspired Dynamic Patterns
    =================================================== */
 
-/* Inline SVG encoded geometric triangle pattern */
-.dark-geo-pattern {
+/* Manchester United 25/26: Subtle Dot Texture + Old Trafford Angles */
+.pattern-dots {
   position: relative;
 }
-
-.dark .dark-geo-pattern::before {
+.pattern-dots::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30Z' fill='rgba(204,255,0,0.018)'/%3E%3Cpath d='M0 0 L30 0 L0 30Z' fill='rgba(255,255,255,0.012)'/%3E%3Cpath d='M60 0 L60 30 L30 0Z' fill='rgba(255,255,255,0.008)'/%3E%3Cpath d='M0 60 L30 60 L0 30Z' fill='rgba(255,255,255,0.008)'/%3E%3Cpath d='M60 60 L60 30 L30 60Z' fill='rgba(255,255,255,0.012)'/%3E%3C/svg%3E");
-  background-size: 60px 60px;
-  opacity: 1;
+  background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px);
+  background-size: 20px 20px;
+  opacity: 0.05;
 }
 
-/* Card-level geometric pattern */
-.dark .dark-card-pattern {
+/* Liverpool 25/26: Teamgeist-inspired Curved Piping */
+.pattern-piping {
   position: relative;
   overflow: hidden;
 }
-
-.dark .dark-card-pattern::after {
+.pattern-piping::before {
   content: '';
-  position: absolute;
+  position: fixed;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0 L40 20 L20 40 L0 20Z' fill='rgba(204,255,0,0.025)'/%3E%3Cpath d='M0 0 L20 0 L0 20Z' fill='rgba(255,255,255,0.015)'/%3E%3Cpath d='M40 0 L40 20 L20 0Z' fill='rgba(255,255,255,0.01)'/%3E%3Cpath d='M0 40 L20 40 L0 20Z' fill='rgba(255,255,255,0.01)'/%3E%3Cpath d='M40 40 L40 20 L20 40Z' fill='rgba(255,255,255,0.015)'/%3E%3C/svg%3E");
-  background-size: 40px 40px;
-  border-radius: inherit;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 0% 0%, transparent 20%, var(--primary) 21%, transparent 22%),
+    radial-gradient(circle at 100% 100%, transparent 20%, var(--primary) 21%, transparent 22%);
+  background-size: 100% 100%;
+  opacity: 0.03;
+}
+
+/* Chelsea 25/26: London Architecture Grunge / Textured Clash */
+.pattern-grunge {
+  position: relative;
+}
+.pattern-grunge::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  filter: contrast(150%) brightness(1000%) invert(100%);
+  opacity: 0.02;
+}
+
+/* Base Utility for Patterns */
+.kit-pattern {
+  position: relative;
 }
 
 /* Volt neon glow accent line for dark mode */

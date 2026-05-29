@@ -40,7 +40,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
       ) : (
         <Link
           href={createPageUrl(currentPage - 1)}
-          className="p-2 rounded-xl border border-gray-200 dark:border-white/[0.04] text-gray-400 hover:border-aleti-red dark:hover:border-volt/20 hover:text-aleti-red dark:hover:text-volt transition-all bg-white dark:bg-[#111318] soft-shadow"
+          className="p-2 rounded-xl border border-gray-200 dark:border-white/[0.04] text-gray-400 hover:border-primary dark:hover:border-volt/20 hover:text-primary dark:hover:text-volt transition-all bg-white dark:bg-[#111318] soft-shadow"
         >
           <ChevronLeft size={20} />
         </Link>
@@ -59,8 +59,8 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
               className={`
                 flex items-center justify-center min-w-[40px] h-10 rounded-xl font-bold text-sm transition-all
                 ${currentPage === page 
-                  ? 'bg-aleti-red dark:bg-volt/90 text-white dark:text-black shadow-lg shadow-aleti-red/20 dark:shadow-volt/10' 
-                  : 'bg-white dark:bg-[#111318] border border-gray-200 dark:border-white/[0.04] text-gray-500 dark:text-gray-400 hover:border-aleti-red dark:hover:border-volt/20 hover:text-aleti-red dark:hover:text-volt'
+                  ? 'bg-primary dark:bg-volt/90 text-white dark:text-black shadow-lg shadow-primary/20 dark:shadow-volt/10' 
+                  : 'bg-white dark:bg-[#111318] border border-gray-200 dark:border-white/[0.04] text-gray-500 dark:text-gray-400 hover:border-primary dark:hover:border-volt/20 hover:text-primary dark:hover:text-volt'
                 }
               `}
             >
@@ -77,7 +77,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
       ) : (
         <Link
           href={createPageUrl(currentPage + 1)}
-          className="p-2 rounded-xl border border-gray-200 dark:border-[#2a3050] text-gray-400 hover:border-aleti-red hover:text-aleti-red transition-all bg-white dark:bg-[#141828] soft-shadow"
+          className="p-2 rounded-xl border border-gray-200 dark:border-[#2a3050] text-gray-400 hover:border-primary hover:text-primary transition-all bg-white dark:bg-[#141828] soft-shadow"
         >
           <ChevronRight size={20} />
         </Link>

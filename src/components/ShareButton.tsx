@@ -77,7 +77,7 @@ export default function ShareButton({ title }: ShareButtonProps) {
         className={`p-2 transition-all rounded-full flex items-center justify-center
           ${isCopied 
             ? 'bg-green-50 text-green-600' 
-            : 'text-gray-400 hover:text-aleti-red hover:bg-gray-50'
+            : 'text-gray-400 hover:text-primary hover:bg-gray-50'
           }`}
         title="기사 공유하기"
       >

@@ -82,18 +82,18 @@ export default function SourceFilter({ allSources }: SourceFilterProps) {
               className={`
                 flex items-center justify-between px-5 py-3.5 rounded-xl cursor-pointer transition-all border
                 ${isSelected
-                  ? 'bg-aleti-red/5 dark:bg-volt/[0.03] border-aleti-red/30 dark:border-volt/30 text-aleti-red dark:text-gray-100 shadow-sm'
-                  : 'bg-gray-50 dark:bg-white/[0.02] border-gray-100 dark:border-white/[0.04] text-gray-500 dark:text-gray-400 hover:border-aleti-navy/20 dark:hover:border-volt/15'}
+                  ? 'bg-primary/5 dark:bg-volt/[0.03] border-primary/30 dark:border-volt/30 text-primary dark:text-gray-100 shadow-sm'
+                  : 'bg-gray-50 dark:bg-white/[0.02] border-gray-100 dark:border-white/[0.04] text-gray-500 dark:text-gray-400 hover:border-secondary/20 dark:hover:border-volt/15'}
               `}
             >
               <div className="flex items-center gap-3">
                 <div className={`
                   w-4 h-4 rounded-md flex items-center justify-center border transition-all
-                  ${isSelected ? 'bg-aleti-red dark:bg-volt border-aleti-red dark:border-volt' : 'bg-white dark:bg-[#1c1e27] border-gray-200 dark:border-white/[0.06]'}
+                  ${isSelected ? 'bg-primary dark:bg-volt border-primary dark:border-volt' : 'bg-white dark:bg-[#1c1e27] border-gray-200 dark:border-white/[0.06]'}
                 `}>
                   {isSelected && <Check size={10} className="text-white dark:text-black stroke-[4px]" />}
                 </div>
-                <span className={`text-[13px] font-bold tracking-tight ${isSelected ? 'text-aleti-red dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
+                <span className={`text-[13px] font-bold tracking-tight ${isSelected ? 'text-primary dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
                   {source.displayName}
                 </span>
               </div>
@@ -124,7 +124,7 @@ export default function SourceFilter({ allSources }: SourceFilterProps) {
               flex-1 py-3 px-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all
               ${selectedInternalIdsFromUrl.length === allSources.length
                 ? 'bg-gray-50 dark:bg-white/[0.02] text-gray-300 dark:text-gray-600 cursor-not-allowed border border-gray-100 dark:border-white/[0.04]'
-                : 'bg-aleti-navy dark:bg-[#1c1e27] text-white dark:text-gray-300 hover:bg-aleti-red dark:hover:bg-volt dark:hover:text-black border border-transparent dark:border-volt/25 shadow-md'}
+                : 'bg-secondary dark:bg-[#1c1e27] text-white dark:text-gray-300 hover:bg-primary dark:hover:bg-volt dark:hover:text-black border border-transparent dark:border-volt/25 shadow-md'}
             `}
           >
             전체 선택
@@ -141,7 +141,7 @@ export default function SourceFilter({ allSources }: SourceFilterProps) {
               flex-1 py-3 px-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all
               ${selectedInternalIdsFromUrl.length === 0
                 ? 'bg-gray-50 dark:bg-white/[0.02] text-gray-300 dark:text-gray-600 cursor-not-allowed border border-gray-100 dark:border-white/[0.04]'
-                : 'bg-white dark:bg-[#111318] border border-gray-200 dark:border-white/[0.04] text-gray-600 dark:text-gray-400 hover:border-aleti-red dark:hover:border-volt/30 hover:text-aleti-red dark:hover:text-volt dark:hover:bg-volt/5 shadow-md'}
+                : 'bg-white dark:bg-[#111318] border border-gray-200 dark:border-white/[0.04] text-gray-600 dark:text-gray-400 hover:border-primary dark:hover:border-volt/30 hover:text-primary dark:hover:text-volt dark:hover:bg-volt/5 shadow-md'}
             `}
           >
             전체 해제

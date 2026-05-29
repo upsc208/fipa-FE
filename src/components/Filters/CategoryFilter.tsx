@@ -71,11 +71,11 @@ export default function CategoryFilter() {
                 className={`
                   flex items-center gap-3 px-7 py-3.5 rounded-full text-base font-black transition-all whitespace-nowrap border
                   ${isActive
-                    ? 'bg-aleti-red dark:bg-volt/90 text-white dark:text-black border-transparent shadow-xl shadow-aleti-red/20 dark:shadow-volt/10'
-                    : 'bg-white dark:bg-[#111318] border-gray-100 dark:border-white/[0.04] text-gray-500 dark:text-gray-400 hover:border-aleti-red/30 dark:hover:border-volt/15 hover:text-aleti-red dark:hover:text-volt hover:bg-aleti-red/5 dark:hover:bg-volt/5'}
+                    ? 'bg-primary dark:bg-volt/90 text-white dark:text-black border-transparent shadow-xl shadow-primary/20 dark:shadow-volt/10'
+                    : 'bg-white dark:bg-[#111318] border-gray-100 dark:border-white/[0.04] text-gray-500 dark:text-gray-400 hover:border-primary/30 dark:hover:border-volt/15 hover:text-primary dark:hover:text-volt hover:bg-primary/5 dark:hover:bg-volt/5'}
                 `}
               >
-                <Icon size={20} className={isActive ? 'text-white' : 'text-gray-400 group-hover:text-aleti-red'} />
+                <Icon size={20} className={isActive ? 'text-white' : 'text-gray-400 group-hover:text-primary'} />
                 {category.label}
               </button>
             );

@@ -72,7 +72,7 @@ export default function MobileFilterDrawer({ allSources }: MobileFilterDrawerPro
           <div className="bg-white dark:bg-[#0d0e14] border-t border-gray-100 dark:border-volt/8 p-6">
             <button
               onClick={() => setIsOpen(false)}
-              className="w-full py-4 bg-aleti-red dark:bg-volt/90 text-white dark:text-black rounded-2xl font-black uppercase tracking-widest shadow-lg shadow-aleti-red/20 dark:shadow-volt/10 active:scale-[0.98] transition-transform"
+              className="w-full py-4 bg-primary dark:bg-volt/90 text-white dark:text-black rounded-2xl font-black uppercase tracking-widest shadow-lg shadow-primary/20 dark:shadow-volt/10 active:scale-[0.98] transition-transform"
             >
               필터 적용
             </button>

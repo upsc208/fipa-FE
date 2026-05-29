@@ -52,7 +52,7 @@ export default function TwitterEmbed({ tweetData, originalUrl }: TwitterEmbedPro
           href={originalUrl} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="text-aleti-red dark:text-volt text-xs font-bold mt-2 inline-block hover:underline"
+          className="text-primary dark:text-volt text-xs font-bold mt-2 inline-block hover:underline"
         >
           트위터에서 직접 보기
         </a>
