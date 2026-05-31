@@ -32,10 +32,10 @@ export const CLUBS: Record<string, ClubConfig> = {
     shortName: 'MAN UTD',
     colors: {
       primary: '#DA291C', // United Red
-      secondary: '#000000', // Black accents
-      accent: '#FBE122', // Yellow/Gold details
+      secondary: '#0f1015', // Matte black accents
+      accent: '#FFFFFF', // White details
       white: '#FFFFFF',
-      darkAccent: '#FBE122',
+      darkAccent: '#DA291C',
       surface: '#DA291C',
     },
     links: {
@@ -57,7 +57,7 @@ export const CLUBS: Record<string, ClubConfig> = {
     shortName: 'LFC',
     colors: {
       primary: '#C8102E', // Strawberry Red
-      secondary: '#FFFFFF', // Crisp White details
+      secondary: '#0a2f2d', // Deep Forest Teal
       accent: '#00B2A9', // Teal/Green accent
       white: '#FFFFFF',
       darkAccent: '#00B2A9',

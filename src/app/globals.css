@@ -21,6 +21,10 @@
   --text-secondary: rgba(255, 255, 255, 0.7);
   --text-tertiary: rgba(255, 255, 255, 0.5);
   --text-muted: rgba(255, 255, 255, 0.3);
+
+  /* Chelsea kit top bar variables */
+  --chelsea-top-bar-bg: #ffffff;
+  --chelsea-top-bar-text: #034694;
 }
 
 .dark {
@@ -35,6 +39,10 @@
   --text-secondary: #94a3b8;
   --text-tertiary: #64748b;
   --text-muted: #475569;
+
+  /* Chelsea kit top bar variables */
+  --chelsea-top-bar-bg: #070e1b;
+  --chelsea-top-bar-text: #ffffff;
 }
 
 
@@ -154,52 +162,163 @@ html {
    Kit-inspired Dynamic Patterns
    =================================================== */
 
-/* Manchester United 25/26: Subtle Dot Texture + Old Trafford Angles */
+/* Manchester United: Premium Jersey Mesh Texture & Soft Stadium Ambient Glow */
 .pattern-dots {
   position: relative;
+  isolation: isolate;
 }
 .pattern-dots::before {
   content: '';
   position: fixed;
-  inset: 0;
-  z-index: 0;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 1000px;
+  max-width: 95vw;
+  max-height: 95vh;
+  z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(var(--primary) 0.5px, transparent 0.5px);
-  background-size: 20px 20px;
-  opacity: 0.05;
+  background-image: url('/devil.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.12;
+  transition: opacity 0.3s ease;
+}
+.dark .pattern-dots::before {
+  opacity: 0.1;
+  filter: invert(1) brightness(2);
 }
 
-/* Liverpool 25/26: Teamgeist-inspired Curved Piping */
+/* Background mesh texture (separate layer for dots) */
+.pattern-dots::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(var(--primary) 0.5px, transparent 0.5px),
+    linear-gradient(45deg, rgba(0, 0, 0, 0.005) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.005) 75%, rgba(0, 0, 0, 0.005)),
+    linear-gradient(45deg, rgba(0, 0, 0, 0.005) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.005) 75%, rgba(0, 0, 0, 0.005));
+  background-size: 16px 16px, 8px 8px, 8px 8px;
+  background-position: 0 0, 0 0, 4px 4px;
+  opacity: 0.07;
+}
+
+.dark .pattern-dots::after {
+  background-image: 
+    radial-gradient(rgba(218, 41, 28, 0.15) 0.5px, transparent 0.5px),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.002) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.002) 75%, rgba(255, 255, 255, 0.002)),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.002) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.002) 75%, rgba(255, 255, 255, 0.002));
+  opacity: 0.8;
+}
+
+/* Stadium Glow Overlay */
+.pattern-dots-glow {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 600px;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top, rgba(218, 41, 28, 0.04) 0%, rgba(218, 41, 28, 0.01) 50%, transparent 100%);
+}
+
+.dark .pattern-dots-glow {
+  background: radial-gradient(circle at top, rgba(218, 41, 28, 0.08) 0%, rgba(218, 41, 28, 0.02) 50%, transparent 100%);
+}
+
+/* Liverpool: Anfield Glow & Faint Liverbird (Phoenix) Background */
 .pattern-piping {
   position: relative;
-  overflow: hidden;
+  isolation: isolate; /* Create new stacking context so z-index: -1 stays above background */
 }
 .pattern-piping::before {
   content: '';
   position: fixed;
-  inset: 0;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 650px;
+  height: 650px;
+  max-width: 85vw;
+  max-height: 85vh;
+  z-index: -1; /* Render behind page content but in front of background */
+  pointer-events: none;
+  background-image: url('/phoenix.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.08; /* Highly visible but elegant watermark */
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+.dark .pattern-piping::before {
+  opacity: 0.05; /* Faint white watermark in dark mode */
+  filter: invert(1); /* Invert black silhouette to white/light gray */
+}
+.pattern-piping::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 600px;
   z-index: 0;
   pointer-events: none;
-  background: 
-    radial-gradient(circle at 0% 0%, transparent 20%, var(--primary) 21%, transparent 22%),
-    radial-gradient(circle at 100% 100%, transparent 20%, var(--primary) 21%, transparent 22%);
-  background-size: 100% 100%;
-  opacity: 0.03;
+  background: radial-gradient(circle at top, rgba(200, 16, 46, 0.03) 0%, rgba(200, 16, 46, 0.01) 50%, transparent 100%);
+}
+
+.dark .pattern-piping::after {
+  background: radial-gradient(circle at top, rgba(200, 16, 46, 0.06) 0%, rgba(200, 16, 46, 0.01) 50%, transparent 100%);
 }
 
 /* Chelsea 25/26: London Architecture Grunge / Textured Clash */
 .pattern-grunge {
   position: relative;
+  isolation: isolate;
 }
 .pattern-grunge::before {
   content: '';
   position: fixed;
-  inset: 0;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  max-width: 90vw;
+  max-height: 90vh;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('/lion.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.1;
+  transition: opacity 0.3s ease;
+}
+.dark .pattern-grunge::before {
+  opacity: 0.07;
+  filter: invert(1) brightness(2);
+}
+.pattern-grunge::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 600px;
   z-index: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  filter: contrast(150%) brightness(1000%) invert(100%);
-  opacity: 0.02;
+  background: radial-gradient(circle at top, rgba(3, 70, 148, 0.04) 0%, rgba(3, 70, 148, 0.01) 50%, transparent 100%);
+}
+.dark .pattern-grunge::after {
+  background: radial-gradient(circle at top, rgba(3, 70, 148, 0.06) 0%, rgba(3, 70, 148, 0.01) 50%, transparent 100%);
 }
 
 /* Base Utility for Patterns */

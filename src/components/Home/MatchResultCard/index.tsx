@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PawPrint, ChevronDown, ChevronUp } from 'lucide-react';
+import { PawPrint, ChevronDown, ChevronUp, Shield } from 'lucide-react';
 import type { RecentMatch, UpcomingMatch } from '@/client/types.gen';
 import { sortScorers } from './utils';
 import { ScoreSection } from './ScoreSection';
@@ -21,15 +21,63 @@ interface MatchResultCardProps {
 export default function MatchResultCard({ recentMatch, upcomingMatches, club }: MatchResultCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const getCardBackground = () => {
+    if (club.id === 'manutd') {
+      return {
+        background: 'linear-gradient(135deg, #b91c1c 0%, #da291c 50%, #80120d 100%)'
+      };
+    }
+    if (club.id === 'liverpool') {
+      return {
+        background: 'linear-gradient(135deg, #b21e29 0%, #c8102e 50%, #7a0c14 100%)'
+      };
+    }
+    if (club.id === 'chelsea') {
+      return {
+        background: 'linear-gradient(135deg, #0551c9 0%, #03388c 100%)'
+      };
+    }
+    return { 
+      backgroundColor: club.colors.secondary === '#FFFFFF' ? club.colors.primary : club.colors.secondary,
+      backgroundImage: 'linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3))'
+    };
+  };
+
   if (!recentMatch) {
     return (
       <div 
         className="text-white p-6 md:p-8 rounded-xl shadow-lg w-full max-w-none font-sans tracking-wide flex flex-col items-center justify-center min-h-[250px] border border-white/10 relative overflow-hidden"
-        style={{ backgroundColor: club.colors.secondary }}
+        style={getCardBackground()}
       >
+        {/* Jersey Mesh Overlay for Man Utd */}
+        {club.id === 'manutd' && (
+          <div 
+            className="absolute inset-0 z-0 pointer-events-none opacity-[0.06]"
+            style={{
+              backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)',
+              backgroundSize: '12px 12px',
+            }}
+          />
+        )}
+        {/* Collar trim detail at the top of the card */}
+        {club.id === 'manutd' && (
+          <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#0f1015] z-20 flex flex-col">
+            <div className="h-[2px] w-full bg-white/80" style={{ marginTop: '2px' }} />
+          </div>
+        )}
+        {club.id === 'liverpool' && (
+          <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20 flex flex-col">
+            <div className="h-[2px] w-full bg-[#c8102e]" style={{ marginTop: '2px' }} />
+          </div>
+        )}
+        {club.id === 'chelsea' && (
+          <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20 flex flex-col">
+            <div className="h-[2px] w-full bg-[#EE242C]" style={{ marginTop: '2px' }} />
+          </div>
+        )}
         <div className="flex flex-col items-center text-center space-y-4 relative z-10">
           <div className="scale-[2.5] mb-2 opacity-50 animate-bounce">
-            <PawPrint />
+            {(club.id === 'manutd' || club.id === 'liverpool') ? <Shield /> : <PawPrint />}
           </div>
           <h3 className="text-xl md:text-2xl font-black tracking-tighter opacity-90 animate-pulse uppercase font-bebas">
             {club.shortName} MATCH DATA LOADING...
@@ -49,11 +97,40 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
   return (
     <div 
       className="text-white rounded-xl shadow-lg w-full max-w-none font-sans tracking-wide flex flex-col overflow-hidden border border-white/10 transition-all duration-500 relative"
-      style={{ 
-        backgroundColor: club.colors.secondary === '#FFFFFF' ? club.colors.primary : club.colors.secondary,
-        backgroundImage: 'linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3))'
-      }}
+      style={getCardBackground()}
     >
+      {/* Jersey Mesh Overlay for Man Utd */}
+      {club.id === 'manutd' && (
+        <div 
+          className="absolute inset-0 z-0 pointer-events-none opacity-[0.06]"
+          style={{
+            backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)',
+            backgroundSize: '12px 12px',
+          }}
+        />
+      )}
+      {/* Collar trim detail at the top of the card (Man Utd) */}
+      {club.id === 'manutd' && (
+        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#0f1015] z-20 flex flex-col">
+          <div className="h-[2px] w-full bg-white/80" style={{ marginTop: '2px' }} />
+        </div>
+      )}
+
+      {/* Ribbed White Collar Trim for Liverpool */}
+      {club.id === 'liverpool' && (
+        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20 flex flex-col">
+          <div className="h-[2px] w-full bg-[#c8102e]" style={{ marginTop: '2px' }} />
+        </div>
+      )}
+
+      {/* Ribbed Collar Trim for Chelsea (White - Red - White) */}
+      {club.id === 'chelsea' && (
+        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20 flex flex-col">
+          <div className="h-[2px] w-full bg-[#EE242C]" style={{ marginTop: '2px' }} />
+        </div>
+      )}
+
+
 
       <div className="p-6 md:p-8 flex flex-col md:flex-row gap-8 md:gap-12 min-h-[250px] relative z-10">
         {/* Left side: Match Result (70%) */}

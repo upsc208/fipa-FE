@@ -71,7 +71,7 @@ export default async function Home({
   return (
     <div className="flex flex-col gap-0 pt-10">
       <section className="container mx-auto px-6 lg:px-12 py-12 relative">
-        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-gray-100 dark:border-white/5 pb-10 relative z-10">
+        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8 relative z-10">
           <div className="w-full">
             <MatchResultCard recentMatch={recentMatchData} upcomingMatches={upcomingMatchesData} club={club} />
           </div>
