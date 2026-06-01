@@ -19,7 +19,7 @@ export interface ClubConfig {
     logoText: string;
   };
   design: {
-    patternType: 'dots' | 'piping' | 'grunge' | 'geo';
+    patternType: 'dots' | 'piping' | 'grunge' | 'cannon' | 'cockerel' | 'moon';
     fontType: 'bebas' | 'kanit';
   };
 }
@@ -31,9 +31,9 @@ export const CLUBS: Record<string, ClubConfig> = {
     nameKo: '맨체스터 유나이티드',
     shortName: 'MAN UTD',
     colors: {
-      primary: '#DA291C', // United Red
-      secondary: '#0f1015', // Matte black accents
-      accent: '#FFFFFF', // White details
+      primary: '#DA291C',
+      secondary: '#0f1015',
+      accent: '#FFFFFF',
       white: '#FFFFFF',
       darkAccent: '#DA291C',
       surface: '#DA291C',
@@ -56,9 +56,9 @@ export const CLUBS: Record<string, ClubConfig> = {
     nameKo: '리버풀',
     shortName: 'LFC',
     colors: {
-      primary: '#C8102E', // Strawberry Red
-      secondary: '#0a2f2d', // Deep Forest Teal
-      accent: '#00B2A9', // Teal/Green accent
+      primary: '#C8102E',
+      secondary: '#0a2f2d',
+      accent: '#00B2A9',
       white: '#FFFFFF',
       darkAccent: '#00B2A9',
       surface: '#C8102E',
@@ -81,9 +81,9 @@ export const CLUBS: Record<string, ClubConfig> = {
     nameKo: '첼시',
     shortName: 'CHELSEA',
     colors: {
-      primary: '#034694', // Rush Blue
-      secondary: '#003366', // Darker Blue for two-tone
-      accent: '#EE242C', // Speed Red accent
+      primary: '#034694',
+      secondary: '#003366',
+      accent: '#EE242C',
       white: '#FFFFFF',
       darkAccent: '#EE242C',
       surface: '#034694',
@@ -100,5 +100,79 @@ export const CLUBS: Record<string, ClubConfig> = {
       fontType: 'bebas',
     },
   },
+  arsenal: {
+    id: 'arsenal',
+    name: 'Arsenal FC',
+    nameKo: '아스날',
+    shortName: 'ARSENAL',
+    colors: {
+      primary: '#EF0107', // Arsenal Red
+      secondary: '#063672', // Arsenal Blue
+      accent: '#DBA111', // Arsenal Gold
+      white: '#FFFFFF',
+      darkAccent: '#EF0107',
+      surface: '#EF0107',
+    },
+    links: {
+      officialTickets: 'https://www.arsenal.com/tickets',
+      officialStore: 'https://arsenaldirect.arsenal.com/',
+    },
+    assets: {
+      logoText: 'GUNNERS',
+    },
+    design: {
+      patternType: 'cannon',
+      fontType: 'bebas',
+    },
+  },
+  tottenham: {
+    id: 'tottenham',
+    name: 'Tottenham Hotspur',
+    nameKo: '토트넘',
+    shortName: 'SPURS',
+    colors: {
+      primary: '#132257', // Navy Blue
+      secondary: '#FFFFFF', // White
+      accent: '#132257',
+      white: '#FFFFFF',
+      darkAccent: '#132257',
+      surface: '#132257',
+    },
+    links: {
+      officialTickets: 'https://www.tottenhamhotspur.com/tickets/',
+      officialStore: 'https://shop.tottenhamhotspur.com/',
+    },
+    assets: {
+      logoText: 'COYS',
+    },
+    design: {
+      patternType: 'cockerel',
+      fontType: 'kanit',
+    },
+  },
+  mancity: {
+    id: 'mancity',
+    name: 'Manchester City',
+    nameKo: '맨시티',
+    shortName: 'MAN CITY',
+    colors: {
+      primary: '#6CABDD', // Sky Blue
+      secondary: '#1C2C5B', // Dark Blue
+      accent: '#FFC85F', // Gold/Yellow
+      white: '#FFFFFF',
+      darkAccent: '#6CABDD',
+      surface: '#6CABDD',
+    },
+    links: {
+      officialTickets: 'https://www.mancity.com/tickets',
+      officialStore: 'https://shop.mancity.com/',
+    },
+    assets: {
+      logoText: 'CITIZENS',
+    },
+    design: {
+      patternType: 'moon',
+      fontType: 'kanit',
+    },
+  },
 };
-

@@ -33,7 +33,7 @@ class TweetErrorBoundary extends Component<{ children: ReactNode; fallback: Reac
 }
 
 interface TwitterEmbedProps {
-  tweetData: any;
+  tweetData?: any;
   originalUrl?: string;
 }
 

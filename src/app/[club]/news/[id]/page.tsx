@@ -165,7 +165,7 @@ export default async function NewsDetailPage({
           <div className="prose prose-xl dark:prose-invert max-w-none mb-20 font-medium leading-[1.8] text-gray-800 dark:text-gray-200">
             {news.articleType === 'SNS_POST' ? (
               <div className="flex justify-center my-10">
-                <TwitterEmbed url={news.originalUrl} />
+                <TwitterEmbed originalUrl={news.originalUrl} />
               </div>
             ) : (
               <div 

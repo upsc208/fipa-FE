@@ -25,6 +25,18 @@
   /* Chelsea kit top bar variables */
   --chelsea-top-bar-bg: #ffffff;
   --chelsea-top-bar-text: #034694;
+
+  /* Arsenal kit top bar variables */
+  --arsenal-top-bar-bg: #ffffff;
+  --arsenal-top-bar-text: #EF0107;
+
+  /* Tottenham kit top bar variables */
+  --tottenham-top-bar-bg: #ffffff;
+  --tottenham-top-bar-text: #132257;
+
+  /* Manchester City kit top bar variables */
+  --mancity-top-bar-bg: #ffffff;
+  --mancity-top-bar-text: #1C2C5B;
 }
 
 .dark {
@@ -43,6 +55,18 @@
   /* Chelsea kit top bar variables */
   --chelsea-top-bar-bg: #070e1b;
   --chelsea-top-bar-text: #ffffff;
+
+  /* Arsenal kit top bar variables */
+  --arsenal-top-bar-bg: #0e0202;
+  --arsenal-top-bar-text: #ffffff;
+
+  /* Tottenham kit top bar variables */
+  --tottenham-top-bar-bg: #070b1a;
+  --tottenham-top-bar-text: #ffffff;
+
+  /* Manchester City kit top bar variables */
+  --mancity-top-bar-bg: #081629;
+  --mancity-top-bar-text: #ffffff;
 }
 
 
@@ -319,6 +343,142 @@ html {
 }
 .dark .pattern-grunge::after {
   background: radial-gradient(circle at top, rgba(3, 70, 148, 0.06) 0%, rgba(3, 70, 148, 0.01) 50%, transparent 100%);
+}
+
+/* Arsenal: Emirates Stadium Glow & Cannon Background */
+.pattern-cannon {
+  position: relative;
+  isolation: isolate;
+}
+.pattern-cannon::before {
+  content: '';
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  max-width: 90vw;
+  max-height: 90vh;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('/cannon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.08;
+  transition: opacity 0.3s ease;
+}
+.dark .pattern-cannon::before {
+  opacity: 0.05;
+  filter: invert(1) brightness(2);
+}
+.pattern-cannon::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 600px;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top, rgba(239, 1, 7, 0.04) 0%, rgba(239, 1, 7, 0.01) 50%, transparent 100%);
+}
+.dark .pattern-cannon::after {
+  background: radial-gradient(circle at top, rgba(239, 1, 7, 0.06) 0%, rgba(239, 1, 7, 0.01) 50%, transparent 100%);
+}
+
+/* Tottenham: Modern Stadium Glow & Cockerel Background */
+.pattern-cockerel {
+  position: relative;
+  isolation: isolate;
+}
+.pattern-cockerel::before {
+  content: '';
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  max-width: 85vw;
+  max-height: 85vh;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('/cockerel.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  transition: opacity 0.3s ease;
+}
+.dark .pattern-cockerel::before {
+  opacity: 0.05;
+  filter: invert(1) brightness(2);
+  mix-blend-mode: screen;
+}
+.pattern-cockerel::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 600px;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top, rgba(19, 34, 87, 0.04) 0%, rgba(19, 34, 87, 0.01) 50%, transparent 100%);
+}
+.dark .pattern-cockerel::after {
+  background: radial-gradient(circle at top, rgba(19, 34, 87, 0.08) 0%, rgba(19, 34, 87, 0.02) 50%, transparent 100%);
+}
+
+/* Manchester City: Sky Blue Glow & Moon/Ship Background */
+.pattern-moon {
+  position: relative;
+  isolation: isolate;
+}
+.pattern-moon::before {
+  content: '';
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  max-width: 90vw;
+  max-height: 90vh;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url('/moon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  transition: opacity 0.3s ease;
+}
+.dark .pattern-moon::before {
+  opacity: 0.05;
+  filter: invert(1) brightness(2);
+  mix-blend-mode: screen;
+}
+.pattern-moon::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 600px;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top, rgba(108, 171, 221, 0.05) 0%, rgba(108, 171, 221, 0.01) 50%, transparent 100%);
+}
+.dark .pattern-moon::after {
+  background: radial-gradient(circle at top, rgba(108, 171, 221, 0.08) 0%, rgba(108, 171, 221, 0.02) 50%, transparent 100%);
 }
 
 /* Base Utility for Patterns */

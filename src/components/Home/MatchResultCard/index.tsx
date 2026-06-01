@@ -37,6 +37,21 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
         background: 'linear-gradient(135deg, #0551c9 0%, #03388c 100%)'
       };
     }
+    if (club.id === 'arsenal') {
+      return {
+        background: 'linear-gradient(135deg, #EF0107 0%, #bd0004 100%)'
+      };
+    }
+    if (club.id === 'tottenham') {
+      return {
+        background: 'linear-gradient(135deg, #1d2d5f 0%, #132257 50%, #0a1336 100%)'
+      };
+    }
+    if (club.id === 'mancity') {
+      return {
+        background: 'linear-gradient(135deg, #89c3eb 0%, #6CABDD 50%, #4f96c9 100%)'
+      };
+    }
     return { 
       backgroundColor: club.colors.secondary === '#FFFFFF' ? club.colors.primary : club.colors.secondary,
       backgroundImage: 'linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3))'
@@ -59,6 +74,21 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
             }}
           />
         )}
+
+        {/* Signature Diagonal White Sash for Man City */}
+        {club.id === 'mancity' && (
+          <div className="absolute inset-0 z-0 pointer-events-none opacity-20 overflow-hidden">
+            <div 
+              className="absolute w-[200%] h-[300%]" 
+              style={{
+                transform: 'rotate(-25deg) translate(-10%, -20%)',
+                background: 'linear-gradient(90deg, transparent 0%, #ffffff 12%, #ffffff 15%, transparent 16%, transparent 18%, #ffffff 19%, #ffffff 20%, transparent 21%, transparent 23%, #ffffff 24%, #ffffff 32%, transparent 33%)',
+                backgroundSize: '100% 100%'
+              }}
+            />
+          </div>
+        )}
+
         {/* Collar trim detail at the top of the card */}
         {club.id === 'manutd' && (
           <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#0f1015] z-20 flex flex-col">
@@ -75,9 +105,26 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
             <div className="h-[2px] w-full bg-[#EE242C]" style={{ marginTop: '2px' }} />
           </div>
         )}
+        {club.id === 'arsenal' && (
+          <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20 flex flex-col justify-between py-[1px]">
+            <div className="h-[1px] w-full bg-[#EF0107]" />
+            <div className="h-[1px] w-full bg-[#EF0107]" />
+            <div className="h-[1px] w-full bg-[#EF0107]" />
+          </div>
+        )}
+        {club.id === 'tottenham' && (
+          <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20 flex flex-col justify-between py-[1px]">
+            <div className="h-[1px] w-full bg-[#132257]" />
+            <div className="h-[2px] w-full bg-[#B0B7C3]" />
+            <div className="h-[1px] w-full bg-[#132257]" />
+          </div>
+        )}
+        {club.id === 'mancity' && (
+          <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20" />
+        )}
         <div className="flex flex-col items-center text-center space-y-4 relative z-10">
           <div className="scale-[2.5] mb-2 opacity-50 animate-bounce">
-            {(club.id === 'manutd' || club.id === 'liverpool') ? <Shield /> : <PawPrint />}
+            {(club.id === 'manutd' || club.id === 'liverpool' || club.id === 'arsenal' || club.id === 'tottenham' || club.id === 'mancity') ? <Shield /> : <PawPrint />}
           </div>
           <h3 className="text-xl md:text-2xl font-black tracking-tighter opacity-90 animate-pulse uppercase font-bebas">
             {club.shortName} MATCH DATA LOADING...
@@ -99,6 +146,7 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
       className="text-white rounded-xl shadow-lg w-full max-w-none font-sans tracking-wide flex flex-col overflow-hidden border border-white/10 transition-all duration-500 relative"
       style={getCardBackground()}
     >
+
       {/* Jersey Mesh Overlay for Man Utd */}
       {club.id === 'manutd' && (
         <div 
@@ -108,6 +156,20 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
             backgroundSize: '12px 12px',
           }}
         />
+      )}
+
+      {/* Signature Diagonal White Sash for Man City */}
+      {club.id === 'mancity' && (
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-20 overflow-hidden">
+          <div 
+            className="absolute w-[200%] h-[300%]" 
+            style={{
+              transform: 'rotate(-25deg) translate(-10%, -20%)',
+              background: 'linear-gradient(90deg, transparent 0%, #ffffff 12%, #ffffff 15%, transparent 16%, transparent 18%, #ffffff 19%, #ffffff 20%, transparent 21%, transparent 23%, #ffffff 24%, #ffffff 32%, transparent 33%)',
+              backgroundSize: '100% 100%'
+            }}
+          />
+        </div>
       )}
       {/* Collar trim detail at the top of the card (Man Utd) */}
       {club.id === 'manutd' && (
@@ -128,6 +190,29 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
         <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20 flex flex-col">
           <div className="h-[2px] w-full bg-[#EE242C]" style={{ marginTop: '2px' }} />
         </div>
+      )}
+
+      {/* Three Stripes Collar Trim for Arsenal */}
+      {club.id === 'arsenal' && (
+        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20 flex flex-col justify-between py-[1px]">
+          <div className="h-[1px] w-full bg-[#EF0107]" />
+          <div className="h-[1px] w-full bg-[#EF0107]" />
+          <div className="h-[1px] w-full bg-[#EF0107]" />
+        </div>
+      )}
+
+      {/* Ribbed Collar Trim for Tottenham (White - Navy - Grey - Navy) */}
+      {club.id === 'tottenham' && (
+        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20 flex flex-col justify-between py-[1px]">
+          <div className="h-[1px] w-full bg-[#132257]" />
+          <div className="h-[2px] w-full bg-[#B0B7C3]" />
+          <div className="h-[1px] w-full bg-[#132257]" />
+        </div>
+      )}
+
+      {/* Ribbed Collar Trim for Man City (Solid White) */}
+      {club.id === 'mancity' && (
+        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20" />
       )}
 
 

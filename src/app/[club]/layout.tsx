@@ -18,27 +18,73 @@ export default async function ClubLayout({
 
   const isChelsea = club.id === 'chelsea';
   const isLiverpool = club.id === 'liverpool';
-
-  const lightBg = isChelsea 
-    ? '#f0f4fa' // Soft, elegant Chelsea blue home kit vibe
-    : isLiverpool 
-      ? '#faf0f1' // Soft, elegant Liverpool red home kit vibe
-      : '#f9fafb';
-
-  const darkBg = isChelsea
-    ? '#080e1a' // Deep dark navy blue for Chelsea dark mode
-    : isLiverpool 
-      ? '#140809' // Deep dark wine red for Liverpool dark mode
-      : '#0a0b10';
-
+  const isArsenal = club.id === 'arsenal';
+  const isTottenham = club.id === 'tottenham';
+  const isManCity = club.id === 'mancity';
   const isManUtd = club.id === 'manutd';
 
+  const lightBg = isChelsea 
+    ? '#f0f4fa' 
+    : isLiverpool 
+      ? '#faf0f1' 
+      : isArsenal
+        ? '#faf9f9'
+        : isManCity
+          ? '#f0f9ff'
+          : isTottenham
+            ? '#f8fafc'
+            : '#f9fafb';
+
+  const darkBg = isChelsea
+    ? '#080e1a' 
+    : isLiverpool 
+      ? '#140809' 
+      : isArsenal
+        ? '#0f0202'
+        : isManCity
+          ? '#081629'
+          : isTottenham
+            ? '#050814'
+            : '#0a0b10';
+
   // Dynamic footer colors
-  const footerBg = isManUtd ? '#ffffff' : isLiverpool ? '#C8102E' : isChelsea ? '#034694' : '#1a1a1a';
-  const footerText = isManUtd ? '#111318' : '#ffffff';
-  const footerMuted = isManUtd ? 'rgba(17, 19, 24, 0.6)' : 'rgba(255, 255, 255, 0.7)';
-  const footerAccent = isManUtd ? 'rgba(17, 19, 24, 0.4)' : 'rgba(255, 255, 255, 0.4)';
-  const footerBorder = isManUtd ? '1px solid rgba(17, 19, 24, 0.08)' : 'none';
+  const footerBg = isManUtd 
+    ? '#ffffff' 
+    : isArsenal
+      ? 'var(--arsenal-top-bar-bg)'
+      : isLiverpool 
+        ? '#C8102E' 
+        : isChelsea 
+          ? '#034694' 
+          : isManCity
+            ? '#6CABDD'
+            : isTottenham
+              ? '#132257'
+              : '#1a1a1a';
+
+  const footerText = isManUtd 
+    ? '#111318' 
+    : isArsenal
+      ? '#EF0107'
+      : '#ffffff';
+
+  const footerMuted = isManUtd 
+    ? 'rgba(17, 19, 24, 0.6)' 
+    : isArsenal
+      ? 'rgba(239, 1, 7, 0.7)'
+      : 'rgba(255, 255, 255, 0.7)';
+
+  const footerAccent = isManUtd 
+    ? 'rgba(17, 19, 24, 0.4)' 
+    : isArsenal
+      ? 'rgba(239, 1, 7, 0.5)'
+      : 'rgba(255, 255, 255, 0.4)';
+
+  const footerBorder = isManUtd 
+    ? '1px solid rgba(17, 19, 24, 0.08)' 
+    : isArsenal
+      ? '1px solid rgba(239, 1, 7, 0.15)'
+      : 'none';
 
   return (
     <div className={`flex flex-col min-h-screen transition-colors duration-500 bg-background pattern-${club.design.patternType}`}>

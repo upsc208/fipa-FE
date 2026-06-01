@@ -28,7 +28,10 @@ export default function Header() {
 
   const isChelsea = clubId === 'chelsea';
   const isLiverpool = clubId === 'liverpool';
-  const isColoredHeader = isChelsea || isLiverpool;
+  const isArsenal = clubId === 'arsenal';
+  const isTottenham = clubId === 'tottenham';
+  const isManCity = clubId === 'mancity';
+  const isColoredHeader = isChelsea || isLiverpool || isArsenal || isTottenham || isManCity;
 
   // Dynamic Header Styles
   let headerBgClass = 'bg-white dark:bg-[#0d0e14] border-b border-gray-200 dark:border-white/5 shadow-sm dark:shadow-none';
@@ -36,6 +39,12 @@ export default function Header() {
     headerBgClass = 'bg-[#034694] dark:bg-[#080e1a] border-b border-white/10 text-white shadow-md';
   } else if (isLiverpool) {
     headerBgClass = 'bg-[#c8102e] dark:bg-[#140809] border-b border-white/10 text-white shadow-md';
+  } else if (isArsenal) {
+    headerBgClass = 'bg-[#EF0107] dark:bg-[#0e0202] border-b border-white/10 text-white shadow-md';
+  } else if (isTottenham) {
+    headerBgClass = 'bg-[#132257] dark:bg-[#070b1a] border-b border-white/10 text-white shadow-md';
+  } else if (isManCity) {
+    headerBgClass = 'bg-[#6CABDD] dark:bg-[#081629] border-b border-white/10 text-white shadow-md';
   }
 
   const textPrimaryClass = isColoredHeader
@@ -69,6 +78,15 @@ export default function Header() {
     if (clubId === 'liverpool') {
       return `linear-gradient(135deg, #b21e29 0%, #c8102e 50%, #7a0c14 100%)`;
     }
+    if (clubId === 'arsenal') {
+      return 'var(--arsenal-top-bar-bg)';
+    }
+    if (clubId === 'tottenham') {
+      return 'var(--tottenham-top-bar-bg)';
+    }
+    if (clubId === 'mancity') {
+      return 'var(--mancity-top-bar-bg)';
+    }
     return club.colors.primary;
   };
 
@@ -80,6 +98,20 @@ export default function Header() {
           className="fixed inset-0 z-[60]" 
           onClick={() => setIsSwitcherOpen(false)}
         />
+      )}
+
+      {/* Man City Diagonal Sash Background */}
+      {isManCity && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30 dark:opacity-15 z-0">
+          <div 
+            className="absolute w-[200%] h-[300%]" 
+            style={{
+              transform: 'rotate(-25deg) translate(-25%, -45%)',
+              background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 12%, rgba(255,255,255,0.7) 15%, transparent 16%, transparent 18%, rgba(255,255,255,0.7) 19%, rgba(255,255,255,0.7) 20%, transparent 21%, transparent 23%, rgba(255,255,255,0.7) 24%, rgba(255,255,255,0.7) 32%, transparent 33%)',
+              backgroundSize: '100% 100%'
+            }}
+          />
+        </div>
       )}
 
       {/* Decorative Top Stripe */}
@@ -154,16 +186,148 @@ export default function Header() {
           </div>
         )}
 
+        {clubId === 'arsenal' && (
+          <div className="w-full h-full flex items-center justify-center px-6 sm:px-12 relative animate-in fade-in slide-in-from-left-8 duration-1000">
+             {/* Adidas 3-Stripes Left */}
+             <div className="absolute left-6 lg:left-12 top-0 bottom-0 flex gap-[9px] items-stretch">
+               <div className="w-[9px] bg-[#EF0107]" style={{ transform: 'skewX(-45deg)', transformOrigin: 'top' }} />
+               <div className="w-[9px] bg-[#EF0107]" style={{ transform: 'skewX(-45deg)', transformOrigin: 'top' }} />
+               <div className="w-[9px] bg-[#EF0107]" style={{ transform: 'skewX(-45deg)', transformOrigin: 'top' }} />
+             </div>
+             
+             {/* Main Slogan flanked by classic Cannons */}
+             <div className="flex items-center gap-3 sm:gap-6 z-10">
+               {/* Left Cannon */}
+               <svg viewBox="0 0 100 100" className="w-5 h-5 sm:w-6 sm:h-6 fill-current hover:rotate-12 transition-transform duration-300" style={{ color: '#DBA111' }}>
+                 <path d="M15,46 h48 v8 h-48 z M63,42 h15 v16 h-15 z M78,47 h10 v6 h-10 z" />
+                 <circle cx="50" cy="65" r="14" fill="none" stroke="currentColor" strokeWidth="5" />
+                 <circle cx="50" cy="65" r="5" fill="currentColor" />
+                 <path d="M32,54 L44,66 M60,54 L52,66" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
+               </svg>
+
+               <span className="font-bebas text-2xl sm:text-3xl tracking-[0.4em] font-black italic uppercase" style={{ color: 'var(--arsenal-top-bar-text)' }}>
+                 COYG
+               </span>
+
+               {/* Right Cannon (Flipped) */}
+               <svg viewBox="0 0 100 100" className="w-5 h-5 sm:w-6 sm:h-6 fill-current scale-x-[-1] hover:-rotate-12 transition-transform duration-300" style={{ color: '#DBA111' }}>
+                 <path d="M15,46 h48 v8 h-48 z M63,42 h15 v16 h-15 z M78,47 h10 v6 h-10 z" />
+                 <circle cx="50" cy="65" r="14" fill="none" stroke="currentColor" strokeWidth="5" />
+                 <circle cx="50" cy="65" r="5" fill="currentColor" />
+                 <path d="M32,54 L44,66 M60,54 L52,66" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
+               </svg>
+             </div>
+
+             {/* Adidas 3-Stripes Right */}
+             <div className="absolute right-6 lg:right-12 top-0 bottom-0 flex gap-[9px] items-stretch">
+               <div className="w-[9px] bg-[#EF0107]" style={{ transform: 'skewX(45deg)', transformOrigin: 'top' }} />
+               <div className="w-[9px] bg-[#EF0107]" style={{ transform: 'skewX(45deg)', transformOrigin: 'top' }} />
+               <div className="w-[9px] bg-[#EF0107]" style={{ transform: 'skewX(45deg)', transformOrigin: 'top' }} />
+             </div>
+
+             {/* Bottom solid gold piping stripe */}
+             <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-[#DBA111] z-20" />
+          </div>
+        )}
+
+        {clubId === 'tottenham' && (
+          <div className="w-full h-full flex items-center justify-center px-6 sm:px-12 relative animate-in fade-in slide-in-from-left-8 duration-1000">
+             {/* Left Sleeve Detail */}
+             <div className="absolute left-0 top-0 bottom-0 flex gap-0 items-stretch overflow-hidden">
+               <div className="w-16 md:w-32 bg-[#132257]" style={{ transform: 'skewX(-40deg)', transformOrigin: 'top left' }} />
+               <div className="w-[4px] bg-[#B0B7C3]" style={{ transform: 'skewX(-40deg)', transformOrigin: 'top left' }} />
+             </div>
+
+             {/* Right Sleeve Detail */}
+             <div className="absolute right-0 top-0 bottom-0 flex gap-0 items-stretch overflow-hidden">
+               <div className="w-[4px] bg-[#B0B7C3]" style={{ transform: 'skewX(40deg)', transformOrigin: 'top right' }} />
+               <div className="w-16 md:w-32 bg-[#132257]" style={{ transform: 'skewX(40deg)', transformOrigin: 'top right' }} />
+             </div>
+
+             {/* Slogan framed by Cockerel crest and Nike Swoosh */}
+             <div className="flex items-center gap-3 sm:gap-6 z-10">
+               {/* Nike Swoosh SVG (Navy) */}
+               <svg viewBox="0 0 24 24" className="w-5 h-5 sm:w-6 sm:h-6 fill-current hover:scale-110 transition-transform duration-300" style={{ color: '#132257' }}>
+                 <path d="M21 6.5C18.6 6.5 14.5 8 10.8 10.5 7.1 13 4 16.5 2 19c-.3.4.2.8.6.5 1.8-1.5 4.5-3.5 7.8-5.1 3.5-1.7 7.2-2.4 9.6-2.4.6 0 .8-.5.3-2.5z" />
+               </svg>
+
+               {/* Red AIA Inspired Slogan */}
+               <span className="font-bebas text-2xl sm:text-3xl tracking-[0.4em] font-black italic uppercase text-[#E4002B]">
+                 COYS
+               </span>
+
+               {/* Cockerel Crest SVG (Navy) */}
+               <svg viewBox="0 0 100 100" className="w-5 h-5 sm:w-6 sm:h-6 fill-current hover:-rotate-12 transition-transform duration-300" style={{ color: '#132257' }}>
+                 {/* Ball */}
+                 <circle cx="50" cy="78" r="15" fill="none" stroke="currentColor" strokeWidth="4" />
+                 <path d="M39 78 h22 M50 63 v30 M39 67 l22 22 M39 89 l22-22" stroke="currentColor" strokeWidth="3" />
+                 {/* Cockerel legs */}
+                 <path d="M46 63 L46 54 M54 63 L54 54" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                 {/* Cockerel Body & Tail */}
+                 <path d="M44 48c0-8 6-12 12-10 2 0 4-2 3-5-2-6 8-8 12-2 1 2-2 4-4 4s-4 4-2 7c3 5-1 11-7 11-4 0-8-2-10-5-2 1-3 2-4 0z" />
+                 {/* Head & Comb */}
+                 <path d="M54 33c1-2 2-3 3-2s2 2 1 3-2 1-3 1-1-2-1-2z" />
+               </svg>
+             </div>
+
+             {/* Grey collar-cuff line at the bottom */}
+             <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#B0B7C3]/50 z-20" />
+          </div>
+        )}
+
+        {clubId === 'mancity' && (
+          <div className="w-full h-full flex items-center justify-center px-6 sm:px-12 relative animate-in fade-in slide-in-from-left-8 duration-1000">
+             {/* Left Sleeve White Cuff Accent */}
+             <div className="absolute left-0 top-0 bottom-0 flex gap-0 items-stretch overflow-hidden">
+               {/* Sky blue sleeve block */}
+               <div className="w-16 md:w-32 bg-[#6CABDD]" style={{ transform: 'skewX(-30deg)', transformOrigin: 'top left' }} />
+               {/* White cuff stripe */}
+               <div className="w-[6px] bg-white border-r border-[#6CABDD]/10" style={{ transform: 'skewX(-30deg)', transformOrigin: 'top left' }} />
+             </div>
+
+             {/* Right Sleeve White Cuff Accent */}
+             <div className="absolute right-0 top-0 bottom-0 flex gap-0 items-stretch overflow-hidden">
+               {/* White cuff stripe */}
+               <div className="w-[6px] bg-white border-l border-[#6CABDD]/10" style={{ transform: 'skewX(30deg)', transformOrigin: 'top right' }} />
+               {/* Sky blue sleeve block */}
+               <div className="w-16 md:w-32 bg-[#6CABDD]" style={{ transform: 'skewX(30deg)', transformOrigin: 'top right' }} />
+             </div>
+
+             {/* Slogan framed by Ship crest and Puma logo */}
+             <div className="flex items-center gap-3 sm:gap-6 z-10">
+               {/* Puma Leaping Cat SVG (Navy) */}
+               <svg viewBox="0 0 24 24" className="w-5 h-5 sm:w-6 sm:h-6 fill-current hover:scale-110 transition-transform duration-300" style={{ color: '#1C2C5B' }}>
+                 <path d="M2 17.5c2.5-2 5.5-4 8.5-5 2.5-.8 5 .2 6.5 2 1.5 1.8 1 4-.5 5.5-1 1-2.5 1-3.5-.5-1-1.5-.5-3.5 1-4.5.8-.5 1.2-1.5.8-2.5s-1.5-1.5-2.5-1.2c-2 .5-4 2-5.5 3.8-1.2 1.5-2.8 3-4.8 2.4z M19 7c1 0 2 .5 2.5 1.5s0 2.5-1 3-2-.5-2.5-1.5.5-2.5 1-3z" />
+               </svg>
+
+               {/* Slogan text BLUE MOON */}
+               <span className="font-bebas text-2xl sm:text-3xl tracking-[0.4em] font-black italic uppercase text-[#1C2C5B]">
+                 BLUE MOON
+               </span>
+
+               {/* Ship Crest SVG (Navy) */}
+               <svg viewBox="0 0 100 100" className="w-5 h-5 sm:w-6 sm:h-6 fill-current hover:rotate-12 transition-transform duration-300" style={{ color: '#1C2C5B' }}>
+                 <path d="M20 55 L35 70 L65 70 L80 55 Z" fill="currentColor" />
+                 <path d="M30 50 L50 20 L50 50 Z M55 50 L75 25 L75 50 Z" fill="currentColor" />
+                 <path d="M15 75 Q30 70 45 75 Q60 80 75 75 Q90 70 105 75" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+               </svg>
+             </div>
+
+             {/* Sky blue bottom stripe representing shirt body junction */}
+             <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#6CABDD] z-20" />
+          </div>
+        )}
+
       </div>
       
-      <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row md:h-20 items-center justify-between px-2 sm:px-6 lg:px-12 py-4 md:py-0 mt-0 gap-y-4 md:gap-y-0">
+      <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row md:h-20 items-center justify-between px-2 sm:px-6 lg:px-12 py-4 md:py-0 mt-0 gap-y-4 md:gap-y-0 relative z-10">
         <div className="flex w-full items-center justify-between md:justify-start md:flex-1 gap-2 sm:gap-6 shrink-0">
           <Link href={`/${club.id}`} className="flex items-center space-x-2 sm:space-x-3 group shrink-0">
             <div 
               className="relative flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl shadow-lg group-hover:scale-105 transition-transform shrink-0 border border-white/10"
               style={{ backgroundColor: isColoredHeader ? '#ffffff' : club.colors.primary }}
             >
-              <span className={`text-[10px] sm:text-sm font-black italic ${isColoredHeader ? (isChelsea ? 'text-[#034694]' : 'text-[#c8102e]') : 'text-white'}`}>{club.shortName.substring(0, 2)}</span>
+              <span className={`text-[10px] sm:text-sm font-black italic ${isColoredHeader ? (isChelsea ? 'text-[#034694]' : isLiverpool ? 'text-[#c8102e]' : isArsenal ? 'text-[#EF0107]' : isTottenham ? 'text-[#132257]' : 'text-[#6CABDD]') : 'text-white'}`}>{club.shortName.substring(0, 2)}</span>
               <div className="absolute -top-1 -right-1 flex h-3 w-3 sm:h-4 sm:w-4 items-center justify-center rounded-full bg-black text-white shadow-sm">
                 <Sparkles size={8} />
               </div>

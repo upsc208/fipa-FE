@@ -1,11 +1,7 @@
 import Link from 'next/link';
 import { ChevronLeft, ShieldAlert, Shield, Target } from 'lucide-react';
-import { CLUBS } from '@/config/clubs';
 
 export default function AboutPage() {
-  // Use Atleti colors as a default for the unified page
-  const defaultClub = CLUBS['atleti'];
-
   return (
     <div className="bg-white dark:bg-[#0a0b10] min-h-screen pb-20 transition-colors duration-300 pt-16">
       <div className="sticky top-16 z-40 w-full bg-white/80 dark:bg-[#0d0e14]/90 backdrop-blur-md border-b border-gray-100 dark:border-white/5">
