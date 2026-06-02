@@ -44,7 +44,7 @@ export const getNewsDetail = <ThrowOnError extends boolean = false>(options: Opt
  *
  * 시스템에서 관리 중인 모든 뉴스 수집원 리스트를 가져옵니다.
  */
-export const getSources = <ThrowOnError extends boolean = false>(options?: Options<GetSourcesData, ThrowOnError>) => (options?.client ?? client).get<GetSourcesResponses, unknown, ThrowOnError>({ url: '/api/news/sources', ...options });
+export const getSources = <ThrowOnError extends boolean = false>(options: Options<GetSourcesData, ThrowOnError>) => (options.client ?? client).get<GetSourcesResponses, unknown, ThrowOnError>({ url: '/api/news/{clubCode}/sources', ...options });
 
 /**
  * 수집 로그 조회

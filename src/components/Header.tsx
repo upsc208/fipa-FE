@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import { Newspaper, Info, Sparkles, Ticket, ShoppingBag, ChevronDown } from 'lucide-react';
-import { CLUBS } from '@/config/clubs';
+import { CLUBS, CLUB_ORDER } from '@/config/clubs';
 
 export default function Header({ clubId: propClubId }: { clubId?: string }) {
   const params = useParams();
@@ -212,27 +212,11 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
                <div className="w-[9px] bg-[#EF0107]" style={{ transform: 'skewX(-45deg)', transformOrigin: 'top' }} />
              </div>
              
-             {/* Main Slogan flanked by classic Cannons */}
+             {/* Main Slogan only */}
              <div className="flex items-center gap-3 sm:gap-6 z-10">
-               {/* Left Cannon */}
-               <svg viewBox="0 0 100 100" className="w-10 h-10 sm:w-12 sm:h-12 fill-current hover:rotate-12 transition-transform duration-300" style={{ color: '#DBA111' }}>
-                 <path d="M15,46 h48 v8 h-48 z M63,42 h15 v16 h-15 z M78,47 h10 v6 h-10 z" />
-                 <circle cx="50" cy="65" r="14" fill="none" stroke="currentColor" strokeWidth="5" />
-                 <circle cx="50" cy="65" r="5" fill="currentColor" />
-                 <path d="M32,54 L44,66 M60,54 L52,66" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
-               </svg>
-
                <span className="font-bebas text-2xl sm:text-3xl tracking-[0.2em] font-black italic uppercase" style={{ color: 'var(--arsenal-top-bar-text)' }}>
                  VICTORIA CONCORDIA CRESCIT
                </span>
-
-               {/* Right Cannon (Flipped) */}
-               <svg viewBox="0 0 100 100" className="w-10 h-10 sm:w-12 sm:h-12 fill-current scale-x-[-1] hover:-rotate-12 transition-transform duration-300" style={{ color: '#DBA111' }}>
-                 <path d="M15,46 h48 v8 h-48 z M63,42 h15 v16 h-15 z M78,47 h10 v6 h-10 z" />
-                 <circle cx="50" cy="65" r="14" fill="none" stroke="currentColor" strokeWidth="5" />
-                 <circle cx="50" cy="65" r="5" fill="currentColor" />
-                 <path d="M32,54 L44,66 M60,54 L52,66" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
-               </svg>
              </div>
 
              {/* Adidas 3-Stripes Right */}
@@ -295,7 +279,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
              <div className="flex items-center gap-4 sm:gap-10 z-10">
                <div className="flex flex-col items-center">
                  <span className="font-bebas text-2xl sm:text-4xl tracking-[0.3em] font-black italic uppercase drop-shadow-sm text-[#1C2C5B]">
-                   BLUE MOON
+                   Superbia in Proelio
                  </span>
                </div>
              </div>
@@ -324,7 +308,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
                 {club.shortName} <span style={logoNewsHighlightStyle}>NEWS</span>
               </span>
               <span className={`text-[8px] sm:text-[10px] font-bold tracking-[0.2em] uppercase leading-none mt-1 hidden sm:block ${textSecondaryClass}`}>
-                {club.nameKo} 최신 소식
+                {club.shortName} 최신 소식
               </span>
             </div>
           </Link>
@@ -345,17 +329,19 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
                   className="fixed inset-0 z-[60]" 
                   onClick={() => setIsSwitcherOpen(false)}
                 />
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-[#111318] border border-gray-100 dark:border-white/10 rounded-2xl shadow-2xl z-[70] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
-                  {Object.values(CLUBS).map((c) => (
-                    <a
-                      key={c.id}
-                      href={`/${c.id}${pathname.replace(`/${clubId}`, '')}`}
-                      className={`flex items-center justify-between px-4 py-4 text-sm font-bold hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer w-full ${c.id === clubId ? 'text-primary bg-gray-50 dark:bg-white/5' : 'text-gray-600 dark:text-gray-400'}`}
-                    >
-                      {c.nameKo}
-                      <div className="h-2 w-2 rounded-full" style={{ backgroundColor: c.colors.primary }} />
-                    </a>
-                  ))}
+                <div className="absolute top-full left-0 mt-2 w-22 sm:w-28 bg-white dark:bg-[#111318] border border-gray-100 dark:border-white/10 rounded-2xl shadow-2xl z-[70] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 origin-top-left">
+                  {CLUB_ORDER.map((id) => {
+                    const c = CLUBS[id];
+                    return (
+                      <a
+                        key={c.id}
+                        href={`/${c.id}${pathname.replace(`/${clubId}`, '')}`}
+                        className={`flex items-center justify-center px-3 py-3 text-sm font-bold hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer w-full ${c.id === clubId ? 'text-primary bg-gray-50 dark:bg-white/5' : 'text-gray-600 dark:text-gray-400'}`}
+                      >
+                        <span className="truncate">{c.nameKo}</span>
+                      </a>
+                    );
+                  })}
                 </div>
               </>
             )}

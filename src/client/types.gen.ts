@@ -229,9 +229,11 @@ export type GetNewsDetailResponse = GetNewsDetailResponses[keyof GetNewsDetailRe
 
 export type GetSourcesData = {
     body?: never;
-    path?: never;
+    path: {
+        clubCode: string;
+    };
     query?: never;
-    url: '/api/news/sources';
+    url: '/api/news/{clubCode}/sources';
 };
 
 export type GetSourcesResponses = {

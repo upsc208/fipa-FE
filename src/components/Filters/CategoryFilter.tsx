@@ -10,15 +10,13 @@ import {
   Mic2, 
   ClipboardList, 
   MoreHorizontal,
-  Flame,
-  Zap
+  Flame
 } from 'lucide-react';
 
 const categories = [
   { id: 'all', label: '전체', icon: LayoutGrid },
   { id: 'hyped', label: 'Hyped', icon: Flame },
   { id: '이적시장', label: '이적시장', icon: ArrowLeftRight },
-  { id: '라이브요약', label: '라이브요약', icon: Zap },
   { id: '경기리뷰', label: '경기리뷰', icon: Trophy },
   { id: '오피셜', label: '오피셜', icon: Megaphone },
   { id: '부상/명단', label: '부상/명단', icon: Stethoscope },

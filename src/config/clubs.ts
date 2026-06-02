@@ -1,5 +1,6 @@
 export interface ClubConfig {
   id: string;
+  clubCode: string; // Backend identifier
   name: string;
   nameKo: string;
   shortName: string;
@@ -27,9 +28,10 @@ export interface ClubConfig {
 export const CLUBS: Record<string, ClubConfig> = {
   manutd: {
     id: 'manutd',
+    clubCode: 'MAN_UTD',
     name: 'Manchester United',
-    nameKo: '맨체스터 유나이티드',
-    shortName: 'MAN UTD',
+    nameKo: '맨유',
+    shortName: 'RED DEVILS',
     colors: {
       primary: '#DA291C',
       secondary: '#0f1015',
@@ -43,7 +45,7 @@ export const CLUBS: Record<string, ClubConfig> = {
       officialStore: 'https://store.manutd.com/',
     },
     assets: {
-      logoText: 'NEWS',
+      logoText: 'DEVILS',
     },
     design: {
       patternType: 'dots',
@@ -52,9 +54,10 @@ export const CLUBS: Record<string, ClubConfig> = {
   },
   liverpool: {
     id: 'liverpool',
+    clubCode: 'LIVERPOOL',
     name: 'Liverpool FC',
     nameKo: '리버풀',
-    shortName: 'LFC',
+    shortName: 'KOP',
     colors: {
       primary: '#C8102E',
       secondary: '#0a2f2d',
@@ -77,9 +80,10 @@ export const CLUBS: Record<string, ClubConfig> = {
   },
   chelsea: {
     id: 'chelsea',
+    clubCode: 'CHELSEA',
     name: 'Chelsea FC',
     nameKo: '첼시',
-    shortName: 'CHELSEA',
+    shortName: 'THE BLUES',
     colors: {
       primary: '#034694',
       secondary: '#003366',
@@ -102,9 +106,10 @@ export const CLUBS: Record<string, ClubConfig> = {
   },
   arsenal: {
     id: 'arsenal',
+    clubCode: 'ARSENAL',
     name: 'Arsenal FC',
     nameKo: '아스날',
-    shortName: 'ARSENAL',
+    shortName: 'GUNNERS',
     colors: {
       primary: '#EF0107', // Arsenal Red
       secondary: '#063672', // Arsenal Blue
@@ -127,6 +132,7 @@ export const CLUBS: Record<string, ClubConfig> = {
   },
   tottenham: {
     id: 'tottenham',
+    clubCode: 'TOTTENHAM',
     name: 'Tottenham Hotspur',
     nameKo: '토트넘',
     shortName: 'SPURS',
@@ -143,7 +149,7 @@ export const CLUBS: Record<string, ClubConfig> = {
       officialStore: 'https://shop.tottenhamhotspur.com/',
     },
     assets: {
-      logoText: 'COYS',
+      logoText: 'SPURS',
     },
     design: {
       patternType: 'cockerel',
@@ -152,9 +158,10 @@ export const CLUBS: Record<string, ClubConfig> = {
   },
   mancity: {
     id: 'mancity',
+    clubCode: 'MAN_CITY',
     name: 'Manchester City',
     nameKo: '맨시티',
-    shortName: 'MAN CITY',
+    shortName: 'CITIZENS',
     colors: {
       primary: '#6CABDD', // Sky Blue
       secondary: '#1C2C5B', // Dark Blue
@@ -176,3 +183,12 @@ export const CLUBS: Record<string, ClubConfig> = {
     },
   },
 };
+
+export const CLUB_ORDER = [
+  'arsenal',
+  'mancity',
+  'manutd',
+  'liverpool',
+  'chelsea',
+  'tottenham',
+];

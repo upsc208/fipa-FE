@@ -51,7 +51,9 @@ export default async function Home({
           ...(sourcesParam && sourcesParam !== 'none' ? { sources } : {})
         }
       } as any),
-      getSources(),
+      getSources({
+        path: { clubCode: club.clubCode }
+      }),
       getRecentMatch(),
       getUpcomingMatches()
     ]);
