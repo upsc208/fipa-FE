@@ -54,8 +54,12 @@ export default async function Home({
       getSources({
         path: { clubCode: club.clubCode }
       }),
-      getRecentMatch(),
-      getUpcomingMatches()
+      getRecentMatch({
+        path: { clubCode: club.clubCode }
+      }),
+      getUpcomingMatches({
+        path: { clubCode: club.clubCode }
+      })
     ]);
 
     newsData = newsResponse.data;

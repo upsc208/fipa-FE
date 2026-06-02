@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetLogsData, GetLogsResponses, GetNewsData, GetNewsDetailData, GetNewsDetailResponses, GetNewsResponses, GetRecentMatchData, GetRecentMatchResponses, GetSourcesData, GetSourcesResponses, GetUpcomingMatchesData, GetUpcomingMatchesResponses, SyncMatchesData, SyncMatchesResponses, TriggerPipelineData, TriggerPipelineResponses } from './types.gen';
+import type { GetLogsData, GetLogsResponses, GetNewsData, GetNewsDetailData, GetNewsDetailResponses, GetNewsResponses, GetRecentMatchData, GetRecentMatchResponses, GetSourcesData, GetSourcesResponses, GetUpcomingMatchesData, GetUpcomingMatchesResponses, SyncMatchesData, SyncMatchesResponses, TriggerPipelineData, TriggerPipelineResponses, TriggerYoutubePipelineData, TriggerYoutubePipelineResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -26,13 +26,6 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 export const triggerPipeline = <ThrowOnError extends boolean = false>(options?: Options<TriggerPipelineData, ThrowOnError>) => (options?.client ?? client).post<TriggerPipelineResponses, unknown, ThrowOnError>({ url: '/api/news/trigger', ...options });
 
 /**
- * 뉴스 목록 조회 (필터링 및 검색 포함)
- *
- * 뉴스 목록을 가져옵니다. 소스 리스트, 카테고리, 그리고 검색어(제목/본문) 필터링이 가능합니다.
- */
-export const getNews = <ThrowOnError extends boolean = false>(options?: Options<GetNewsData, ThrowOnError>) => (options?.client ?? client).get<GetNewsResponses, unknown, ThrowOnError>({ url: '/api/news', ...options });
-
-/**
  * 뉴스 상세 조회 (전체 포함)
  *
  * 특정 기사의 상세 정보(이미지, 본문 포함)를 가져옵니다.
@@ -40,9 +33,9 @@ export const getNews = <ThrowOnError extends boolean = false>(options?: Options<
 export const getNewsDetail = <ThrowOnError extends boolean = false>(options: Options<GetNewsDetailData, ThrowOnError>) => (options.client ?? client).get<GetNewsDetailResponses, unknown, ThrowOnError>({ url: '/api/news/{id}', ...options });
 
 /**
- * 수집 소스 목록 조회
+ * 수집 소스 목록 조회 (구단별)
  *
- * 시스템에서 관리 중인 모든 뉴스 수집원 리스트를 가져옵니다.
+ * 특정 구단의 뉴스 수집원 리스트를 가져옵니다.
  */
 export const getSources = <ThrowOnError extends boolean = false>(options: Options<GetSourcesData, ThrowOnError>) => (options.client ?? client).get<GetSourcesResponses, unknown, ThrowOnError>({ url: '/api/news/{clubCode}/sources', ...options });
 
@@ -54,22 +47,31 @@ export const getSources = <ThrowOnError extends boolean = false>(options: Option
 export const getLogs = <ThrowOnError extends boolean = false>(options?: Options<GetLogsData, ThrowOnError>) => (options?.client ?? client).get<GetLogsResponses, unknown, ThrowOnError>({ url: '/api/news/logs', ...options });
 
 /**
- * 향후 경기 일정 조회
+ * 뉴스 목록 조회 (구단별)
  *
- * 다가올 3경기의 일정을 가져옵니다.
+ * 특정 구단의 뉴스 목록을 가져옵니다.
  */
-export const getUpcomingMatches = <ThrowOnError extends boolean = false>(options?: Options<GetUpcomingMatchesData, ThrowOnError>) => (options?.client ?? client).get<GetUpcomingMatchesResponses, unknown, ThrowOnError>({ url: '/api/matches/upcoming', ...options });
+export const getNews = <ThrowOnError extends boolean = false>(options: Options<GetNewsData, ThrowOnError>) => (options.client ?? client).get<GetNewsResponses, unknown, ThrowOnError>({ url: '/api/news/club/{clubCode}', ...options });
 
 /**
- * [테스트용] 경기 정보 강제 동기화
+ * 향후 경기 일정 조회 (구단별)
  *
- * 백그라운드가 아닌 즉시 API를 호출하여 데이터를 업데이트합니다.
+ * 특정 구단의 다가올 3경기의 일정을 가져옵니다.
  */
-export const syncMatches = <ThrowOnError extends boolean = false>(options?: Options<SyncMatchesData, ThrowOnError>) => (options?.client ?? client).get<SyncMatchesResponses, unknown, ThrowOnError>({ url: '/api/matches/sync', ...options });
+export const getUpcomingMatches = <ThrowOnError extends boolean = false>(options: Options<GetUpcomingMatchesData, ThrowOnError>) => (options.client ?? client).get<GetUpcomingMatchesResponses, unknown, ThrowOnError>({ url: '/api/matches/{clubCode}/upcoming', ...options });
 
 /**
- * 최근 경기 결과 조회
+ * 경기 정보 강제 동기화 (구단별)
  *
- * 가장 최근 종료된 경기 1개의 상세 결과를 가져옵니다.
+ * 특정 구단의 경기 정보를 즉시 업데이트합니다.
  */
-export const getRecentMatch = <ThrowOnError extends boolean = false>(options?: Options<GetRecentMatchData, ThrowOnError>) => (options?.client ?? client).get<GetRecentMatchResponses, unknown, ThrowOnError>({ url: '/api/matches/recent', ...options });
+export const syncMatches = <ThrowOnError extends boolean = false>(options: Options<SyncMatchesData, ThrowOnError>) => (options.client ?? client).get<SyncMatchesResponses, unknown, ThrowOnError>({ url: '/api/matches/{clubCode}/sync', ...options });
+
+/**
+ * 최근 경기 결과 조회 (구단별)
+ *
+ * 특정 구단의 가장 최근 종료된 경기 1개의 상세 결과를 가져옵니다.
+ */
+export const getRecentMatch = <ThrowOnError extends boolean = false>(options: Options<GetRecentMatchData, ThrowOnError>) => (options.client ?? client).get<GetRecentMatchResponses, unknown, ThrowOnError>({ url: '/api/matches/{clubCode}/recent', ...options });
+
+export const triggerYoutubePipeline = <ThrowOnError extends boolean = false>(options?: Options<TriggerYoutubePipelineData, ThrowOnError>) => (options?.client ?? client).get<TriggerYoutubePipelineResponses, unknown, ThrowOnError>({ url: '/api/admin/youtube/trigger', ...options });
