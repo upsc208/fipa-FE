@@ -75,14 +75,14 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
           />
         )}
 
-        {/* Signature Diagonal White Sash for Man City */}
+        {/* Iconic 25/26 Diagonal Sash for Man City */}
         {club.id === 'mancity' && (
           <div className="absolute inset-0 z-0 pointer-events-none opacity-20 overflow-hidden">
             <div 
               className="absolute w-[200%] h-[300%]" 
               style={{
-                transform: 'rotate(-25deg) translate(-10%, -20%)',
-                background: 'linear-gradient(90deg, transparent 0%, #ffffff 12%, #ffffff 15%, transparent 16%, transparent 18%, #ffffff 19%, #ffffff 20%, transparent 21%, transparent 23%, #ffffff 24%, #ffffff 32%, transparent 33%)',
+                transform: 'rotate(25deg) translate(-90%, -35%)',
+                background: 'linear-gradient(90deg, transparent 40%, #ffffff 45%, #ffffff 55%, transparent 60%)',
                 backgroundSize: '100% 100%'
               }}
             />
@@ -120,7 +120,9 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
           </div>
         )}
         {club.id === 'mancity' && (
-          <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20" />
+          <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20 flex flex-col justify-center">
+            <div className="h-[1px] w-full bg-[#1C2C5B] opacity-10" />
+          </div>
         )}
         <div className="flex flex-col items-center text-center space-y-4 relative z-10">
           <div className="scale-[2.5] mb-2 opacity-50 animate-bounce">
@@ -158,14 +160,14 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
         />
       )}
 
-      {/* Signature Diagonal White Sash for Man City */}
+      {/* Iconic 25/26 Diagonal Sash for Man City */}
       {club.id === 'mancity' && (
         <div className="absolute inset-0 z-0 pointer-events-none opacity-20 overflow-hidden">
           <div 
             className="absolute w-[200%] h-[300%]" 
             style={{
-              transform: 'rotate(-25deg) translate(-10%, -20%)',
-              background: 'linear-gradient(90deg, transparent 0%, #ffffff 12%, #ffffff 15%, transparent 16%, transparent 18%, #ffffff 19%, #ffffff 20%, transparent 21%, transparent 23%, #ffffff 24%, #ffffff 32%, transparent 33%)',
+              transform: 'rotate(25deg) translate(-32%, -35%)',
+              background: 'linear-gradient(90deg, transparent 40%, #ffffff 45%, #ffffff 55%, transparent 60%)',
               backgroundSize: '100% 100%'
             }}
           />
@@ -210,9 +212,11 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
         </div>
       )}
 
-      {/* Ribbed Collar Trim for Man City (Solid White) */}
+      {/* Ribbed Collar Trim for Man City (25/26 Design) */}
       {club.id === 'mancity' && (
-        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20" />
+        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#FFFFFF] z-20 flex flex-col justify-center">
+          <div className="h-[1px] w-full bg-[#1C2C5B] opacity-10" />
+        </div>
       )}
 
 
@@ -284,4 +288,3 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
     </div>
   );
 }
-

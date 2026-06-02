@@ -48,7 +48,7 @@ export default async function ClubLayout({
             : '#0a0b10';
 
   // Dynamic footer colors
-  const footerBg = isManUtd 
+  const footerBg = (isManUtd || isManCity)
     ? '#ffffff' 
     : isArsenal
       ? 'var(--arsenal-top-bar-bg)'
@@ -56,32 +56,36 @@ export default async function ClubLayout({
         ? '#C8102E' 
         : isChelsea 
           ? '#034694' 
-          : isManCity
-            ? '#6CABDD'
-            : isTottenham
-              ? '#132257'
-              : '#1a1a1a';
+          : isTottenham
+            ? '#132257'
+            : '#1a1a1a';
 
   const footerText = isManUtd 
     ? '#111318' 
-    : isArsenal
-      ? '#EF0107'
-      : '#ffffff';
+    : isManCity
+      ? '#1C2C5B'
+      : isArsenal
+        ? '#EF0107'
+        : '#ffffff';
 
   const footerMuted = isManUtd 
     ? 'rgba(17, 19, 24, 0.6)' 
-    : isArsenal
-      ? 'rgba(239, 1, 7, 0.7)'
-      : 'rgba(255, 255, 255, 0.7)';
+    : isManCity
+      ? 'rgba(28, 44, 91, 0.7)'
+      : isArsenal
+        ? 'rgba(239, 1, 7, 0.7)'
+        : 'rgba(255, 255, 255, 0.7)';
 
   const footerAccent = isManUtd 
     ? 'rgba(17, 19, 24, 0.4)' 
-    : isArsenal
-      ? 'rgba(239, 1, 7, 0.5)'
-      : 'rgba(255, 255, 255, 0.4)';
+    : isManCity
+      ? 'rgba(28, 44, 91, 0.5)'
+      : isArsenal
+        ? 'rgba(239, 1, 7, 0.5)'
+        : 'rgba(255, 255, 255, 0.4)';
 
-  const footerBorder = isManUtd 
-    ? '1px solid rgba(17, 19, 24, 0.08)' 
+  const footerBorder = (isManUtd || isManCity)
+    ? `1px solid ${isManCity ? 'rgba(28, 44, 91, 0.1)' : 'rgba(17, 19, 24, 0.08)'}`
     : isArsenal
       ? '1px solid rgba(239, 1, 7, 0.15)'
       : 'none';
@@ -101,7 +105,7 @@ export default async function ClubLayout({
         }
       `}} />
 
-      <Header />
+      <Header clubId={clubId} />
       
       {club.id === 'manutd' && <div className="pattern-dots-glow" />}
 
