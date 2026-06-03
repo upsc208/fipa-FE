@@ -23,10 +23,10 @@ export default async function ClubLayout({
   const isManCity = club.id === 'mancity';
   const isManUtd = club.id === 'manutd';
 
-  const lightBg = isChelsea 
-    ? '#f0f4fa' 
-    : isLiverpool 
-      ? '#faf0f1' 
+  const lightBg = isChelsea
+    ? '#f0f4fa'
+    : isLiverpool
+      ? '#faf0f1'
       : isArsenal
         ? '#faf9f9'
         : isManCity
@@ -36,9 +36,9 @@ export default async function ClubLayout({
             : '#f9fafb';
 
   const darkBg = isChelsea
-    ? '#080e1a' 
-    : isLiverpool 
-      ? '#140809' 
+    ? '#080e1a'
+    : isLiverpool
+      ? '#140809'
       : isArsenal
         ? '#0f0202'
         : isManCity
@@ -49,35 +49,35 @@ export default async function ClubLayout({
 
   // Dynamic footer colors
   const footerBg = (isManUtd || isManCity)
-    ? '#ffffff' 
+    ? '#ffffff'
     : isArsenal
       ? 'var(--arsenal-top-bar-bg)'
-      : isLiverpool 
-        ? '#C8102E' 
-        : isChelsea 
-          ? '#034694' 
+      : isLiverpool
+        ? '#C8102E'
+        : isChelsea
+          ? '#034694'
           : isTottenham
             ? '#132257'
             : '#1a1a1a';
 
-  const footerText = isManUtd 
-    ? '#111318' 
+  const footerText = isManUtd
+    ? '#111318'
     : isManCity
       ? '#1C2C5B'
       : isArsenal
         ? '#EF0107'
         : '#ffffff';
 
-  const footerMuted = isManUtd 
-    ? 'rgba(17, 19, 24, 0.6)' 
+  const footerMuted = isManUtd
+    ? 'rgba(17, 19, 24, 0.6)'
     : isManCity
       ? 'rgba(28, 44, 91, 0.7)'
       : isArsenal
         ? 'rgba(239, 1, 7, 0.7)'
         : 'rgba(255, 255, 255, 0.7)';
 
-  const footerAccent = isManUtd 
-    ? 'rgba(17, 19, 24, 0.4)' 
+  const footerAccent = isManUtd
+    ? 'rgba(17, 19, 24, 0.4)'
     : isManCity
       ? 'rgba(28, 44, 91, 0.5)'
       : isArsenal
@@ -92,30 +92,61 @@ export default async function ClubLayout({
 
   return (
     <div className={`flex flex-col min-h-screen transition-colors duration-500 bg-background pattern-${club.design.patternType}`}>
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         :root {
           --primary: ${club.colors.primary};
           --secondary: ${club.colors.secondary};
           --accent: ${club.colors.accent};
           --volt: ${club.colors.darkAccent};
           --background: ${lightBg};
+          --manutd-card-bg: linear-gradient(135deg, #b91c1c 0%, #da291c 50%, #80120d 100%);
+          --manutd-stripe-bg: #DA291C;
+          --primary-glow: ${club.colors.primary}05;
+          --primary-border-glow: ${club.colors.primary}10;
+          --primary-border-glow-20: ${club.colors.primary}20;
         }
         .dark {
           --background: ${darkBg};
+          ${isManUtd ? `
+            --primary: #E5B824;
+            --secondary: #1072E5;
+            --accent: #E5B824;
+            --volt: #E5B824;
+            --background: #121316;
+            --surface: #18191D;
+            --surface-secondary: #1E2026;
+            --surface-tertiary: #252830;
+            --manutd-card-bg: linear-gradient(135deg, #18191D 0%, #121316 100%);
+            --manutd-stripe-bg: #121316;
+            --border-color: rgba(229, 184, 36, 0.15);
+            --border-light: rgba(16, 114, 229, 0.15);
+            --text-primary: #F8F9FA;
+            --text-secondary: #A0A5B5;
+            --text-tertiary: #707585;
+            --text-muted: #4A4E5A;
+            --primary-glow: rgba(229, 184, 36, 0.02);
+            --primary-border-glow: rgba(229, 184, 36, 0.08);
+            --primary-border-glow-20: rgba(229, 184, 36, 0.15);
+          ` : `
+            --primary-glow: ${club.colors.primary}08;
+            --primary-border-glow: ${club.colors.primary}15;
+            --primary-border-glow-20: ${club.colors.primary}25;
+          `}
         }
       `}} />
 
       <Header clubId={clubId} />
-      
+
       {club.id === 'manutd' && <div className="pattern-dots-glow" />}
 
       <main className="flex-grow relative z-10">
         {children}
       </main>
 
-      <footer 
+      <footer
         className="py-12 relative z-10 transition-colors duration-500"
-        style={{ 
+        style={{
           backgroundColor: footerBg,
           borderTop: footerBorder
         }}
@@ -124,10 +155,10 @@ export default async function ClubLayout({
           <div className="flex flex-col items-center justify-center space-y-6">
             <div className="text-center">
               <p className="text-sm font-bold mb-1 transition-colors duration-500" style={{ color: footerText }}>
-                FIPA 뉴스
+                Factos 👍 👀 | 해외 축구 뉴스 플랫폼
               </p>
               <p className="text-xs transition-colors duration-500" style={{ color: footerMuted }}>
-                &copy; {new Date().getFullYear()} FIPA NEWS. All rights reserved.
+                &copy; {new Date().getFullYear()} Factos News. All rights reserved.
               </p>
             </div>
             <p className="text-[11px] italic transition-colors duration-500" style={{ color: footerAccent }}>

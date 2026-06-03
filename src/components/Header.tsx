@@ -45,7 +45,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
   } else if (isTottenham) {
     headerBgClass = 'bg-[#132257] dark:bg-[#070b1a] border-b border-white/10 text-white shadow-md';
   } else if (isManCity) {
-    headerBgClass = 'bg-[#6CABDD] dark:bg-[#081629] border-b border-white/10 text-white shadow-md';
+    headerBgClass = 'bg-[#85C6F2] dark:bg-[#081629] border-b border-white/10 text-white shadow-md';
   }
 
   const textPrimaryClass = isColoredHeader
@@ -69,12 +69,12 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
     : 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 text-xs font-bold hover:bg-gray-100 dark:hover:bg-white/10 transition-all relative z-[70] cursor-pointer';
 
   if (isManUtd) {
-    switcherButtonClass = 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#da291c] border border-[#da291c]/20 text-xs font-bold text-white hover:bg-[#b91c1c] transition-all relative z-[70] cursor-pointer shadow-sm';
+    switcherButtonClass = 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary dark:bg-volt/95 border border-primary/20 dark:border-volt/20 text-xs font-bold text-white dark:text-black hover:bg-primary/90 dark:hover:bg-volt transition-all relative z-[70] cursor-pointer shadow-sm';
   }
 
   const logoNewsHighlightStyle = isColoredHeader
     ? { color: '#ffffff' }
-    : { color: club.colors.primary };
+    : { color: 'var(--primary)' };
 
   const getStripePattern = () => {
     if (clubId === 'chelsea') {
@@ -90,7 +90,10 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
       return 'var(--tottenham-top-bar-bg)';
     }
     if (clubId === 'mancity') {
-      return 'linear-gradient(135deg, #6CABDD 0%, #8ed1fc 50%, #6CABDD 100%)';
+      return 'linear-gradient(135deg, #85C6F2 0%, #a4d8f8 50%, #85C6F2 100%)';
+    }
+    if (clubId === 'manutd') {
+      return 'var(--manutd-stripe-bg)';
     }
     return club.colors.primary;
   };
@@ -178,28 +181,28 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
 
         {clubId === 'manutd' && (
           <div className="w-full h-full flex items-center justify-center px-6 sm:px-12 relative animate-in fade-in slide-in-from-left-8 duration-1000">
-             {/* Adidas-style 3-Stripes Left (Black) */}
+             {/* Adidas-style 3-Stripes Left (Black / Gold in Dark) */}
              <div className="absolute left-6 lg:left-12 top-0 bottom-0 flex gap-[9px] items-stretch">
-               <div className="w-[9px] bg-black" style={{ transform: 'skewX(-45deg)', transformOrigin: 'top' }} />
-               <div className="w-[9px] bg-black" style={{ transform: 'skewX(-45deg)', transformOrigin: 'top' }} />
-               <div className="w-[9px] bg-black" style={{ transform: 'skewX(-45deg)', transformOrigin: 'top' }} />
+               <div className="w-[9px] bg-black dark:bg-[#E5B824]" style={{ transform: 'skewX(-45deg)', transformOrigin: 'top' }} />
+               <div className="w-[9px] bg-black dark:bg-[#E5B824]" style={{ transform: 'skewX(-45deg)', transformOrigin: 'top' }} />
+               <div className="w-[9px] bg-black dark:bg-[#E5B824]" style={{ transform: 'skewX(-45deg)', transformOrigin: 'top' }} />
              </div>
              
-             {/* Main Slogan */}
-             <span className="text-white font-bebas text-xl sm:text-2xl lg:text-3xl tracking-[0.4em] font-black drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] italic uppercase">
+             {/* Main Slogan (White / Gold in Dark) */}
+             <span className="text-white dark:text-[#E5B824] font-bebas text-xl sm:text-2xl lg:text-3xl tracking-[0.4em] font-black drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] italic uppercase">
                GLORY GLORY MAN UNITED
              </span>
 
-             {/* Adidas-style 3-Stripes Right (Black) */}
+             {/* Adidas-style 3-Stripes Right (Black / Gold in Dark) */}
              <div className="absolute right-6 lg:right-12 top-0 bottom-0 flex gap-[9px] items-stretch">
-               <div className="w-[9px] bg-black" style={{ transform: 'skewX(45deg)', transformOrigin: 'top' }} />
-               <div className="w-[9px] bg-black" style={{ transform: 'skewX(45deg)', transformOrigin: 'top' }} />
-               <div className="w-[9px] bg-black" style={{ transform: 'skewX(45deg)', transformOrigin: 'top' }} />
+               <div className="w-[9px] bg-black dark:bg-[#E5B824]" style={{ transform: 'skewX(45deg)', transformOrigin: 'top' }} />
+               <div className="w-[9px] bg-black dark:bg-[#E5B824]" style={{ transform: 'skewX(45deg)', transformOrigin: 'top' }} />
+               <div className="w-[9px] bg-black dark:bg-[#E5B824]" style={{ transform: 'skewX(45deg)', transformOrigin: 'top' }} />
              </div>
 
-             {/* Collar trim detail at the bottom of the stripe */}
-             <div className="absolute bottom-0 left-0 right-0 h-[5px] bg-[#0f1015]" />
-             <div className="absolute bottom-[2px] left-0 right-0 h-[1px] bg-white/90" />
+             {/* Collar trim detail at the bottom of the stripe (Blue & Gold in Dark) */}
+             <div className="absolute bottom-0 left-0 right-0 h-[5px] bg-[#0f1015] dark:bg-[#1072E5]" />
+             <div className="absolute bottom-[2px] left-0 right-0 h-[1px] bg-white/90 dark:bg-[#E5B824]/90" />
           </div>
         )}
 
@@ -298,7 +301,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
               className="relative flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl shadow-lg group-hover:scale-105 transition-transform shrink-0 border border-white/10"
               style={{ backgroundColor: isColoredHeader ? '#ffffff' : club.colors.primary }}
             >
-              <span className={`text-[10px] sm:text-sm font-black italic ${isColoredHeader ? (isChelsea ? 'text-[#034694]' : isLiverpool ? 'text-[#c8102e]' : isArsenal ? 'text-[#EF0107]' : isTottenham ? 'text-[#132257]' : 'text-[#6CABDD]') : 'text-white'}`}>{club.shortName.substring(0, 2)}</span>
+              <span className={`text-[10px] sm:text-sm font-black italic ${isColoredHeader ? (isChelsea ? 'text-[#034694]' : isLiverpool ? 'text-[#c8102e]' : isArsenal ? 'text-[#EF0107]' : isTottenham ? 'text-[#132257]' : 'text-[#85C6F2]') : 'text-white'}`}>{club.shortName.substring(0, 2)}</span>
               <div className="absolute -top-1 -right-1 flex h-3 w-3 sm:h-4 sm:w-4 items-center justify-center rounded-full bg-black text-white shadow-sm">
                 <Sparkles size={8} />
               </div>

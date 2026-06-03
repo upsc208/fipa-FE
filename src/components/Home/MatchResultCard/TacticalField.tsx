@@ -16,7 +16,7 @@ export const TacticalField = ({ lineup, homeTeam, awayTeam }: TacticalFieldProps
       return { bg: '#EF0107', border: '#ffffff', text: '#ffffff' };
     }
     if (name.includes('city') || name.includes('맨시티')) {
-      return { bg: '#6CABDD', border: '#ffffff', text: '#1C2C5B' };
+      return { bg: '#85C6F2', border: '#ffffff', text: '#1C2C5B' };
     }
     if (name.includes('united') || name.includes('맨유')) {
       return { bg: '#DA291C', border: '#000000', text: '#ffffff' };

@@ -41,7 +41,7 @@ export const CLUBS: Record<string, ClubConfig> = {
       surface: '#DA291C',
     },
     links: {
-      officialTickets: 'https://www.manutd.com/en/tickets',
+      officialTickets: 'https://tickets.manutd.com/?dd_referrer=https%3A%2F%2Fwww.manutd.com%2F&int_campaign=match_tickets&int_content=meganav&int_medium=menu&int_source=muwebsite&t=y',
       officialStore: 'https://store.manutd.com/',
     },
     assets: {
@@ -163,12 +163,12 @@ export const CLUBS: Record<string, ClubConfig> = {
     nameKo: '맨시티',
     shortName: 'CITIZENS',
     colors: {
-      primary: '#6CABDD', // Sky Blue
+      primary: '#85C6F2', // Sky Blue
       secondary: '#1C2C5B', // Dark Blue
       accent: '#FFC85F', // Gold/Yellow
       white: '#FFFFFF',
-      darkAccent: '#6CABDD',
-      surface: '#6CABDD',
+      darkAccent: '#85C6F2',
+      surface: '#85C6F2',
     },
     links: {
       officialTickets: 'https://www.mancity.com/tickets',

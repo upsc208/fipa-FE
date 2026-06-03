@@ -43,6 +43,7 @@ export default async function Home({
     // Fetch news and sources in parallel
     const [newsResponse, sourcesResponse, recentMatchResponse, upcomingMatchesResponse] = await Promise.all([
       getNews({
+        path: { clubCode: club.clubCode },
         query: {
           page: page,
           size: size,
@@ -50,7 +51,7 @@ export default async function Home({
           ...(category && category !== 'all' ? { category } : {}),
           ...(sourcesParam && sourcesParam !== 'none' ? { sources } : {})
         }
-      } as any),
+      }),
       getSources({
         path: { clubCode: club.clubCode }
       }),

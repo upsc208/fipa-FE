@@ -32,7 +32,7 @@ export default function NewsCard({ news, showImage = false, fromPage, club }: Ne
       {/* 상단 액센트 라인 */}
       <div 
         className="h-2 w-full opacity-0 group-hover:opacity-100 transition-opacity"
-        style={{ background: `linear-gradient(90deg, ${club.colors.primary}, ${club.colors.accent}, transparent)` }}
+        style={{ background: 'linear-gradient(90deg, var(--primary), var(--accent), transparent)' }}
       />
 
 
@@ -60,14 +60,14 @@ export default function NewsCard({ news, showImage = false, fromPage, club }: Ne
             <div className="flex items-center gap-2">
               <span 
                 className="text-[11px] sm:text-[12px] lg:text-[13px] font-bebas text-white px-3 py-1.5 rounded-md uppercase tracking-widest shadow-md"
-                style={{ backgroundColor: club.colors.primary }}
+                style={{ backgroundColor: 'var(--primary)' }}
               >
                 {news.sourceName}
               </span>
             </div>
 
             <div className="flex items-center gap-1.5 text-[11px] sm:text-[12px] lg:text-[13px] font-extrabold uppercase tracking-tighter text-gray-500 dark:text-gray-400">
-              <User size={16} style={{ color: club.colors.primary }} />
+              <User size={16} style={{ color: 'var(--primary)' }} />
               <span className="truncate max-w-[100px] sm:max-w-none font-kanit">{news.authorName || 'NEWS'}</span>
             </div>
 
@@ -96,9 +96,9 @@ export default function NewsCard({ news, showImage = false, fromPage, club }: Ne
           {news.summaryKo && (
             <div 
               className="relative p-5 sm:p-6 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border-l-4 transition-all hidden xs:block shadow-inner"
-              style={{ borderLeftColor: club.colors.primary }}
+              style={{ borderLeftColor: 'var(--primary)' }}
             >
-              <div className="flex items-center gap-2 mb-3" style={{ color: club.colors.primary }}>
+              <div className="flex items-center gap-2 mb-3" style={{ color: 'var(--primary)' }}>
                 <Sparkles size={18} className="fill-current" />
                 <span className="text-[11px] lg:text-[12px] font-bebas tracking-[0.2em] uppercase">AI Insight</span>
               </div>
@@ -110,7 +110,7 @@ export default function NewsCard({ news, showImage = false, fromPage, club }: Ne
 
           <div 
             className="mt-6 lg:mt-8 flex items-center gap-2 text-[12px] lg:text-[13px] font-bebas opacity-100 sm:opacity-0 group-hover:opacity-100 transition-all sm:translate-y-2 group-hover:translate-y-0 uppercase tracking-[0.2em]"
-            style={{ color: club.colors.primary }}
+            style={{ color: 'var(--primary)' }}
           >
             <span className="border-b-2 border-current pb-0.5">Read Full Story</span>
             <ExternalLink size={16} />

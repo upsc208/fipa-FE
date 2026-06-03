@@ -25,7 +25,7 @@ export default async function AboutPage({
             홈으로 돌아가기
           </Link>
           <div className="flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full" style={{ backgroundColor: club.colors.primary }}></div>
+            <div className="h-2 w-2 rounded-full" style={{ backgroundColor: 'var(--primary)' }}></div>
             <span className="text-xs font-black uppercase tracking-widest text-gray-400">About Platform</span>
           </div>
         </div>
@@ -34,7 +34,7 @@ export default async function AboutPage({
       <main className="container mx-auto px-6 lg:px-12 py-20 lg:py-32">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black text-gray-950 dark:text-white mb-10 tracking-tighter uppercase font-bebas">
-            ABOUT <span style={{ color: club.colors.primary }}>{club.shortName} NEWS</span>
+            ABOUT <span style={{ color: 'var(--primary)' }}>{club.shortName} NEWS</span>
           </h1>
 
           <div className="prose prose-xl text-gray-600 dark:text-gray-300 leading-relaxed space-y-8 font-medium max-w-none font-kanit">
@@ -44,7 +44,7 @@ export default async function AboutPage({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32 not-prose">
               <div className="space-y-6">
-                <div className="h-14 w-14 rounded-2xl flex items-center justify-center text-white" style={{ backgroundColor: club.colors.primary }}>
+                <div className="h-14 w-14 rounded-2xl flex items-center justify-center text-white" style={{ backgroundColor: 'var(--primary)' }}>
                   <Shield size={28} />
                 </div>
                 <h3 className="text-2xl font-black uppercase font-bebas">Authenticity</h3>
@@ -53,7 +53,7 @@ export default async function AboutPage({
                 </p>
               </div>
               <div className="space-y-6">
-                <div className="h-14 w-14 rounded-2xl flex items-center justify-center text-white" style={{ backgroundColor: club.colors.secondary }}>
+                <div className="h-14 w-14 rounded-2xl flex items-center justify-center text-white" style={{ backgroundColor: 'var(--secondary)' }}>
                   <Target size={28} />
                 </div>
                 <h3 className="text-2xl font-black uppercase font-bebas">Accessibility</h3>
@@ -65,26 +65,26 @@ export default async function AboutPage({
 
             <div 
               className="p-8 sm:p-12 rounded-[3rem] border my-16 not-prose"
-              style={{ backgroundColor: `${club.colors.primary}05`, borderColor: `${club.colors.primary}10` }}
+              style={{ backgroundColor: 'var(--primary-glow)', borderColor: 'var(--primary-border-glow)' }}
             >
               <h2 
                 className="text-2xl sm:text-3xl font-black mb-8 flex items-center gap-3 uppercase font-bebas"
-                style={{ color: club.colors.primary }}
+                style={{ color: 'var(--primary)' }}
               >
-                <div className="h-3 w-3 rounded-full" style={{ backgroundColor: club.colors.primary }}></div>
+                <div className="h-3 w-3 rounded-full" style={{ backgroundColor: 'var(--primary)' }}></div>
                 Project Mission
               </h2>
               <ul className="space-y-6">
                 <li className="flex gap-4">
-                  <span className="font-bold shrink-0 mt-1" style={{ color: club.colors.primary }}>01.</span>
+                  <span className="font-bold shrink-0 mt-1" style={{ color: 'var(--primary)' }}>01.</span>
                   <p className="text-gray-700 dark:text-gray-300 font-bold text-lg leading-tight">가장 빠르고 정확한 {club.shortName} 뉴스 전달</p>
                 </li>
                 <li className="flex gap-4">
-                  <span className="font-bold shrink-0 mt-1" style={{ color: club.colors.primary }}>02.</span>
+                  <span className="font-bold shrink-0 mt-1" style={{ color: 'var(--primary)' }}>02.</span>
                   <p className="text-gray-700 dark:text-gray-300 font-bold text-lg leading-tight">AI 기반의 요약으로 정보 습득 효율성 극대화</p>
                 </li>
                 <li className="flex gap-4">
-                  <span className="font-bold shrink-0 mt-1" style={{ color: club.colors.primary }}>03.</span>
+                  <span className="font-bold shrink-0 mt-1" style={{ color: 'var(--primary)' }}>03.</span>
                   <p className="text-gray-700 dark:text-gray-300 font-bold text-lg leading-tight">글로벌 팬덤을 위한 디지털 뉴스 허브 구축</p>
                 </li>
               </ul>
@@ -93,7 +93,7 @@ export default async function AboutPage({
             <div className="border-t border-gray-100 dark:border-white/5 pt-16 not-prose">
               <h3 
                 className="flex items-center gap-2 font-black mb-6 uppercase tracking-tighter text-xl sm:text-2xl font-bebas"
-                style={{ color: club.colors.primary }}
+                style={{ color: 'var(--primary)' }}
               >
                 <ShieldAlert size={28} /> Legal Disclaimer
               </h3>

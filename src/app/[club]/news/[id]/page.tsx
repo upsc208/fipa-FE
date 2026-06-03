@@ -89,7 +89,7 @@ export default async function NewsDetailPage({
     return (
       <div className="container mx-auto px-4 py-20 text-center">
         <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">뉴스를 찾을 수 없습니다.</h1>
-        <Link href={`/${clubId}`} className="font-bold underline" style={{ color: club.colors.primary }}>홈으로 돌아가기</Link>
+        <Link href={`/${clubId}`} className="font-bold underline" style={{ color: 'var(--primary)' }}>홈으로 돌아가기</Link>
       </div>
     );
   }
@@ -201,7 +201,7 @@ export default async function NewsDetailPage({
           <div className="flex flex-col sm:flex-row sm:items-center justify-between border-y border-gray-100 dark:border-white/5 py-4 sm:py-6 gap-6">
             <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
               <div className="flex items-center gap-3">
-                <span className="text-xs sm:text-sm font-black uppercase tracking-widest" style={{ color: club.colors.primary }}>
+                <span className="text-xs sm:text-sm font-black uppercase tracking-widest" style={{ color: 'var(--primary)' }}>
                   {news.sourceName || '알 수 없는 출처'}
                 </span>
                 <div className="h-4 w-px bg-gray-200 dark:bg-white/10" />
@@ -222,7 +222,7 @@ export default async function NewsDetailPage({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-gray-50 dark:bg-white/[0.03] text-gray-600 dark:text-gray-300 rounded-xl text-xs sm:text-sm font-bold transition-all border border-gray-100 dark:border-white/[0.04] hover:opacity-80"
-                  style={{ borderColor: `${club.colors.primary}20` }}
+                  style={{ borderColor: 'var(--primary-border-glow-20)' }}
                 >
                   <span className="whitespace-nowrap">원문 보기</span>
                   <ExternalLink size={14} />
@@ -239,16 +239,16 @@ export default async function NewsDetailPage({
         {summaryPoints.length > 0 && (
           <div className="mb-12 bg-gray-50 dark:bg-[#111318] rounded-3xl p-6 lg:p-8 border border-gray-100 dark:border-white/10 relative overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-5">
-              <Newspaper size={80} style={{ color: club.colors.primary }} />
+              <Newspaper size={80} style={{ color: 'var(--primary)' }} />
             </div>
-            <h2 className="text-sm font-black uppercase tracking-widest mb-4 flex items-center gap-2" style={{ color: club.colors.primary }}>
-              <div className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: club.colors.primary }}></div>
+            <h2 className="text-sm font-black uppercase tracking-widest mb-4 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+              <div className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ backgroundColor: 'var(--primary)' }}></div>
               AI 핵심 요약
             </h2>
             <ul className="space-y-4">
               {summaryPoints.map((point, index) => (
                 <li key={index} className="flex items-start gap-3 text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full opacity-40" style={{ backgroundColor: club.colors.primary }}></span>
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full opacity-40" style={{ backgroundColor: 'var(--primary)' }}></span>
                   {point}
                 </li>
               ))}
@@ -283,7 +283,7 @@ export default async function NewsDetailPage({
         {news.articleType === 'SNS_POST' && news.originalUrl && (news.originalUrl.includes('x.com') || news.originalUrl.includes('twitter.com')) && (
           <div className="mb-16 py-10 border-t border-gray-100 dark:border-white/5">
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-              <MessageSquare size={20} style={{ color: club.colors.primary }} />
+              <MessageSquare size={20} style={{ color: 'var(--primary)' }} />
               원본 포스트
             </h3>
             <div className="flex justify-center">
@@ -295,7 +295,7 @@ export default async function NewsDetailPage({
                 ) : (
                   <div className="p-8 text-center bg-gray-50 dark:bg-white/5 rounded-2xl">
                     <p className="text-gray-500 dark:text-gray-400 text-sm">트윗 ID를 찾을 수 없습니다.</p>
-                    <a href={news.originalUrl} target="_blank" rel="noopener noreferrer" className="text-xs font-bold mt-2 inline-block underline" style={{ color: club.colors.primary }}>
+                    <a href={news.originalUrl} target="_blank" rel="noopener noreferrer" className="text-xs font-bold mt-2 inline-block underline" style={{ color: 'var(--primary)' }}>
                       원문 직접 보기
                     </a>
                   </div>

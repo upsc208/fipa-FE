@@ -24,7 +24,7 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
   const getCardBackground = () => {
     if (club.id === 'manutd') {
       return {
-        background: 'linear-gradient(135deg, #b91c1c 0%, #da291c 50%, #80120d 100%)'
+        background: 'var(--manutd-card-bg)'
       };
     }
     if (club.id === 'liverpool') {
@@ -49,7 +49,7 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
     }
     if (club.id === 'mancity') {
       return {
-        background: 'linear-gradient(135deg, #89c3eb 0%, #6CABDD 50%, #4f96c9 100%)'
+        background: 'linear-gradient(135deg, #a4d8f8 0%, #85C6F2 50%, #5ba7de 100%)'
       };
     }
     return { 
@@ -91,8 +91,8 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
 
         {/* Collar trim detail at the top of the card */}
         {club.id === 'manutd' && (
-          <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#0f1015] z-20 flex flex-col">
-            <div className="h-[2px] w-full bg-white/80" style={{ marginTop: '2px' }} />
+          <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#0f1015] dark:bg-[#1072E5] z-20 flex flex-col">
+            <div className="h-[2px] w-full bg-white/80 dark:bg-[#E5B824]/80" style={{ marginTop: '2px' }} />
           </div>
         )}
         {club.id === 'liverpool' && (
@@ -175,8 +175,8 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, club }: 
       )}
       {/* Collar trim detail at the top of the card (Man Utd) */}
       {club.id === 'manutd' && (
-        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#0f1015] z-20 flex flex-col">
-          <div className="h-[2px] w-full bg-white/80" style={{ marginTop: '2px' }} />
+        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#0f1015] dark:bg-[#1072E5] z-20 flex flex-col">
+          <div className="h-[2px] w-full bg-white/80 dark:bg-[#E5B824]/80" style={{ marginTop: '2px' }} />
         </div>
       )}
 

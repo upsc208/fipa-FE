@@ -27,7 +27,7 @@ const greatVibes = Great_Vibes({
 export const metadata: Metadata = {
   metadataBase: new URL('https://fipa-news.kr'),
   title: {
-    default: "FIPA NEWS | 글로벌 축구 뉴스 플랫폼",
+    default: "Factos 👍 👀 | 해외 축구 뉴스 플랫폼",
     template: "%s | FIPA NEWS"
   },
   description: "글로벌 축구 팬들을 위한 최신 뉴스, 경기 정보 및 분석 플랫폼.",
