@@ -31,8 +31,10 @@ export const ScoreSection = ({
       {/* Score Main */}
       <div className="order-2 flex-1 flex flex-col md:flex-row items-center justify-between pb-6 md:pb-10 w-full gap-4 md:gap-0">
         {/* Home Team */}
-        <div className="w-full md:w-[35%] lg:w-[38%] text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black tracking-tighter text-white text-center md:text-left leading-tight break-words min-w-0 transition-all duration-300 uppercase">
-          {homeTeam}
+        <div className="w-full md:w-[35%] lg:w-[38%] @container min-w-0">
+          <div className="text-[clamp(1.25rem,10cqi,2.25rem)] md:text-[clamp(1.5rem,12cqi,4.5rem)] font-black tracking-tighter text-white text-center md:text-left leading-tight break-keep min-w-0 transition-all duration-300 uppercase">
+            {homeTeam}
+          </div>
         </div>
 
         {/* Score - Fixed Center Width */}
@@ -43,8 +45,10 @@ export const ScoreSection = ({
         </div>
 
         {/* Away Team */}
-        <div className="w-full md:w-[35%] lg:w-[38%] text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black tracking-tighter text-white text-center md:text-right leading-tight break-words min-w-0 transition-all duration-300 uppercase">
-          {awayTeam}
+        <div className="w-full md:w-[35%] lg:w-[38%] @container min-w-0">
+          <div className="text-[clamp(1.25rem,10cqi,2.25rem)] md:text-[clamp(1.5rem,12cqi,4.5rem)] font-black tracking-tighter text-white text-center md:text-right leading-tight break-keep min-w-0 transition-all duration-300 uppercase">
+            {awayTeam}
+          </div>
         </div>
       </div>
     </>

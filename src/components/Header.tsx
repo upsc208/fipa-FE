@@ -333,12 +333,12 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
                   onClick={() => setIsSwitcherOpen(false)}
                 />
                 <div className="absolute top-full left-0 mt-2 w-22 sm:w-28 bg-white dark:bg-[#111318] border border-gray-100 dark:border-white/10 rounded-2xl shadow-2xl z-[70] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 origin-top-left">
-                  {CLUB_ORDER.map((id) => {
+                    {CLUB_ORDER.map((id) => {
                     const c = CLUBS[id];
                     return (
                       <a
                         key={c.id}
-                        href={`/${c.id}${pathname.replace(`/${clubId}`, '')}`}
+                        href={`/${c.id}`}
                         className={`flex items-center justify-center px-3 py-3 text-sm font-bold hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer w-full ${c.id === clubId ? 'text-primary bg-gray-50 dark:bg-white/5' : 'text-gray-600 dark:text-gray-400'}`}
                       >
                         <span className="truncate">{c.nameKo}</span>

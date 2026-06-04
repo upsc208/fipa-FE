@@ -105,6 +105,11 @@ export default async function ClubLayout({
           --primary-glow: ${club.colors.primary}05;
           --primary-border-glow: ${club.colors.primary}10;
           --primary-border-glow-20: ${club.colors.primary}20;
+          --footer-bg: ${footerBg};
+          --footer-text: ${footerText};
+          --footer-muted: ${footerMuted};
+          --footer-accent: ${footerAccent};
+          --footer-border: ${footerBorder};
         }
         .dark {
           --background: ${darkBg};
@@ -128,6 +133,11 @@ export default async function ClubLayout({
             --primary-glow: rgba(229, 184, 36, 0.02);
             --primary-border-glow: rgba(229, 184, 36, 0.08);
             --primary-border-glow-20: rgba(229, 184, 36, 0.15);
+            --footer-bg: #000000;
+            --footer-text: #F8F9FA;
+            --footer-muted: #A0A5B5;
+            --footer-accent: #707585;
+            --footer-border: 1px solid rgba(229, 184, 36, 0.15);
           ` : `
             --primary-glow: ${club.colors.primary}08;
             --primary-border-glow: ${club.colors.primary}15;
@@ -147,21 +157,21 @@ export default async function ClubLayout({
       <footer
         className="py-12 relative z-10 transition-colors duration-500"
         style={{
-          backgroundColor: footerBg,
-          borderTop: footerBorder
+          backgroundColor: 'var(--footer-bg)',
+          borderTop: 'var(--footer-border)'
         }}
       >
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center space-y-6">
             <div className="text-center">
-              <p className="text-sm font-bold mb-1 transition-colors duration-500" style={{ color: footerText }}>
+              <p className="text-sm font-bold mb-1 transition-colors duration-500" style={{ color: 'var(--footer-text)' }}>
                 Factos 👍 👀 | 해외 축구 뉴스 플랫폼
               </p>
-              <p className="text-xs transition-colors duration-500" style={{ color: footerMuted }}>
+              <p className="text-xs transition-colors duration-500" style={{ color: 'var(--footer-muted)' }}>
                 &copy; {new Date().getFullYear()} Factos News. All rights reserved.
               </p>
             </div>
-            <p className="text-[11px] italic transition-colors duration-500" style={{ color: footerAccent }}>
+            <p className="text-[11px] italic transition-colors duration-500" style={{ color: 'var(--footer-accent)' }}>
               &quot;본 사이트는 해외 축구 비공식 팬 페이지입니다.&quot;
             </p>
           </div>
