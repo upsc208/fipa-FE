@@ -1,4 +1,4 @@
-import { getNews, getSources, getRecentMatch, getUpcomingMatches } from '@/client/sdk.gen';
+import { getNews, getSources, getRecentMatch, getUpcomingMatches, getLatestBriefing } from '@/client/sdk.gen';
 import NewsCard from '@/components/NewsCard';
 import NewsFeedContainer from '@/components/Home/NewsFeedContainer';
 import SearchBar from '@/components/Filters/SearchBar';
@@ -38,10 +38,11 @@ export default async function Home({
   let sourcesData: any[] = [];
   let recentMatchData = null;
   let upcomingMatchesData: any[] = [];
+  let briefingData = null;
 
   try {
     // Fetch news and sources in parallel
-    const [newsResponse, sourcesResponse, recentMatchResponse, upcomingMatchesResponse] = await Promise.all([
+    const [newsResponse, sourcesResponse, recentMatchResponse, upcomingMatchesResponse, briefingResponse] = await Promise.all([
       getNews({
         path: { clubCode: club.clubCode },
         query: {
@@ -60,6 +61,9 @@ export default async function Home({
       }),
       getUpcomingMatches({
         path: { clubCode: club.clubCode }
+      }),
+      getLatestBriefing({
+        path: { clubCode: club.clubCode }
       })
     ]);
 
@@ -67,6 +71,7 @@ export default async function Home({
     sourcesData = sourcesResponse.data || [];
     recentMatchData = recentMatchResponse.data || null;
     upcomingMatchesData = upcomingMatchesResponse.data || [];
+    briefingData = briefingResponse.data || null;
   } catch (error) {
     console.error('Failed to fetch data:', error);
   }
@@ -80,7 +85,12 @@ export default async function Home({
       <section className="container mx-auto px-6 lg:px-12 py-12 relative">
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8 relative z-10">
           <div className="w-full">
-            <MatchResultCard recentMatch={recentMatchData} upcomingMatches={upcomingMatchesData} club={club} />
+            <MatchResultCard 
+              recentMatch={recentMatchData} 
+              upcomingMatches={upcomingMatchesData} 
+              briefing={briefingData}
+              club={club} 
+            />
           </div>
           <MobileFilterDrawer allSources={sourcesData} />
         </div>
@@ -120,6 +130,3 @@ export default async function Home({
     </div>
   );
 }
-
-
-

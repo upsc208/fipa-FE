@@ -4,6 +4,22 @@ export type ClientOptions = {
     baseUrl: 'http://localhost:8080' | (string & {});
 };
 
+export type FeedbackRequest = {
+    title: string;
+    content: string;
+    category: string;
+};
+
+export type FeedbackResponse = {
+    id: number;
+    message: string;
+};
+
+export type BriefingResponse = {
+    content: Array<string>;
+    createdAt: string;
+};
+
 export type NewsDetailResponse = {
     id: number;
     titleKo?: string;
@@ -56,8 +72,8 @@ export type CollectionLog = {
 };
 
 export type PageCollectionLog = {
-    totalElements?: number;
     totalPages?: number;
+    totalElements?: number;
     size?: number;
     content?: Array<CollectionLog>;
     number?: number;
@@ -80,8 +96,8 @@ export type PageableObject = {
 
 export type SortObject = {
     empty?: boolean;
-    sorted?: boolean;
     unsorted?: boolean;
+    sorted?: boolean;
 };
 
 export type NewsListResponse = {
@@ -98,8 +114,8 @@ export type NewsListResponse = {
 };
 
 export type PageNewsListResponse = {
-    totalElements?: number;
     totalPages?: number;
+    totalElements?: number;
     size?: number;
     content?: Array<NewsListResponse>;
     number?: number;
@@ -217,8 +233,8 @@ export type CollectionLogWritable = {
 };
 
 export type PageCollectionLogWritable = {
-    totalElements?: number;
     totalPages?: number;
+    totalElements?: number;
     size?: number;
     content?: Array<CollectionLogWritable>;
     number?: number;
@@ -243,6 +259,40 @@ export type TriggerPipelineResponses = {
      */
     200: unknown;
 };
+
+export type SubmitFeedbackData = {
+    body: FeedbackRequest;
+    path?: never;
+    query?: never;
+    url: '/api/feedback';
+};
+
+export type SubmitFeedbackResponses = {
+    /**
+     * OK
+     */
+    200: FeedbackResponse;
+};
+
+export type SubmitFeedbackResponse = SubmitFeedbackResponses[keyof SubmitFeedbackResponses];
+
+export type SyncBriefingData = {
+    body?: never;
+    path: {
+        clubCode: string;
+    };
+    query?: never;
+    url: '/api/briefings/{clubCode}/sync';
+};
+
+export type SyncBriefingResponses = {
+    /**
+     * OK
+     */
+    200: BriefingResponse;
+};
+
+export type SyncBriefingResponse = SyncBriefingResponses[keyof SyncBriefingResponses];
 
 export type GetNewsDetailData = {
     body?: never;
@@ -377,6 +427,24 @@ export type GetRecentMatchResponses = {
 };
 
 export type GetRecentMatchResponse = GetRecentMatchResponses[keyof GetRecentMatchResponses];
+
+export type GetLatestBriefingData = {
+    body?: never;
+    path: {
+        clubCode: string;
+    };
+    query?: never;
+    url: '/api/briefings/{clubCode}';
+};
+
+export type GetLatestBriefingResponses = {
+    /**
+     * OK
+     */
+    200: BriefingResponse;
+};
+
+export type GetLatestBriefingResponse = GetLatestBriefingResponses[keyof GetLatestBriefingResponses];
 
 export type TriggerYoutubePipelineData = {
     body?: never;

@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetLogsData, GetLogsResponses, GetNewsData, GetNewsDetailData, GetNewsDetailResponses, GetNewsResponses, GetRecentMatchData, GetRecentMatchResponses, GetSourcesData, GetSourcesResponses, GetUpcomingMatchesData, GetUpcomingMatchesResponses, SyncMatchesData, SyncMatchesResponses, TriggerPipelineData, TriggerPipelineResponses, TriggerYoutubePipelineData, TriggerYoutubePipelineResponses } from './types.gen';
+import type { GetLatestBriefingData, GetLatestBriefingResponses, GetLogsData, GetLogsResponses, GetNewsData, GetNewsDetailData, GetNewsDetailResponses, GetNewsResponses, GetRecentMatchData, GetRecentMatchResponses, GetSourcesData, GetSourcesResponses, GetUpcomingMatchesData, GetUpcomingMatchesResponses, SubmitFeedbackData, SubmitFeedbackResponses, SyncBriefingData, SyncBriefingResponses, SyncMatchesData, SyncMatchesResponses, TriggerPipelineData, TriggerPipelineResponses, TriggerYoutubePipelineData, TriggerYoutubePipelineResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -24,6 +24,27 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
  * 뉴스 수집 파이프라인을 즉시 실행합니다.
  */
 export const triggerPipeline = <ThrowOnError extends boolean = false>(options?: Options<TriggerPipelineData, ThrowOnError>) => (options?.client ?? client).post<TriggerPipelineResponses, unknown, ThrowOnError>({ url: '/api/news/trigger', ...options });
+
+/**
+ * 피드백 제출
+ *
+ * 건의사항이나 버그 제보를 제출하고 관리자 슬랙으로 알림을 보냅니다.
+ */
+export const submitFeedback = <ThrowOnError extends boolean = false>(options: Options<SubmitFeedbackData, ThrowOnError>) => (options.client ?? client).post<SubmitFeedbackResponses, unknown, ThrowOnError>({
+    url: '/api/feedback',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
+});
+
+/**
+ * 브리핑 강제 업데이트 (구단별)
+ *
+ * 특정 구단의 브리핑을 즉시 새롭게 생성합니다.
+ */
+export const syncBriefing = <ThrowOnError extends boolean = false>(options: Options<SyncBriefingData, ThrowOnError>) => (options.client ?? client).post<SyncBriefingResponses, unknown, ThrowOnError>({ url: '/api/briefings/{clubCode}/sync', ...options });
 
 /**
  * 뉴스 상세 조회 (전체 포함)
@@ -73,5 +94,12 @@ export const syncMatches = <ThrowOnError extends boolean = false>(options: Optio
  * 특정 구단의 가장 최근 종료된 경기 1개의 상세 결과를 가져옵니다.
  */
 export const getRecentMatch = <ThrowOnError extends boolean = false>(options: Options<GetRecentMatchData, ThrowOnError>) => (options.client ?? client).get<GetRecentMatchResponses, unknown, ThrowOnError>({ url: '/api/matches/{clubCode}/recent', ...options });
+
+/**
+ * 최신 브리핑 조회 (구단별)
+ *
+ * 특정 구단의 가장 최근 생성된 AI 브리핑을 가져옵니다.
+ */
+export const getLatestBriefing = <ThrowOnError extends boolean = false>(options: Options<GetLatestBriefingData, ThrowOnError>) => (options.client ?? client).get<GetLatestBriefingResponses, unknown, ThrowOnError>({ url: '/api/briefings/{clubCode}', ...options });
 
 export const triggerYoutubePipeline = <ThrowOnError extends boolean = false>(options?: Options<TriggerYoutubePipelineData, ThrowOnError>) => (options?.client ?? client).get<TriggerYoutubePipelineResponses, unknown, ThrowOnError>({ url: '/api/admin/youtube/trigger', ...options });

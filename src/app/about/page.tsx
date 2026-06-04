@@ -1,7 +1,42 @@
-import Link from 'next/link';
-import { ChevronLeft, ShieldAlert, Shield, Target, Zap, Globe, Cpu } from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import { Zap, Globe, Cpu, Send, CheckCircle2, AlertCircle, Shield, ShieldAlert } from 'lucide-react';
+import { submitFeedback } from '@/client/sdk.gen';
 
 export default function AboutPage() {
+  const [category, setCategory] = useState('SUGGESTION');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [isSubmitting, setIsAtSubmitting] = useState(false);
+  const [status, setStatus] = useState<'IDLE' | 'SUCCESS' | 'ERROR'>('IDLE');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title || !content) return;
+
+    setIsAtSubmitting(true);
+    setStatus('IDLE');
+
+    try {
+      await submitFeedback({
+        body: {
+          category,
+          title,
+          content
+        }
+      });
+      setStatus('SUCCESS');
+      setTitle('');
+      setContent('');
+    } catch (error) {
+      console.error('Failed to submit feedback:', error);
+      setStatus('ERROR');
+    } finally {
+      setIsAtSubmitting(false);
+    }
+  };
+
   return (
     <div className="bg-white dark:bg-[#0a0b10] min-h-screen pb-20 transition-colors duration-300">
       <main className="container mx-auto px-6 lg:px-12 py-20 lg:py-32">
@@ -72,6 +107,86 @@ export default function AboutPage() {
                       </div>
                     </div>
                   ))}
+                </div>
+              </section>
+
+              {/* Feedback Form Section */}
+              <section className="pt-20 border-t border-gray-100 dark:border-white/5">
+                <div className="max-w-2xl">
+                  <h2 className="text-3xl font-black mb-2 uppercase font-bebas text-gray-900 dark:text-white">
+                    Feedback & Support
+                  </h2>
+                  <p className="text-gray-500 dark:text-gray-400 font-bold mb-8">
+                    플랫폼 발전을 위한 건의사항이나 버그 제보를 남겨주세요. 관리자의 슬랙으로 직접 전달됩니다.
+                  </p>
+
+                  <form onSubmit={handleSubmit} className="space-y-6 not-prose">
+                    <div className="flex flex-wrap gap-3">
+                      {[
+                        { id: 'SUGGESTION', label: '건의사항' },
+                        { id: 'BUG', label: '버그 신고' },
+                        { id: 'ETC', label: '기타' }
+                      ].map((cat) => (
+                        <button
+                          key={cat.id}
+                          type="button"
+                          onClick={() => setCategory(cat.id)}
+                          className={`px-5 py-2.5 rounded-full text-sm font-black transition-all ${
+                            category === cat.id
+                              ? 'bg-gray-900 text-white dark:bg-white dark:text-black shadow-lg scale-105'
+                              : 'bg-gray-50 text-gray-400 dark:bg-white/5 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-white/10'
+                          }`}
+                        >
+                          {cat.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="space-y-4">
+                      <input
+                        type="text"
+                        placeholder="제목을 입력해주세요"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                        className="w-full px-6 py-4 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition-all font-bold"
+                      />
+                      <textarea
+                        placeholder="내용을 상세히 적어주시면 큰 도움이 됩니다"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        required
+                        rows={5}
+                        className="w-full px-6 py-4 rounded-3xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition-all font-bold resize-none"
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex-1">
+                        {status === 'SUCCESS' && (
+                          <div className="flex items-center gap-2 text-green-600 dark:text-green-400 font-bold text-sm animate-in fade-in slide-in-from-left-4">
+                            <CheckCircle2 size={18} />
+                            소중한 의견이 전달되었습니다. 감사합니다!
+                          </div>
+                        )}
+                        {status === 'ERROR' && (
+                          <div className="flex items-center gap-2 text-red-600 dark:text-red-400 font-bold text-sm animate-in fade-in slide-in-from-left-4">
+                            <AlertCircle size={18} />
+                            전송에 실패했습니다. 잠시 후 다시 시도해주세요.
+                          </div>
+                        )}
+                      </div>
+                      
+                      <button
+                        type="submit"
+                        disabled={isSubmitting || !title || !content}
+                        className="flex items-center gap-2 px-8 py-4 rounded-2xl bg-gray-900 dark:bg-white text-white dark:text-black font-black hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xl"
+                      >
+                        {isSubmitting ? '전송 중...' : '보내기'}
+                        <Send size={18} />
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </section>
 
