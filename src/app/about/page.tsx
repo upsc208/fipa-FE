@@ -1,94 +1,101 @@
 import Link from 'next/link';
-import { ChevronLeft, ShieldAlert, Shield, Target } from 'lucide-react';
+import { ChevronLeft, ShieldAlert, Shield, Target, Zap, Globe, Cpu } from 'lucide-react';
 
 export default function AboutPage() {
   return (
-    <div className="bg-white dark:bg-[#0a0b10] min-h-screen pb-20 transition-colors duration-300 pt-16">
-      <div className="sticky top-16 z-40 w-full bg-white/80 dark:bg-[#0d0e14]/90 backdrop-blur-md border-b border-gray-100 dark:border-white/5">
-        <div className="container mx-auto px-6 lg:px-12 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-1 text-sm font-semibold text-gray-500 hover:opacity-70 transition-all">
-            <ChevronLeft size={16} />
-            홈으로 돌아가기
-          </Link>
-          <div className="flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-primary"></div>
-            <span className="text-xs font-black uppercase tracking-widest text-gray-400">About Platform</span>
-          </div>
-        </div>
-      </div>
-
+    <div className="bg-white dark:bg-[#0a0b10] min-h-screen pb-20 transition-colors duration-300">
       <main className="container mx-auto px-6 lg:px-12 py-20 lg:py-32">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black text-gray-950 dark:text-white mb-10 tracking-tighter uppercase font-bebas">
-            ABOUT <span className="text-primary">FIPA NEWS</span>
+          <div className="inline-block px-4 py-1.5 rounded-full bg-gray-100 dark:bg-white/10 text-gray-900 dark:text-gray-100 text-xs font-black uppercase tracking-[0.2em] mb-6">
+            Global Football News Hub
+          </div>
+          <h1 className="text-5xl sm:text-7xl lg:text-9xl font-black text-gray-950 dark:text-white mb-10 tracking-tighter uppercase font-bebas leading-[0.85]">
+            FACTOS <span className="text-gray-400 dark:text-gray-500">NEWS</span>
           </h1>
 
-          <div className="prose prose-xl text-gray-600 dark:text-gray-300 leading-relaxed space-y-8 font-medium max-w-none font-kanit">
-            <p className="text-xl sm:text-2xl font-bold leading-relaxed mb-16">
-              <strong>FIPA NEWS</strong>는 해외 축구를 사랑하는 한국 팬들이 언어의 장벽 없이 현지의 생생한 소식을 접할 수 있도록 돕기 위해 시작된 <strong>비공식 팬 프로젝트</strong>입니다.
+          <div className="prose prose-xl text-gray-600 dark:text-gray-300 leading-relaxed space-y-12 font-medium max-w-none font-kanit">
+            <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 leading-tight">
+              Factos News는 파편화된 해외 축구 소식을 한곳에 모아, 가장 직관적이고 빠르게 전달하는 <span className="text-black dark:text-white border-b-4 border-gray-900 dark:border-white">AI 기반 뉴스 플랫폼</span>입니다.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32 not-prose">
-              <div className="space-y-6">
-                <div className="h-14 w-14 rounded-2xl flex items-center justify-center text-white bg-primary">
-                  <Shield size={28} />
+            <p className="text-lg">
+              우리는 수많은 언론사와 소셜 미디어에서 쏟아지는 정보 중, 팬들이 정말로 궁금해하는 <strong>&apos;사실(Factos)&apos;</strong>만을 골라냅니다. 언어의 장벽과 정보의 과부하를 넘어, 모든 축구 팬이 평등하게 최신 소식을 누릴 수 있는 환경을 구축하는 것이 우리의 미션입니다.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32 not-prose">
+              <div className="p-8 rounded-[2rem] bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 space-y-4">
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center text-white bg-gray-900 dark:bg-gray-800">
+                  <Zap size={24} />
                 </div>
-                <h3 className="text-2xl font-black uppercase font-bebas">Authenticity</h3>
-                <p className="text-gray-500 font-medium leading-relaxed">
-                  현지 유력 언론사와 공식 소셜 미디어를 통해 검증된 정보만을 필터링하여 전달합니다.
+                <h3 className="text-xl font-black uppercase font-bebas">Real-time</h3>
+                <p className="text-sm text-gray-500 font-bold leading-relaxed">
+                  현지 유력 기자들과 클럽 공식 채널의 소식을 24시간 모니터링하여 실시간으로 업데이트합니다.
                 </p>
               </div>
-              <div className="space-y-6">
-                <div className="h-14 w-14 rounded-2xl flex items-center justify-center text-white bg-gray-900 dark:bg-gray-800">
-                  <Target size={28} />
+              <div className="p-8 rounded-[2rem] bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 space-y-4">
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center text-white bg-gray-400 dark:bg-gray-600">
+                  <Cpu size={24} />
                 </div>
-                <h3 className="text-2xl font-black uppercase font-bebas">Accessibility</h3>
-                <p className="text-gray-500 font-medium leading-relaxed">
-                  복잡한 외국 기사를 AI 기술을 활용하여 핵심만 요약, 한국 팬들이 읽기 편한 형태로 재구성합니다.
+                <h3 className="text-xl font-black uppercase font-bebas">AI Summary</h3>
+                <p className="text-sm text-gray-500 font-bold leading-relaxed">
+                  복잡하고 긴 외국어 기사를 AI가 분석하여 핵심 내용만 3줄 요약으로 제공합니다.
+                </p>
+              </div>
+              <div className="p-8 rounded-[2rem] bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 space-y-4">
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center text-white bg-gray-200 dark:bg-gray-700">
+                  <Globe size={24} />
+                </div>
+                <h3 className="text-xl font-black uppercase font-bebas">Multi-Club</h3>
+                <p className="text-sm text-gray-500 font-bold leading-relaxed">
+                  맨유, 리버풀, 아스널 등 프리미어리그 주요 구단별 맞춤형 테마와 전용 뉴스 피드를 지원합니다.
                 </p>
               </div>
             </div>
 
-            <div 
-              className="p-8 sm:p-12 rounded-[3rem] border my-16 not-prose bg-primary/5 border-primary/10"
-            >
-              <h2 
-                className="text-2xl sm:text-3xl font-black mb-8 flex items-center gap-3 uppercase font-bebas text-primary"
-              >
-                <div className="h-3 w-3 rounded-full bg-primary"></div>
-                Project Mission
-              </h2>
-              <ul className="space-y-6">
-                <li className="flex gap-4">
-                  <span className="font-bold shrink-0 mt-1 text-primary">01.</span>
-                  <p className="text-gray-700 dark:text-gray-300 font-bold text-lg leading-tight">가장 빠르고 정확한 현지 소식 전달</p>
-                </li>
-                <li className="flex gap-4">
-                  <span className="font-bold shrink-0 mt-1 text-primary">02.</span>
-                  <p className="text-gray-700 dark:text-gray-300 font-bold text-lg leading-tight">AI 기반의 요약으로 정보 습득 효율성 극대화</p>
-                </li>
-                <li className="flex gap-4">
-                  <span className="font-bold shrink-0 mt-1 text-primary">03.</span>
-                  <p className="text-gray-700 dark:text-gray-300 font-bold text-lg leading-tight">글로벌 팬덤을 위한 디지털 뉴스 허브 구축</p>
-                </li>
-              </ul>
-            </div>
+            <div className="space-y-16">
+              <section>
+                <h2 className="text-3xl font-black mb-8 flex items-center gap-3 uppercase font-bebas text-gray-900 dark:text-white">
+                  <div className="h-1.5 w-8 rounded-full bg-gray-900 dark:bg-white"></div>
+                  The Factos Experience
+                </h2>
+                <div className="grid grid-cols-1 gap-6">
+                  {[
+                    { title: "검증된 소스", desc: "BBC, The Athletic 등 공신력 있는 매체의 정보만을 취급합니다." },
+                    { title: "데이터 시각화", desc: "단순 텍스트를 넘어 경기 결과, 라인업, 스탯을 직관적인 UI로 제공합니다." },
+                    { title: "개인화된 테마", desc: "자신이 응원하는 구단의 컬러와 아이덴티티가 반영된 전용 페이지를 경험하세요." }
+                  ].map((item, i) => (
+                    <div key={i} className="flex gap-6 items-start p-6 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors group">
+                      <span className="text-4xl font-black text-gray-200 dark:text-white/10 group-hover:text-gray-900/20 dark:group-hover:text-white/20 transition-colors font-bebas">{String(i + 1).padStart(2, '0')}</span>
+                      <div>
+                        <h4 className="text-xl font-black text-gray-900 dark:text-white mb-1 tracking-tight">{item.title}</h4>
+                        <p className="text-gray-500 dark:text-gray-400 font-bold">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
 
-            <div className="border-t border-gray-100 dark:border-white/5 pt-16 not-prose">
-              <h3 
-                className="flex items-center gap-2 font-black mb-6 uppercase tracking-tighter text-xl sm:text-2xl font-bebas text-primary"
-              >
-                <ShieldAlert size={28} /> Legal Disclaimer
-              </h3>
-              <div className="space-y-4 text-sm font-bold text-gray-500 dark:text-gray-400">
-                <p>• 본 사이트는 각 구단 또는 특정 언론사와 공식적인 관계가 없는 <strong>비공식 팬 페이지</strong>입니다.</p>
-                <p>• 서비스 내에서 제공되는 요약 정보는 AI 기술로 생성되었으며, 원문 기사와 뉘앙스 차이가 있을 수 있습니다.</p>
-                <p>• 모든 뉴스 권한은 원작자 및 해당 언론사에 있으며, 본 서비스는 정보 전달의 편의를 위해서만 링크를 제공합니다.</p>
-              </div>
+              <section className="p-8 sm:p-12 rounded-[3rem] bg-gray-900 text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-8 opacity-10">
+                  <Shield size={120} />
+                </div>
+                <h3 className="flex items-center gap-2 font-black mb-6 uppercase tracking-tighter text-2xl font-bebas text-gray-400">
+                  <ShieldAlert size={28} /> Legal Disclaimer
+                </h3>
+                <div className="space-y-4 text-sm font-bold text-gray-400 relative z-10">
+                  <p>• Factos News는 축구 팬들을 위한 <strong>비공식 프로젝트</strong>이며, 특정 구단이나 언론사와 공식 파트너십 관계가 없습니다.</p>
+                  <p>• 모든 기사의 저작권은 해당 원문 언론사에 있으며, 본 서비스는 원활한 정보 습득을 돕는 매개체 역할만을 수행합니다.</p>
+                  <p>• AI 요약 정보는 기술적 한계로 인해 원문의 의도와 미세한 차이가 있을 수 있으므로, 정확한 내용은 원문 링크를 참조하시기 바랍니다.</p>
+                </div>
+              </section>
             </div>
           </div>
         </div>
       </main>
+
+      <footer className="container mx-auto px-6 text-center text-gray-400 text-[10px] font-black uppercase tracking-[0.5em] mt-20">
+        &copy; 2026 Factos News Platform. All Factos Reserved.
+      </footer>
     </div>
   );
 }

@@ -24,27 +24,25 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (!club) return null;
-
   const isChelsea = clubId === 'chelsea';
   const isLiverpool = clubId === 'liverpool';
   const isArsenal = clubId === 'arsenal';
   const isTottenham = clubId === 'tottenham';
   const isManCity = clubId === 'mancity';
   const isManUtd = clubId === 'manutd';
-  const isColoredHeader = isChelsea || isLiverpool || isArsenal || isTottenham || isManCity;
+  const isColoredHeader = (isChelsea || isLiverpool || isArsenal || isTottenham || isManCity) && club;
 
   // Dynamic Header Styles
   let headerBgClass = 'bg-white dark:bg-[#0d0e14] border-b border-gray-200 dark:border-white/5 shadow-sm dark:shadow-none';
-  if (isChelsea) {
+  if (isChelsea && club) {
     headerBgClass = 'bg-[#034694] dark:bg-[#080e1a] border-b border-white/10 text-white shadow-md';
-  } else if (isLiverpool) {
+  } else if (isLiverpool && club) {
     headerBgClass = 'bg-[#c8102e] dark:bg-[#140809] text-white';
-  } else if (isArsenal) {
+  } else if (isArsenal && club) {
     headerBgClass = 'bg-[#EF0107] dark:bg-[#0e0202] border-b border-white/10 text-white shadow-md';
-  } else if (isTottenham) {
+  } else if (isTottenham && club) {
     headerBgClass = 'bg-[#132257] dark:bg-[#070b1a] border-b border-white/10 text-white shadow-md';
-  } else if (isManCity) {
+  } else if (isManCity && club) {
     headerBgClass = 'bg-[#85C6F2] dark:bg-[#081629] border-b border-white/10 text-white shadow-md';
   }
 
@@ -66,42 +64,42 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
 
   let switcherButtonClass = isColoredHeader
     ? 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold text-white hover:bg-white/20 transition-all relative z-[70] cursor-pointer'
-    : 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 text-xs font-bold hover:bg-gray-100 dark:hover:bg-white/10 transition-all relative z-[70] cursor-pointer';
+    : 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-black text-xs font-bold text-black hover:bg-gray-50 transition-all relative z-[70] cursor-pointer shadow-sm';
 
-  if (isManUtd) {
+  if (isManUtd && club) {
     switcherButtonClass = 'flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary dark:bg-volt/95 border border-primary/20 dark:border-volt/20 text-xs font-bold text-white dark:text-black hover:bg-primary/90 dark:hover:bg-volt transition-all relative z-[70] cursor-pointer shadow-sm';
   }
 
   const logoNewsHighlightStyle = isColoredHeader
     ? { color: '#ffffff' }
-    : { color: 'var(--primary)' };
+    : { color: clubId ? 'var(--primary, #9ca3af)' : '#9ca3af' };
 
   const getStripePattern = () => {
-    if (clubId === 'chelsea') {
+    if (clubId === 'chelsea' && club) {
       return '#034694';
     }
-    if (clubId === 'liverpool') {
+    if (clubId === 'liverpool' && club) {
       return '#c8102e';
     }
-    if (clubId === 'arsenal') {
+    if (clubId === 'arsenal' && club) {
       return 'var(--arsenal-top-bar-bg)';
     }
-    if (clubId === 'tottenham') {
+    if (clubId === 'tottenham' && club) {
       return 'var(--tottenham-top-bar-bg)';
     }
-    if (clubId === 'mancity') {
+    if (clubId === 'mancity' && club) {
       return 'linear-gradient(135deg, #85C6F2 0%, #a4d8f8 50%, #85C6F2 100%)';
     }
-    if (clubId === 'manutd') {
+    if (clubId === 'manutd' && club) {
       return 'var(--manutd-stripe-bg)';
     }
-    return club.colors.primary;
+    return '#111827'; // Neutral dark gray/black
   };
 
   return (
     <header className={`sticky top-0 z-50 w-full transition-colors duration-300 ${headerBgClass}`}>
       {/* Man City Diagonal Sash Background */}
-      {isManCity && (
+      {isManCity && club && (
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30 dark:opacity-15 z-0">
           <div 
             className="absolute w-[200%] h-[300%]" 
@@ -121,7 +119,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
         }`}
         style={{ background: getStripePattern() }}
       >
-        {clubId === 'liverpool' && (
+        {clubId === 'liverpool' && club && (
           <div className="w-full h-full flex items-center justify-center px-6 sm:px-12 relative animate-in fade-in duration-1000 overflow-hidden">
              {/* Adidas-style 3-Stripes Left (White) */}
              <div className="absolute left-6 lg:left-12 top-0 bottom-0 flex gap-[9px] items-stretch">
@@ -154,7 +152,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
           </div>
         )}
         
-        {clubId === 'chelsea' && (
+        {clubId === 'chelsea' && club && (
           <div className="w-full h-full flex items-center justify-center px-6 sm:px-12 relative animate-in fade-in duration-1000 overflow-hidden">
             {/* White Vertical Bar Left (Flipped Flatter Sharp Curve) */}
             <div 
@@ -179,7 +177,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
           </div>
         )}
 
-        {clubId === 'manutd' && (
+        {clubId === 'manutd' && club && (
           <div className="w-full h-full flex items-center justify-center px-6 sm:px-12 relative animate-in fade-in slide-in-from-left-8 duration-1000">
              {/* Adidas-style 3-Stripes Left (Black / Gold in Dark) */}
              <div className="absolute left-6 lg:left-12 top-0 bottom-0 flex gap-[9px] items-stretch">
@@ -206,7 +204,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
           </div>
         )}
 
-        {clubId === 'arsenal' && (
+        {clubId === 'arsenal' && club && (
           <div className="w-full h-full flex items-center justify-center px-6 sm:px-12 relative animate-in fade-in slide-in-from-left-8 duration-1000">
              {/* Adidas 3-Stripes Left */}
              <div className="absolute left-6 lg:left-12 top-0 bottom-0 flex gap-[9px] items-stretch">
@@ -234,7 +232,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
           </div>
         )}
 
-        {clubId === 'tottenham' && (
+        {clubId === 'tottenham' && club && (
           <div className="w-full h-full flex items-center justify-center px-6 sm:px-12 relative animate-in fade-in slide-in-from-left-8 duration-1000">
              {/* Left Sleeve Detail */}
              <div className="absolute left-0 top-0 bottom-0 flex gap-0 items-stretch overflow-hidden">
@@ -263,7 +261,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
           </div>
         )}
 
-        {clubId === 'mancity' && (
+        {clubId === 'mancity' && club && (
           <div className="w-full h-full flex items-center justify-center px-6 sm:px-12 relative animate-in fade-in duration-1000 overflow-hidden">
              {/* 25/26 Iconic Diagonal Sash */}
              <div 
@@ -292,26 +290,34 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
           </div>
         )}
 
+        {(!clubId || !club) && (
+          <div className="w-full h-full flex items-center justify-center px-6 sm:px-12 animate-in fade-in duration-1000">
+             <span className="text-white font-bebas text-xl sm:text-2xl tracking-[0.5em] font-black uppercase">
+               Factos Football News Platform
+             </span>
+          </div>
+        )}
+
       </div>
       
       <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row md:h-20 items-center justify-between px-2 sm:px-6 lg:px-12 py-4 md:py-0 mt-0 gap-y-4 md:gap-y-0 relative z-[70]">
         <div className="flex w-full items-center justify-between md:justify-start md:flex-1 gap-2 sm:gap-6 shrink-0">
-          <Link href={`/${club.id}`} className="flex items-center space-x-2 sm:space-x-3 group shrink-0">
+          <Link href={club ? `/${club.id}` : "/"} className="flex items-center space-x-2 sm:space-x-3 group shrink-0">
             <div 
               className="relative flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl shadow-lg group-hover:scale-105 transition-transform shrink-0 border border-white/10"
-              style={{ backgroundColor: isColoredHeader ? '#ffffff' : club.colors.primary }}
+              style={{ backgroundColor: isColoredHeader ? '#ffffff' : (club?.colors.primary || '#111827') }}
             >
-              <span className={`text-[10px] sm:text-sm font-black italic ${isColoredHeader ? (isChelsea ? 'text-[#034694]' : isLiverpool ? 'text-[#c8102e]' : isArsenal ? 'text-[#EF0107]' : isTottenham ? 'text-[#132257]' : 'text-[#85C6F2]') : 'text-white'}`}>{club.shortName.substring(0, 2)}</span>
+              <span className={`text-[10px] sm:text-sm font-black italic ${isColoredHeader ? (isChelsea ? 'text-[#034694]' : isLiverpool ? 'text-[#c8102e]' : isArsenal ? 'text-[#EF0107]' : isTottenham ? 'text-[#132257]' : 'text-[#85C6F2]') : 'text-white'}`}>{club ? club.shortName.substring(0, 2) : 'FP'}</span>
               <div className="absolute -top-1 -right-1 flex h-3 w-3 sm:h-4 sm:w-4 items-center justify-center rounded-full bg-black text-white shadow-sm">
                 <Sparkles size={8} />
               </div>
             </div>
             <div className="flex flex-col">
               <span className={`text-base sm:text-xl font-black tracking-tighter uppercase leading-none font-bebas ${textPrimaryClass}`}>
-                {club.shortName} <span style={logoNewsHighlightStyle}>NEWS</span>
+                {club ? club.shortName : 'FACTOS'} <span style={logoNewsHighlightStyle}>NEWS</span>
               </span>
               <span className={`text-[8px] sm:text-[10px] font-bold tracking-[0.2em] uppercase leading-none mt-1 hidden sm:block ${textSecondaryClass}`}>
-                {club.shortName} 최신 소식
+                {club ? `${club.shortName} 최신 소식` : '글로벌 축구 통합 뉴스'}
               </span>
             </div>
           </Link>
@@ -352,17 +358,17 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
         </div>
 
         <nav className="flex items-center justify-center gap-x-4 sm:gap-x-8 md:flex-1 md:justify-center text-sm font-extrabold w-full md:w-auto mt-4 md:mt-0 whitespace-nowrap">
-          <Link href={`/${club.id}`} className={navLinkClass}>
+          <Link href={club ? `/${club.id}` : "/"} className={navLinkClass}>
             <Newspaper className="w-5 h-5" />
             <span className="tracking-tight">뉴스</span>
           </Link>
-          <Link href={`/${club.id}/about`} className={navLinkClass}>
+          <Link href="/about" className={navLinkClass}>
             <Info className="w-5 h-5" />
             <span className="tracking-tight">소개</span>
           </Link>
           <div className={`hidden lg:block h-6 w-[1px] mx-2 ${isColoredHeader ? 'bg-white/20' : 'bg-gray-200 dark:bg-white/10'}`}></div>
           <a
-            href={club.links.officialTickets}
+            href={club?.links.officialTickets || "#"}
             target="_blank"
             rel="noopener noreferrer"
             className={navButtonClass}
@@ -371,7 +377,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
             <span className="tracking-tighter font-extrabold">티켓</span>
           </a>
           <a
-            href={club.links.officialStore}
+            href={club?.links.officialStore || "#"}
             target="_blank"
             rel="noopener noreferrer"
             className={navButtonClass}
