@@ -1,4 +1,4 @@
-import { getNews, getSources, getRecentMatch, getUpcomingMatches, getLatestBriefing } from '@/client/sdk.gen';
+import { getNews, getSources, getRecentMatch, getUpcomingMatches, getLatestBriefing, getTransferRanking } from '@/client/sdk.gen';
 import NewsCard from '@/components/NewsCard';
 import NewsFeedContainer from '@/components/Home/NewsFeedContainer';
 import SearchBar from '@/components/Filters/SearchBar';
@@ -39,10 +39,11 @@ export default async function Home({
   let recentMatchData = null;
   let upcomingMatchesData: any[] = [];
   let briefingData = null;
+  let transferRankingData = null;
 
   try {
     // Fetch news and sources in parallel
-    const [newsResponse, sourcesResponse, recentMatchResponse, upcomingMatchesResponse, briefingResponse] = await Promise.all([
+    const [newsResponse, sourcesResponse, recentMatchResponse, upcomingMatchesResponse, briefingResponse, transferRankingResponse] = await Promise.all([
       getNews({
         path: { clubCode: club.clubCode },
         query: {
@@ -64,6 +65,9 @@ export default async function Home({
       }),
       getLatestBriefing({
         path: { clubCode: club.clubCode }
+      }),
+      getTransferRanking({
+        path: { clubCode: club.clubCode }
       })
     ]);
 
@@ -72,6 +76,7 @@ export default async function Home({
     recentMatchData = recentMatchResponse.data || null;
     upcomingMatchesData = upcomingMatchesResponse.data || [];
     briefingData = briefingResponse.data || null;
+    transferRankingData = transferRankingResponse.data || null;
   } catch (error) {
     console.error('Failed to fetch data:', error);
   }
@@ -89,6 +94,7 @@ export default async function Home({
               recentMatch={recentMatchData} 
               upcomingMatches={upcomingMatchesData} 
               briefing={briefingData}
+              transferRanking={transferRankingData}
               club={club} 
             />
           </div>

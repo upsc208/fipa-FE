@@ -10,19 +10,19 @@ interface BriefingSectionProps {
 
 export const BriefingSection = ({ briefing, clubName, createdAt }: BriefingSectionProps) => {
   return (
-    <div className="flex flex-col h-full min-h-[220px]">
-      <div className="flex items-center justify-between mb-6">
+    <div className="flex flex-col h-full">
+      <div className="flex items-center justify-between mb-6 shrink-0">
         <div className="flex items-center gap-2">
           <div className="p-2 bg-white/10 rounded-lg">
             <Sparkles size={18} className="text-white" />
           </div>
           <div>
             <h3 className="text-lg md:text-xl font-black tracking-tighter uppercase font-bebas">
-              {clubName} AI Briefing
+              {clubName} AI 브리핑
             </h3>
             <p className="text-[10px] font-bold opacity-60 uppercase tracking-widest flex items-center gap-1">
               <Clock size={10} />
-              Recent 8 Hours Update
+              최근 8시간 업데이트
             </p>
           </div>
         </div>
@@ -33,7 +33,7 @@ export const BriefingSection = ({ briefing, clubName, createdAt }: BriefingSecti
         )}
       </div>
 
-      <div className="flex-1 space-y-4">
+      <div className="flex-1 overflow-y-auto scrollbar-hide space-y-4 pr-1">
         {briefing && briefing.length > 0 ? (
           <div className="grid grid-cols-1 gap-3">
             {briefing.map((item, i) => (

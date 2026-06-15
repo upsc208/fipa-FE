@@ -11,18 +11,54 @@ import { StatsSection } from './StatsSection';
 import { TacticalField } from './TacticalField';
 import { MatchEvents } from './MatchEvents';
 import { BriefingSection } from './BriefingSection';
+import { TransferProbabilitySection } from './TransferProbabilitySection';
 import { ClubConfig } from '@/config/clubs';
+import type { PlayerTransferProbability } from '@/client/types.gen';
 
 interface MatchResultCardProps {
   recentMatch?: RecentMatch | null;
   upcomingMatches?: UpcomingMatch[] | null;
   briefing?: BriefingResponse | null;
+  transferRanking?: PlayerTransferProbability[] | null;
   club: ClubConfig;
 }
 
-export default function MatchResultCard({ recentMatch, upcomingMatches, briefing, club }: MatchResultCardProps) {
+export default function MatchResultCard({ recentMatch, upcomingMatches, briefing, transferRanking, club }: MatchResultCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [activeSlide, setActiveSlide] = useState<'briefing' | 'match'>('briefing');
+  const [activeSlide, setActiveSlide] = useState<'briefing' | 'transfer' | 'match'>('briefing');
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      // Swipe Left -> Next Slide
+      if (activeSlide === 'briefing') setActiveSlide('transfer');
+      else if (activeSlide === 'transfer') setActiveSlide('match');
+      else if (activeSlide === 'match') setActiveSlide('briefing');
+    } else if (isRightSwipe) {
+      // Swipe Right -> Prev Slide
+      if (activeSlide === 'match') setActiveSlide('transfer');
+      else if (activeSlide === 'transfer') setActiveSlide('briefing');
+      else if (activeSlide === 'briefing') setActiveSlide('match');
+    }
+  };
 
   const getCardBackground = () => {
     if (club.id === 'manutd') {
@@ -57,6 +93,9 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, briefing
     <div 
       className="text-white rounded-xl shadow-lg w-full max-w-none font-sans tracking-wide flex flex-col overflow-hidden border border-white/10 transition-all duration-500 relative"
       style={getCardBackground()}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
     >
       {/* Visual Decorations */}
       {club.id === 'manutd' && <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.06]" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '12px 12px' }} />}
@@ -79,64 +118,108 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, briefing
       <div className="relative z-10 flex flex-col">
         {/* Fixed Height Content Area */}
         <div className="h-[360px] flex flex-col overflow-hidden relative">
-          {activeSlide === 'briefing' ? (
+          {/* Briefing Slide (Desktop: Briefing + Transfer / Mobile: Briefing only) */}
+          {activeSlide === 'briefing' && (
             <div className="flex-grow overflow-y-auto scrollbar-hide p-6 md:p-8 animate-in fade-in slide-in-from-right-4 duration-500">
-              <div className="min-h-full flex flex-col justify-center">
-                <BriefingSection 
-                  briefing={briefing?.content || []} 
-                  clubName={club.nameKo} 
-                  createdAt={briefing?.createdAt}
-                />
+              <div className="min-h-full flex flex-col md:flex-row gap-8 md:gap-12 items-start justify-start">
+                <div className="w-full md:w-[79%] flex flex-col pr-0 md:pr-8 md:border-r border-white/20">
+                  <BriefingSection 
+                    briefing={briefing?.content || []} 
+                    clubName={club.nameKo} 
+                    createdAt={briefing?.createdAt}
+                  />
+                </div>
+                {/* Desktop view: side-by-side / Mobile view: hidden in this slide */}
+                <div className="hidden md:flex md:w-[21%] flex-col h-full">
+                  <TransferProbabilitySection players={transferRanking || []} />
+                </div>
               </div>
             </div>
-          ) : recentMatch ? (
-            <div className="flex-grow p-6 md:p-8 animate-in fade-in slide-in-from-left-4 duration-500 flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-center">
-              <div className="w-full md:w-[70%] flex flex-col pr-0 md:pr-8 md:border-r border-white/20">
-                <ScoreSection 
-                  homeTeam={recentMatch.homeTeam}
-                  awayTeam={recentMatch.awayTeam}
-                  homeScore={recentMatch.homeScore}
-                  awayScore={recentMatch.awayScore}
-                  matchDate={recentMatch.matchDate}
-                  tournament={recentMatch.tournament}
-                  isHome={recentMatch.isHome}
-                />
-                <ScorersSection homeScorers={homeScorers} awayScorers={awayScorers} />
-                <div className="order-4 md:order-3 border-t border-white/20 mb-8 mx-2"></div>
+          )}
+
+          {/* Transfer Slide (Mobile only) */}
+          {activeSlide === 'transfer' && (
+            <div className="flex-grow overflow-y-auto scrollbar-hide p-6 md:p-8 animate-in fade-in slide-in-from-right-4 duration-500 md:hidden">
+              <div className="min-h-full flex flex-col items-start justify-start">
+                <div className="w-full flex flex-col h-full">
+                  <TransferProbabilitySection players={transferRanking || []} />
+                </div>
               </div>
-              <UpcomingSection upcomingMatches={upcomingMatches} />
             </div>
-          ) : (
-            <div className="flex-grow p-6 md:p-8 flex flex-col items-center justify-center text-center space-y-4 opacity-50">
-              <Shield size={48} />
-              <p className="font-bold uppercase tracking-widest">No match data available</p>
-            </div>
+          )}
+
+          {/* Match Slide */}
+          {activeSlide === 'match' && (
+            recentMatch ? (
+              <div className="flex-grow p-6 md:p-8 animate-in fade-in slide-in-from-left-4 duration-500 flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-center">
+                <div className="w-full md:w-[70%] flex flex-col pr-0 md:pr-8 md:border-r border-white/20">
+                  <ScoreSection 
+                    homeTeam={recentMatch.homeTeam}
+                    awayTeam={recentMatch.awayTeam}
+                    homeScore={recentMatch.homeScore}
+                    awayScore={recentMatch.awayScore}
+                    matchDate={recentMatch.matchDate}
+                    tournament={recentMatch.tournament}
+                    isHome={recentMatch.isHome}
+                  />
+                  <ScorersSection homeScorers={homeScorers} awayScorers={awayScorers} />
+                  <div className="order-4 md:order-3 border-t border-white/20 mb-8 mx-2"></div>
+                </div>
+                <UpcomingSection upcomingMatches={upcomingMatches} />
+              </div>
+            ) : (
+              <div className="flex-grow p-6 md:p-8 flex flex-col items-center justify-center text-center space-y-4 opacity-50">
+                <Shield size={48} />
+                <p className="font-bold uppercase tracking-widest">No match data available</p>
+              </div>
+            )
           )}
         </div>
 
         {/* Carousel Controls - Nav Arrows */}
-        {activeSlide === 'match' && (
-          <button 
-            onClick={() => setActiveSlide('briefing')}
-            className="absolute left-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 hover:bg-black/40 text-white/80 hover:text-white transition-all z-30 cursor-pointer backdrop-blur-sm animate-in fade-in slide-in-from-right-2 duration-300 shadow-lg"
-          >
-            <ChevronLeft size={24} strokeWidth={3} />
-          </button>
-        )}
-        {activeSlide === 'briefing' && (
-          <button 
-            onClick={() => setActiveSlide('match')}
-            className="absolute right-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 hover:bg-black/40 text-white/80 hover:text-white transition-all z-30 cursor-pointer backdrop-blur-sm animate-in fade-in slide-in-from-left-2 duration-300 shadow-lg"
-          >
-            <ChevronRight size={24} strokeWidth={3} />
-          </button>
-        )}
+        <div className="absolute inset-y-0 left-0 right-0 pointer-events-none flex items-center justify-between px-3 z-30">
+          {/* Left Arrow (Prev) */}
+          <div className="flex items-center">
+            {(activeSlide === 'transfer' || activeSlide === 'match') && (
+              <button 
+                onClick={() => {
+                  if (activeSlide === 'match') setActiveSlide('transfer');
+                  else if (activeSlide === 'transfer') setActiveSlide('briefing');
+                }}
+                className="p-2 rounded-full bg-black/20 hover:bg-black/40 text-white/80 hover:text-white transition-all pointer-events-auto backdrop-blur-sm shadow-lg"
+              >
+                <ChevronLeft size={20} strokeWidth={3} />
+              </button>
+            )}
+          </div>
+
+          {/* Right Arrow (Next) */}
+          <div className="flex items-center">
+            {(activeSlide === 'briefing' || activeSlide === 'transfer') && (
+              <button 
+                onClick={() => {
+                  if (activeSlide === 'briefing') setActiveSlide('transfer');
+                  else if (activeSlide === 'transfer') setActiveSlide('match');
+                }}
+                className="p-2 rounded-full bg-black/20 hover:bg-black/40 text-white/80 hover:text-white transition-all pointer-events-auto backdrop-blur-sm shadow-lg"
+              >
+                <ChevronRight size={20} strokeWidth={3} />
+              </button>
+            )}
+          </div>
+        </div>
 
         {/* Carousel Dots */}
         <div className="flex justify-center gap-2 pb-4">
           <button 
             onClick={() => setActiveSlide('briefing')}
             className={`w-2 h-2 rounded-full transition-all ${activeSlide === 'briefing' ? 'bg-white w-4' : 'bg-white/30'}`}
+          />
+          {/* Only show Transfer dot on mobile or if we want it as a dedicated slide on desktop too. 
+              Let's keep it consistent: 3 dots for everyone. */}
+          <button 
+            onClick={() => setActiveSlide('transfer')}
+            className={`w-2 h-2 rounded-full transition-all ${activeSlide === 'transfer' ? 'bg-white w-4' : 'bg-white/30'}`}
           />
           <button 
             onClick={() => setActiveSlide('match')}
