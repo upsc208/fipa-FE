@@ -358,7 +358,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
         </div>
 
         <nav className="flex items-center justify-center gap-x-4 sm:gap-x-8 md:flex-1 md:justify-center text-sm font-extrabold w-full md:w-auto mt-4 md:mt-0 whitespace-nowrap">
-          <Link href={club ? `/${club.id}` : "/"} className={navLinkClass}>
+          <Link href={club ? `/${club.id}#news-section` : "/"} className={navLinkClass}>
             <Newspaper className="w-5 h-5" />
             <span className="tracking-tight">뉴스</span>
           </Link>
