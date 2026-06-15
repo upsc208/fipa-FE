@@ -177,14 +177,13 @@ export default async function NewsDetailPage({
   }
 
   return (
-    <div className="bg-white dark:bg-[#0a0b10] min-h-screen pb-20 transition-colors duration-300">
+    <div className="bg-background min-h-screen pb-20 transition-colors duration-300">
       {/* Sticky Back Bar */}
-      <div className="sticky top-16 sm:top-20 z-40 w-full bg-white/80 dark:bg-[#0d0e14]/90 backdrop-blur-md border-b border-gray-100 dark:border-white/5">
+      <div className="sticky top-16 sm:top-20 z-40 w-full bg-background/80 backdrop-blur-md border-b border-gray-100 dark:border-white/5">
         <div className="container mx-auto px-4 h-12 flex items-center">
           <Link 
             href={fromPage ? `/${clubId}?page=${fromPage}#news-${id}` : `/${clubId}/#news-${id}`}
-            className="flex items-center gap-1 text-sm font-semibold text-gray-500 transition-colors"
-            style={{ color: 'var(--text-gray-500)' }} // Fallback
+            className="flex items-center gap-1 text-sm font-semibold text-gray-500 transition-colors hover:text-gray-900 dark:hover:text-white"
           >
             <ChevronLeft size={16} />
             목록으로 돌아가기
@@ -221,7 +220,7 @@ export default async function NewsDetailPage({
                   href={news.originalUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-gray-50 dark:bg-white/[0.03] text-gray-600 dark:text-gray-300 rounded-xl text-xs sm:text-sm font-bold transition-all border border-gray-100 dark:border-white/[0.04] hover:opacity-80"
+                  className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/50 dark:bg-white/[0.03] text-gray-600 dark:text-gray-300 rounded-xl text-xs sm:text-sm font-bold transition-all border border-gray-100 dark:border-white/[0.04] hover:opacity-80"
                   style={{ borderColor: 'var(--primary-border-glow-20)' }}
                 >
                   <span className="whitespace-nowrap">원문 보기</span>
@@ -237,7 +236,7 @@ export default async function NewsDetailPage({
         </header>
         
         {summaryPoints.length > 0 && (
-          <div className="mb-12 bg-gray-50 dark:bg-[#111318] rounded-3xl p-6 lg:p-8 border border-gray-100 dark:border-white/10 relative overflow-hidden">
+          <div className="mb-12 bg-white/40 dark:bg-[#111318] rounded-3xl p-6 lg:p-8 border border-gray-100 dark:border-white/10 relative overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-5">
               <Newspaper size={80} style={{ color: 'var(--primary)' }} />
             </div>
@@ -258,7 +257,7 @@ export default async function NewsDetailPage({
 
         {news.imageUrl && (
           <div className="mb-12">
-            <div className="relative h-[300px] sm:h-[450px] w-full overflow-hidden rounded-3xl shadow-xl shadow-gray-200/50 dark:shadow-none mb-3 border border-gray-100 dark:border-white/5">
+            <div className="relative h-[300px] sm:h-[450px] w-full overflow-hidden rounded-3xl shadow-xl shadow-gray-200/50 dark:shadow-none mb-3 border border-gray-100 dark:border-white/5 bg-white/20">
               <Image
                 src={news.imageUrl}
                 alt={news.titleKo || '뉴스 이미지'}
