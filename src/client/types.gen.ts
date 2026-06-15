@@ -20,6 +20,14 @@ export type BriefingResponse = {
     createdAt: string;
 };
 
+export type PlayerTransferProbability = {
+    playerName: string;
+    probability: number;
+    latestNewsTitle?: string;
+    articleCount: number;
+    isOfficial: boolean;
+};
+
 export type NewsDetailResponse = {
     id: number;
     titleKo?: string;
@@ -55,6 +63,7 @@ export type NewsSource = {
     sourceUrl?: string;
     iconUrl?: string;
     category: string;
+    tier: number;
     isActive: boolean;
 };
 
@@ -72,8 +81,8 @@ export type CollectionLog = {
 };
 
 export type PageCollectionLog = {
-    totalPages?: number;
     totalElements?: number;
+    totalPages?: number;
     size?: number;
     content?: Array<CollectionLog>;
     number?: number;
@@ -88,16 +97,16 @@ export type PageCollectionLog = {
 export type PageableObject = {
     offset?: number;
     sort?: SortObject;
-    paged?: boolean;
-    pageNumber?: number;
     pageSize?: number;
+    pageNumber?: number;
+    paged?: boolean;
     unpaged?: boolean;
 };
 
 export type SortObject = {
     empty?: boolean;
-    unsorted?: boolean;
     sorted?: boolean;
+    unsorted?: boolean;
 };
 
 export type NewsListResponse = {
@@ -114,8 +123,8 @@ export type NewsListResponse = {
 };
 
 export type PageNewsListResponse = {
-    totalPages?: number;
     totalElements?: number;
+    totalPages?: number;
     size?: number;
     content?: Array<NewsListResponse>;
     number?: number;
@@ -158,6 +167,8 @@ export type RecentMatch = {
     awayTeam: string;
     homeScore: number;
     awayScore: number;
+    homePenaltyScore?: number;
+    awayPenaltyScore?: number;
     matchDate: string;
     isHome: boolean;
     tournament: string;
@@ -215,6 +226,7 @@ export type NewsSourceWritable = {
     sourceUrl?: string;
     iconUrl?: string;
     category: string;
+    tier: number;
     isActive: boolean;
     active?: boolean;
 };
@@ -233,8 +245,8 @@ export type CollectionLogWritable = {
 };
 
 export type PageCollectionLogWritable = {
-    totalPages?: number;
     totalElements?: number;
+    totalPages?: number;
     size?: number;
     content?: Array<CollectionLogWritable>;
     number?: number;
@@ -293,6 +305,24 @@ export type SyncBriefingResponses = {
 };
 
 export type SyncBriefingResponse = SyncBriefingResponses[keyof SyncBriefingResponses];
+
+export type GetTransferRankingData = {
+    body?: never;
+    path: {
+        clubCode: string;
+    };
+    query?: never;
+    url: '/api/transfer/ranking/{clubCode}';
+};
+
+export type GetTransferRankingResponses = {
+    /**
+     * OK
+     */
+    200: Array<PlayerTransferProbability>;
+};
+
+export type GetTransferRankingResponse = GetTransferRankingResponses[keyof GetTransferRankingResponses];
 
 export type GetNewsDetailData = {
     body?: never;

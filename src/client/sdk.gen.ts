@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetLatestBriefingData, GetLatestBriefingResponses, GetLogsData, GetLogsResponses, GetNewsData, GetNewsDetailData, GetNewsDetailResponses, GetNewsResponses, GetRecentMatchData, GetRecentMatchResponses, GetSourcesData, GetSourcesResponses, GetUpcomingMatchesData, GetUpcomingMatchesResponses, SubmitFeedbackData, SubmitFeedbackResponses, SyncBriefingData, SyncBriefingResponses, SyncMatchesData, SyncMatchesResponses, TriggerPipelineData, TriggerPipelineResponses, TriggerYoutubePipelineData, TriggerYoutubePipelineResponses } from './types.gen';
+import type { GetLatestBriefingData, GetLatestBriefingResponses, GetLogsData, GetLogsResponses, GetNewsData, GetNewsDetailData, GetNewsDetailResponses, GetNewsResponses, GetRecentMatchData, GetRecentMatchResponses, GetSourcesData, GetSourcesResponses, GetTransferRankingData, GetTransferRankingResponses, GetUpcomingMatchesData, GetUpcomingMatchesResponses, SubmitFeedbackData, SubmitFeedbackResponses, SyncBriefingData, SyncBriefingResponses, SyncMatchesData, SyncMatchesResponses, TriggerPipelineData, TriggerPipelineResponses, TriggerYoutubePipelineData, TriggerYoutubePipelineResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -45,6 +45,13 @@ export const submitFeedback = <ThrowOnError extends boolean = false>(options: Op
  * 특정 구단의 브리핑을 즉시 새롭게 생성합니다.
  */
 export const syncBriefing = <ThrowOnError extends boolean = false>(options: Options<SyncBriefingData, ThrowOnError>) => (options.client ?? client).post<SyncBriefingResponses, unknown, ThrowOnError>({ url: '/api/briefings/{clubCode}/sync', ...options });
+
+/**
+ * 구단별 이적 확률 랭킹 조회
+ *
+ * 특정 구단의 최근 이적 소식을 분석하여 타겟별 이적 확률 랭킹을 반환합니다.
+ */
+export const getTransferRanking = <ThrowOnError extends boolean = false>(options: Options<GetTransferRankingData, ThrowOnError>) => (options.client ?? client).get<GetTransferRankingResponses, unknown, ThrowOnError>({ url: '/api/transfer/ranking/{clubCode}', ...options });
 
 /**
  * 뉴스 상세 조회 (전체 포함)
