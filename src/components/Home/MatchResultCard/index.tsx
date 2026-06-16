@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PawPrint, ChevronDown, ChevronUp, Shield, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronUp, Shield, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { RecentMatch, UpcomingMatch, BriefingResponse } from '@/client/types.gen';
 import { sortScorers } from './utils';
 import { ScoreSection } from './ScoreSection';
@@ -28,6 +28,15 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, briefing
   const [activeSlide, setActiveSlide] = useState<'briefing' | 'transfer' | 'match'>('briefing');
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Handle window resize to detect mobile/desktop
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Minimum swipe distance (in px)
   const minSwipeDistance = 50;
@@ -49,14 +58,22 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, briefing
 
     if (isLeftSwipe) {
       // Swipe Left -> Next Slide
-      if (activeSlide === 'briefing') setActiveSlide('transfer');
-      else if (activeSlide === 'transfer') setActiveSlide('match');
-      else if (activeSlide === 'match') setActiveSlide('briefing');
+      if (activeSlide === 'briefing') {
+        setActiveSlide(isMobile ? 'transfer' : 'match');
+      } else if (activeSlide === 'transfer') {
+        setActiveSlide('match');
+      } else if (activeSlide === 'match') {
+        setActiveSlide('briefing');
+      }
     } else if (isRightSwipe) {
       // Swipe Right -> Prev Slide
-      if (activeSlide === 'match') setActiveSlide('transfer');
-      else if (activeSlide === 'transfer') setActiveSlide('briefing');
-      else if (activeSlide === 'briefing') setActiveSlide('match');
+      if (activeSlide === 'match') {
+        setActiveSlide(isMobile ? 'transfer' : 'briefing');
+      } else if (activeSlide === 'transfer') {
+        setActiveSlide('briefing');
+      } else if (activeSlide === 'briefing') {
+        setActiveSlide('match');
+      }
     }
   };
 
@@ -120,9 +137,9 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, briefing
         <div className="h-[360px] flex flex-col overflow-hidden relative">
           {/* Briefing Slide (Desktop: Briefing + Transfer / Mobile: Briefing only) */}
           {activeSlide === 'briefing' && (
-            <div className="flex-grow overflow-y-auto scrollbar-hide p-6 md:p-8 animate-in fade-in slide-in-from-right-4 duration-500">
-              <div className="min-h-full flex flex-col md:flex-row gap-8 md:gap-12 items-start justify-start">
-                <div className="w-full md:w-[79%] flex flex-col pr-0 md:pr-8 md:border-r border-white/20">
+            <div className="flex-grow overflow-y-auto md:overflow-hidden scrollbar-hide p-6 md:p-8 animate-in fade-in slide-in-from-right-4 duration-500">
+              <div className="h-full flex flex-col md:flex-row gap-8 md:gap-12 items-start justify-start">
+                <div className="w-full md:w-[79%] flex flex-col h-full pr-0 md:pr-8 md:border-r border-white/20">
                   <BriefingSection 
                     briefing={briefing?.content || []} 
                     clubName={club.nameKo} 
@@ -180,10 +197,10 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, briefing
         <div className="absolute inset-y-0 left-0 right-0 pointer-events-none flex items-center justify-between px-3 z-30">
           {/* Left Arrow (Prev) */}
           <div className="flex items-center">
-            {(activeSlide === 'transfer' || activeSlide === 'match') && (
+            {(isMobile ? (activeSlide === 'transfer' || activeSlide === 'match') : (activeSlide === 'match')) && (
               <button 
                 onClick={() => {
-                  if (activeSlide === 'match') setActiveSlide('transfer');
+                  if (activeSlide === 'match') setActiveSlide(isMobile ? 'transfer' : 'briefing');
                   else if (activeSlide === 'transfer') setActiveSlide('briefing');
                 }}
                 className="p-2 rounded-full bg-black/20 hover:bg-black/40 text-white/80 hover:text-white transition-all pointer-events-auto backdrop-blur-sm shadow-lg"
@@ -195,10 +212,10 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, briefing
 
           {/* Right Arrow (Next) */}
           <div className="flex items-center">
-            {(activeSlide === 'briefing' || activeSlide === 'transfer') && (
+            {(isMobile ? (activeSlide === 'briefing' || activeSlide === 'transfer') : (activeSlide === 'briefing')) && (
               <button 
                 onClick={() => {
-                  if (activeSlide === 'briefing') setActiveSlide('transfer');
+                  if (activeSlide === 'briefing') setActiveSlide(isMobile ? 'transfer' : 'match');
                   else if (activeSlide === 'transfer') setActiveSlide('match');
                 }}
                 className="p-2 rounded-full bg-black/20 hover:bg-black/40 text-white/80 hover:text-white transition-all pointer-events-auto backdrop-blur-sm shadow-lg"
@@ -215,12 +232,13 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, briefing
             onClick={() => setActiveSlide('briefing')}
             className={`w-2 h-2 rounded-full transition-all ${activeSlide === 'briefing' ? 'bg-white w-4' : 'bg-white/30'}`}
           />
-          {/* Only show Transfer dot on mobile or if we want it as a dedicated slide on desktop too. 
-              Let's keep it consistent: 3 dots for everyone. */}
-          <button 
-            onClick={() => setActiveSlide('transfer')}
-            className={`w-2 h-2 rounded-full transition-all ${activeSlide === 'transfer' ? 'bg-white w-4' : 'bg-white/30'}`}
-          />
+          {/* Only show Transfer dot on mobile */}
+          {isMobile && (
+            <button 
+              onClick={() => setActiveSlide('transfer')}
+              className={`w-2 h-2 rounded-full transition-all ${activeSlide === 'transfer' ? 'bg-white w-4' : 'bg-white/30'}`}
+            />
+          )}
           <button 
             onClick={() => setActiveSlide('match')}
             className={`w-2 h-2 rounded-full transition-all ${activeSlide === 'match' ? 'bg-white w-4' : 'bg-white/30'}`}
