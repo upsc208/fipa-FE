@@ -9,6 +9,7 @@ import MatchResultCard from '@/components/Home/MatchResultCard';
 import MobileFilterDrawer from '@/components/Filters/MobileFilterDrawer';
 import { CLUBS } from '@/config/clubs';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 export default async function Home({
   params: paramsPromise,
@@ -98,12 +99,18 @@ export default async function Home({
               club={club} 
             />
           </div>
-          <MobileFilterDrawer allSources={sourcesData} />
+          <Suspense fallback={<div className="h-12 w-24 bg-gray-100 animate-pulse rounded-2xl md:hidden" />}>
+            <MobileFilterDrawer allSources={sourcesData} />
+          </Suspense>
         </div>
 
         <div id="news-section" className="scroll-mt-36 md:scroll-mt-24">
-          <SearchBar />
-          <CategoryFilter />
+          <Suspense fallback={<div className="h-14 w-full bg-gray-100 animate-pulse rounded-2xl mb-12" />}>
+            <SearchBar />
+          </Suspense>
+          <Suspense fallback={<div className="h-10 w-full bg-gray-100 animate-pulse rounded-full mb-8" />}>
+            <CategoryFilter />
+          </Suspense>
         </div>
 
         <NewsFeedContainer sourcesData={sourcesData}>
@@ -115,10 +122,12 @@ export default async function Home({
                 ))}
               </div>
 
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-              />
+              <Suspense fallback={<div className="h-10 w-full bg-gray-100 animate-pulse rounded-xl mt-16" />}>
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                />
+              </Suspense>
             </>
           ) : (
             <div className="flex flex-col items-center justify-center py-48 bg-white dark:bg-[#111318] rounded-[3rem] border-2 border-dashed border-gray-100 dark:border-white/[0.04] relative">
@@ -136,3 +145,4 @@ export default async function Home({
     </div>
   );
 }
+

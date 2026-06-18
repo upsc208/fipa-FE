@@ -342,13 +342,14 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
                     {CLUB_ORDER.map((id) => {
                     const c = CLUBS[id];
                     return (
-                      <a
+                      <Link
                         key={c.id}
                         href={`/${c.id}`}
+                        onClick={() => setIsSwitcherOpen(false)}
                         className={`flex items-center justify-center px-3 py-3 text-sm font-bold hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer w-full ${c.id === clubId ? 'text-primary bg-gray-50 dark:bg-white/5' : 'text-gray-600 dark:text-gray-400'}`}
                       >
                         <span className="truncate">{c.nameKo}</span>
-                      </a>
+                      </Link>
                     );
                   })}
                 </div>
@@ -408,13 +409,14 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
                     {CLUB_ORDER.map((id) => {
                     const c = CLUBS[id];
                     return (
-                      <a
+                      <Link
                         key={c.id}
                         href={`/${c.id}`}
+                        onClick={() => setIsSwitcherOpen(false)}
                         className={`flex items-center justify-center px-3 py-3 text-sm font-bold hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer w-full ${c.id === clubId ? 'text-primary bg-gray-50 dark:bg-white/5' : 'text-gray-600 dark:text-gray-400'}`}
                       >
                         <span className="truncate">{c.nameKo}</span>
-                      </a>
+                      </Link>
                     );
                   })}
                 </div>

@@ -167,7 +167,7 @@ export default async function ClubLayout({
               <p className="text-sm font-bold mb-1 transition-colors duration-500" style={{ color: 'var(--footer-text)' }}>
                 Factos 👍 👀 | 해외 축구 뉴스 플랫폼
               </p>
-              <p className="text-xs transition-colors duration-500" style={{ color: 'var(--footer-muted)' }}>
+              <p className="text-xs transition-colors duration-500" style={{ color: 'var(--footer-muted)' }} suppressHydrationWarning>
                 &copy; {new Date().getFullYear()} Factos News. All rights reserved.
               </p>
             </div>

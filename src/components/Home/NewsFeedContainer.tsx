@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { ChevronRight } from 'lucide-react';
 import SourceFilter from '@/components/Filters/SourceFilter';
 
@@ -31,7 +31,9 @@ export default function NewsFeedContainer({ sourcesData, children }: NewsFeedCon
               </h3>
             </div>
             
-            <SourceFilter allSources={sourcesData} />
+            <Suspense fallback={<div className="h-40 w-full animate-pulse bg-gray-50 dark:bg-white/5 rounded-2xl" />}>
+              <SourceFilter allSources={sourcesData} />
+            </Suspense>
           </div>
         </div>
       </div>
