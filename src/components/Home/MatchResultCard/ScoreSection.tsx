@@ -12,7 +12,13 @@ interface ScoreSectionProps {
 }
 
 export const ScoreSection = ({ 
-  homeTeam, awayTeam, homeScore, awayScore, matchDate, tournament, isHome 
+  homeTeam = 'Home Team', 
+  awayTeam = 'Away Team', 
+  homeScore = 0, 
+  awayScore = 0, 
+  matchDate = '', 
+  tournament = '', 
+  isHome = true 
 }: ScoreSectionProps) => {
   return (
     <>
@@ -20,9 +26,9 @@ export const ScoreSection = ({
       <div className="order-1 flex justify-between items-start text-[10px] md:text-xs font-bold tracking-widest uppercase mb-8 md:mb-6 gap-4">
         <span className="shrink-0">Full Time</span>
         <div className="flex flex-wrap justify-end gap-x-1.5 text-right">
-          <span className="whitespace-nowrap">{formatKST(matchDate)}</span>
+          <span className="whitespace-nowrap">{matchDate ? formatKST(matchDate) : 'Date TBD'}</span>
           <span className="opacity-40">&middot;</span>
-          <span className="whitespace-nowrap">{tournament}</span>
+          <span className="whitespace-nowrap">{tournament || 'Tournament'}</span>
           <span className="opacity-40">&middot;</span>
           <span className="whitespace-nowrap">{isHome ? 'HOME' : 'AWAY'}</span>
         </div>
@@ -40,7 +46,7 @@ export const ScoreSection = ({
         {/* Score - Fixed Center Width */}
         <div className="shrink-0 w-full md:w-[25%] lg:w-[20%] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter text-center my-2 md:my-0 whitespace-nowrap transition-all duration-300 flex justify-center items-center px-4">
           <span className="bg-clip-text text-transparent bg-white">
-            {homeScore} - {awayScore}
+            {homeScore ?? 0} - {awayScore ?? 0}
           </span>
         </div>
 

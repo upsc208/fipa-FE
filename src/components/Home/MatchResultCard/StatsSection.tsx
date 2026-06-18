@@ -23,8 +23,10 @@ export const StatsSection = ({ stats, isExpanded }: StatsSectionProps) => {
             return idxA - idxB;
           })
           .map(([label, val], idx) => {
-            const homeVal = parseFloat(val.home.replace(/[^0-9.]/g, '')) || 0;
-            const awayVal = parseFloat(val.away.replace(/[^0-9.]/g, '')) || 0;
+            const homeValStr = val.home || '0';
+            const awayValStr = val.away || '0';
+            const homeVal = parseFloat(homeValStr.replace(/[^0-9.]/g, '')) || 0;
+            const awayVal = parseFloat(awayValStr.replace(/[^0-9.]/g, '')) || 0;
             const total = homeVal + awayVal;
             const homePct = total === 0 ? 50 : (homeVal / total) * 100;
 
@@ -33,9 +35,9 @@ export const StatsSection = ({ stats, isExpanded }: StatsSectionProps) => {
             return (
               <div key={idx} className="flex flex-col gap-2">
                 <div className="flex justify-between text-xs md:text-sm font-bold uppercase tracking-tight px-1 text-white">
-                  <span>{val.home}</span>
+                  <span>{homeValStr}</span>
                   <span>{translatedLabel}</span>
-                  <span>{val.away}</span>
+                  <span>{awayValStr}</span>
                 </div>
                 <div className="h-2 bg-white/10 rounded-full overflow-hidden flex">
                   <div

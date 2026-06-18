@@ -11,7 +11,7 @@ interface TacticalFieldProps {
 export const TacticalField = ({ lineup, homeTeam, awayTeam }: TacticalFieldProps) => {
   // Find club colors based on the team name to reflect home kit design
   const findClubColors = (teamName: string) => {
-    const name = teamName.toLowerCase();
+    const name = (teamName || '').toLowerCase();
     if (name.includes('arsenal') || name.includes('아스날')) {
       return { bg: '#EF0107', border: '#ffffff', text: '#ffffff' };
     }
@@ -38,6 +38,7 @@ export const TacticalField = ({ lineup, homeTeam, awayTeam }: TacticalFieldProps
   const awayColors = findClubColors(awayTeam);
 
   const renderTeam = (teamLineup: any, isHome: boolean) => {
+    if (!teamLineup) return <div className="flex-1" />;
     const formation = teamLineup.formation || '4-4-2';
     const starters = teamLineup.starters || [];
     const rows = [1, ...formation.split('-').map(Number)];
@@ -64,10 +65,10 @@ export const TacticalField = ({ lineup, homeTeam, awayTeam }: TacticalFieldProps
                     color: colors.text
                   }}
                 >
-                  {player.shirt}
+                  {player?.shirt || ''}
                 </div>
                 <div className="text-[6px] sm:text-[8px] md:text-[10px] font-bold text-white text-center leading-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] max-w-[35px] sm:max-w-[50px] md:max-w-[70px] truncate">
-                  {player.name.split(' ').pop()}
+                  {player?.name ? player.name.split(' ').pop() : ''}
                 </div>
               </div>
             ))}
@@ -83,10 +84,10 @@ export const TacticalField = ({ lineup, homeTeam, awayTeam }: TacticalFieldProps
         <div className="flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: homeColors.bg }}></span>
           <span>{homeTeam}</span>
-          <span className="opacity-60">({lineup.home.formation})</span>
+          <span className="opacity-60">({lineup?.home?.formation || 'N/A'})</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="opacity-60">({lineup.away.formation})</span>
+          <span className="opacity-60">({lineup?.away?.formation || 'N/A'})</span>
           <span>{awayTeam}</span>
           <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: awayColors.bg }}></span>
         </div>

@@ -22,8 +22,9 @@ export const formatKST = (dateStr: string) => {
 /**
  * Sorts scorers by time (earliest first)
  */
-export const sortScorers = (scorers: any[] = []) => {
-  return [...scorers].sort((a, b) => {
+export const sortScorers = (scorers: any[] | null | undefined = []) => {
+  const safeScorers = scorers || [];
+  return [...safeScorers].sort((a, b) => {
     const timeA = parseInt(a.time.replace(/[^0-9]/g, '')) || 0;
     const timeB = parseInt(b.time.replace(/[^0-9]/g, '')) || 0;
     return timeA - timeB;
