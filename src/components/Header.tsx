@@ -301,7 +301,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
       </div>
       
       <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row md:h-20 items-center justify-between px-2 sm:px-6 lg:px-12 py-4 md:py-0 mt-0 gap-y-4 md:gap-y-0 relative z-[70]">
-        <div className="flex w-full items-center justify-between md:justify-start md:flex-1 gap-2 sm:gap-6 shrink-0">
+        <div className="flex w-full items-center justify-between md:justify-start md:flex-1 gap-2 md:gap-4 lg:gap-6 shrink-0">
           <Link href={club ? `/${club.id}` : "/"} className="flex items-center space-x-2 sm:space-x-3 group shrink-0">
             <div 
               className="relative flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl shadow-lg group-hover:scale-105 transition-transform shrink-0 border border-white/10"
@@ -357,7 +357,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
           </div>
         </div>
 
-        <nav className="flex items-center justify-center gap-x-4 sm:gap-x-8 md:flex-1 md:justify-center text-sm font-extrabold w-full md:w-auto mt-4 md:mt-0 whitespace-nowrap">
+        <nav className="flex items-center justify-center gap-x-4 md:gap-x-6 lg:gap-x-8 md:flex-none md:justify-center text-sm font-extrabold w-full md:w-auto mt-4 md:mt-0 whitespace-nowrap">
           <Link href={club ? `/${club.id}#news-section` : "/"} className={navLinkClass}>
             <Newspaper className="w-5 h-5" />
             <span className="tracking-tight">뉴스</span>
