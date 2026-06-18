@@ -322,8 +322,8 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
             </div>
           </Link>
  
-          {/* Club Switcher */}
-          <div className="relative">
+          {/* Club Switcher (Mobile Only) */}
+          <div className="relative md:hidden">
             <button 
               onClick={() => setIsSwitcherOpen(!isSwitcherOpen)}
               className={switcherButtonClass}
@@ -338,7 +338,7 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
                   className="fixed inset-0 z-[60]" 
                   onClick={() => setIsSwitcherOpen(false)}
                 />
-                <div className="absolute top-full left-0 mt-2 w-22 sm:w-28 bg-white dark:bg-[#111318] border border-gray-100 dark:border-white/10 rounded-2xl shadow-2xl z-[70] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 origin-top-left">
+                <div className="absolute top-full right-0 mt-2 w-22 sm:w-28 bg-white dark:bg-[#111318] border border-gray-100 dark:border-white/10 rounded-2xl shadow-2xl z-[70] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 origin-top-right">
                     {CLUB_ORDER.map((id) => {
                     const c = CLUBS[id];
                     return (
@@ -388,7 +388,39 @@ export default function Header({ clubId: propClubId }: { clubId?: string }) {
         </nav>
 
         <div className="hidden md:flex md:flex-1 justify-end">
-          {/* Right side spacer or user profile etc. */}
+          {/* Club Switcher (Desktop Only) */}
+          <div className="relative">
+            <button 
+              onClick={() => setIsSwitcherOpen(!isSwitcherOpen)}
+              className={switcherButtonClass}
+            >
+              팀 변경
+              <ChevronDown size={14} className={`transition-transform duration-300 ${isSwitcherOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {isSwitcherOpen && (
+              <>
+                <div 
+                  className="fixed inset-0 z-[60]" 
+                  onClick={() => setIsSwitcherOpen(false)}
+                />
+                <div className="absolute top-full right-0 mt-2 w-22 sm:w-28 bg-white dark:bg-[#111318] border border-gray-100 dark:border-white/10 rounded-2xl shadow-2xl z-[70] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 origin-top-right">
+                    {CLUB_ORDER.map((id) => {
+                    const c = CLUBS[id];
+                    return (
+                      <a
+                        key={c.id}
+                        href={`/${c.id}`}
+                        className={`flex items-center justify-center px-3 py-3 text-sm font-bold hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer w-full ${c.id === clubId ? 'text-primary bg-gray-50 dark:bg-white/5' : 'text-gray-600 dark:text-gray-400'}`}
+                      >
+                        <span className="truncate">{c.nameKo}</span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </header>
