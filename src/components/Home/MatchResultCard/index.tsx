@@ -29,9 +29,11 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, briefing
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Handle window resize to detect mobile/desktop
   React.useEffect(() => {
+    setMounted(true);
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -232,8 +234,8 @@ export default function MatchResultCard({ recentMatch, upcomingMatches, briefing
             onClick={() => setActiveSlide('briefing')}
             className={`w-2 h-2 rounded-full transition-all ${activeSlide === 'briefing' ? 'bg-white w-4' : 'bg-white/30'}`}
           />
-          {/* Only show Transfer dot on mobile */}
-          {isMobile && (
+          {/* Only show Transfer dot on mobile - use mounted check to prevent hydration mismatch */}
+          {mounted && isMobile && (
             <button 
               onClick={() => setActiveSlide('transfer')}
               className={`w-2 h-2 rounded-full transition-all ${activeSlide === 'transfer' ? 'bg-white w-4' : 'bg-white/30'}`}

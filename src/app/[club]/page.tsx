@@ -27,15 +27,17 @@ export default async function Home({
   }
 
   const searchParams = await searchParamsPromise;
-  const page = searchParams.page ? parseInt(searchParams.page) - 1 : 0;
-  const size = searchParams.size ? parseInt(searchParams.size) : 10;
+  const pageRaw = parseInt(searchParams.page || '1');
+  const page = isNaN(pageRaw) ? 0 : pageRaw - 1;
+  const sizeRaw = parseInt(searchParams.size || '10');
+  const size = isNaN(sizeRaw) ? 10 : sizeRaw;
   const query = searchParams.query || '';
   const category = searchParams.category || '';
   const sourcesParam = searchParams.sources || '';
   const sources = sourcesParam ? sourcesParam.split(',') : [];
   const isHyped = searchParams.isHyped === 'true';
 
-  let newsData;
+  let newsData = null;
   let sourcesData: any[] = [];
   let recentMatchData = null;
   let upcomingMatchesData: any[] = [];
@@ -43,8 +45,8 @@ export default async function Home({
   let transferRankingData = null;
 
   try {
-    // Fetch news and sources in parallel
-    const [newsResponse, sourcesResponse, recentMatchResponse, upcomingMatchesResponse, briefingResponse, transferRankingResponse] = await Promise.all([
+    // Fetch news and sources in parallel using allSettled for robustness
+    const results = await Promise.allSettled([
       getNews({
         path: { clubCode: club.clubCode },
         query: {
@@ -72,19 +74,20 @@ export default async function Home({
       })
     ]);
 
-    newsData = newsResponse.data;
-    sourcesData = sourcesResponse.data || [];
-    recentMatchData = recentMatchResponse.data || null;
-    upcomingMatchesData = upcomingMatchesResponse.data || [];
-    briefingData = briefingResponse.data || null;
-    transferRankingData = transferRankingResponse.data || null;
+    if (results[0].status === 'fulfilled') newsData = results[0].value.data;
+    if (results[1].status === 'fulfilled') sourcesData = results[1].value.data || [];
+    if (results[2].status === 'fulfilled') recentMatchData = results[2].value.data || null;
+    if (results[3].status === 'fulfilled') upcomingMatchesData = results[3].value.data || [];
+    if (results[4].status === 'fulfilled') briefingData = results[4].value.data || null;
+    if (results[5].status === 'fulfilled') transferRankingData = results[5].value.data || null;
+
   } catch (error) {
-    console.error('Failed to fetch data:', error);
+    console.error('Unexpected error during data fetch:', error);
   }
 
-  let newsList = newsData?.content || [];
-  let totalPages = newsData?.totalPages || 0;
-  const currentPage = (newsData?.number || 0) + 1;
+  let newsList = (newsData as any)?.content || [];
+  let totalPages = (newsData as any)?.totalPages || 0;
+  const currentPage = ((newsData as any)?.number || 0) + 1;
 
   return (
     <div className="flex flex-col gap-0 pt-10">
